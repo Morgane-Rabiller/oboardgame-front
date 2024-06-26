@@ -1,0 +1,24 @@
+.header {
+    &_first {
+    display: flex;
+    align-items: flex-end;
+    margin: 0.5rem;
+  }
+  &-logo {
+    width: 4rem;
+    margin-right: 1rem;
+  }
+  &-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding-bottom: 0.5rem;
+  }
+  &-header_separate {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  hr {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
