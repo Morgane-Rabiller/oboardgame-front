@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './styles/index.scss';
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
+import "primereact/resources/themes/mdc-light-deeppurple/theme.css";
+// import "primereact/resources/themes/bootstrap4-light-purple/theme.css";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

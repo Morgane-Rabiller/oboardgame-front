@@ -1,0 +1,14 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &_title {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+    }
+    &_form {
+        display: flex;
+        flex-direction: column;
+        line-height: 0.2rem;
+    }
+}
