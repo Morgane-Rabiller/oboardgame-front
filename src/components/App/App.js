@@ -27,6 +27,7 @@ function Root() {
     <div className="App">
       <Header/>
       <Outlet />
+      <hr className='separate'/>
     </div>
   )
 }
