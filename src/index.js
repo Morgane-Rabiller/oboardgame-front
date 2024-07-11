@@ -4,6 +4,7 @@ import './styles/index.scss';
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 import "primereact/resources/themes/mdc-light-deeppurple/theme.css";
+// import "primereact/resources/themes/mdc-dark-indigo/theme.css";
 // import "primereact/resources/themes/bootstrap4-light-purple/theme.css";
 
 

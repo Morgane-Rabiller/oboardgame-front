@@ -11,6 +11,7 @@
     &_form {
         display: flex;
         flex-direction: column;
+        width: 15rem;
         &-password {
             margin-top: 2rem;
         }
@@ -37,4 +38,8 @@
 .p-input-icon {
     padding-bottom: 5rem;
     margin-top: -6px;
+}
+
+.p-password-input {
+    width: 15rem;
 }
