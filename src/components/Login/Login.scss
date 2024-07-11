@@ -1,3 +1,5 @@
+@use "src/styles/vars";
+
 .login {
     display: flex;
     flex-direction: column;
@@ -9,6 +11,30 @@
     &_form {
         display: flex;
         flex-direction: column;
-        line-height: 0.2rem;
+        &-pseudo {
+            margin-bottom: 2rem;
+        }
+        &-button {
+            background: vars.$button-color;
+            padding-top: 1.3rem;
+            padding-bottom: 1.3rem;
+            border-radius: 38px;
+            border: none;
+            margin-top: 4rem;
+            color: white;
+        }
+        &-register {
+            text-align: center;
+            margin-top: 1rem;
+            line-height: 1rem;
+        }
+        &-link:hover {
+            text-decoration: underline;
+        }
     }
+}
+
+.p-input-icon {
+    padding-bottom: 5rem;
+    margin-top: -6px;
 }
