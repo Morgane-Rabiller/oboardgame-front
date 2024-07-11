@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import './App.scss';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
+import Register from '../Register/Register';
 // import { useState } from "react";
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "connexion",
         element: <Login />,
+      },
+      {
+        path: "inscription",
+        element: <Register />,
       },
     ],
   }

@@ -1,6 +1,6 @@
 @use "src/styles/vars";
 
-.login {
+.register {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,8 +11,8 @@
     &_form {
         display: flex;
         flex-direction: column;
-        &-pseudo {
-            margin-bottom: 2rem;
+        &-password {
+            margin-top: 2rem;
         }
         &-button {
             background: vars.$button-color;
