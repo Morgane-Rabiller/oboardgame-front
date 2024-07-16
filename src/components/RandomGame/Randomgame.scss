@@ -1,0 +1,16 @@
+@use "src/styles/vars";
+
+.p-togglebutton {
+    width: 10rem;
+    height: 3rem;
+}
+.p-button-text {
+    width: 1rem;
+}
+.p-button-icon-left {
+    margin-left: 1rem;
+}
+// .p-button {
+//     background: vars.$button-color;
+    
+// }

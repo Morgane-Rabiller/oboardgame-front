@@ -5,6 +5,7 @@ import './App.scss';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import RandomGame from '../RandomGame/Randomgame';
 // import { useState } from "react";
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "inscription",
         element: <Register />,
+      },
+      {
+        path: "selection-aleatoire",
+        element: <RandomGame />,
       },
     ],
   }
