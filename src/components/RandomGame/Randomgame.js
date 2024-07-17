@@ -3,20 +3,30 @@ import React, { useState } from "react";
 import { ToggleButton } from 'primereact/togglebutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
+import card from "../../assets/card.png";
+import dice from "../../assets/dice.png";
+import pawn from "../../assets/pawn.png";
 
 const Randomgame = () => {
     const [checked, setChecked] = useState(false);
     const [minPlayer, setMinPlayer] = useState(25);
     const [maxPlayer, setMaxPlayer] = useState(25);
     const [age, setAge] = useState(25);
-    const [selectedCity, setSelectedCity] = useState(null);
-    const cities = [
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome', code: 'RM' },
-        { name: 'London', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' }
+    const [selectedDuration, setSelectedDuration] = useState(null);
+    const durations = [
+        { name: '---' },
+        { name: '15' },
+        { name: '30' },
+        { name: '45' },
+        { name: '60+' }
     ];
+    const [ selectedType, setSelectedType] = useState(null);
+    const types = [
+        { name: "---" },
+        { name: <img src={card} className="img_card" /> },
+        { name: <img src={dice} className="img" /> },
+        { name: <img src={pawn} className="img" /> },
+    ]
     return (
         <div className="randomgame">
             <div>
@@ -33,8 +43,8 @@ const Randomgame = () => {
                 </div>
                 <div>
                     <label htmlFor="minmax-buttons" className="block mb-2">Durée</label>
-                    <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
-                    placeholder="Select a City" className="w-full md:w-8rem" />
+                    <Dropdown value={selectedDuration} onChange={(e) => setSelectedDuration(e.value)} options={durations} optionLabel="name" 
+                    placeholder="" className="w-full md:w-8rem" />
                 </div>
                 <div>
                     <label htmlFor="minmax-buttons" className="block mb-2">Age (Max)</label>
@@ -42,8 +52,8 @@ const Randomgame = () => {
                 </div>
                 <div>
                     <label htmlFor="minmax-buttons" className="block mb-2">Type</label>
-                    <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
-                    placeholder="Select a City" className="w-full md:w-8rem" />
+                    <Dropdown value={selectedType} onChange={(e) => setSelectedType(e.value)} options={types} optionLabel="name" 
+                    placeholder="" className="w-full md:w-10rem" />
                 </div>
             </div>}
             
