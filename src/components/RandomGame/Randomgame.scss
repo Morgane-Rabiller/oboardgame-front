@@ -1,8 +1,17 @@
 @use "src/styles/vars";
 
+.randomgame {
+    margin: 2rem;
+    &_filters {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
 .p-togglebutton {
     width: 10rem;
-    height: 3rem;
+    height: 2rem;
 }
 .p-button-text {
     width: 1rem;
@@ -14,3 +23,13 @@
 //     background: vars.$button-color;
     
 // }
+
+.p-inputnumber {
+    height: 2rem;
+}
+.p-inputnumber-input {
+    width: 3rem;
+}
+.p-inputnumber-button {
+    width: 1.5rem;
+}
