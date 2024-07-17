@@ -20,7 +20,7 @@ const Randomgame = () => {
     return (
         <div className="randomgame">
             <div>
-                <ToggleButton invalid onIcon="pi pi-eye" offIcon="pi pi-eye-slash" checked={checked} onChange={(e) => setChecked(e.value)} className="toggle-button w-8rem" onLabel="Filter" offLabel="Filter"/>
+                <ToggleButton invalid onIcon="pi pi-eye" offIcon="pi pi-eye-slash" checked={checked} onChange={(e) => setChecked(e.value)} className="toggle-button w-8rem" onLabel="Filtres" offLabel="Filtres"/>
             </div>
             {checked && <div className="randomgame_filters">
                 <div>
@@ -46,6 +46,10 @@ const Randomgame = () => {
                     placeholder="Select a City" className="w-full md:w-8rem" />
                 </div>
             </div>}
+            
+            <div className="randomgame_button-container">
+                <button className="randomgame_button">Lancer la sélection aléatoire</button>
+            </div>
         </div>
     );
 };
