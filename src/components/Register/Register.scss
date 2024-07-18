@@ -12,6 +12,9 @@
         display: flex;
         flex-direction: column;
         width: 15rem;
+        &-email {
+            margin-top: 2rem;
+        }
         &-password {
             margin-top: 2rem;
         }
