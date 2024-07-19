@@ -23,9 +23,9 @@ const Randomgame = () => {
     const [ selectedType, setSelectedType] = useState(null);
     const types = [
         { name: "---" },
-        { name: <img src={card} className="img_card" /> },
-        { name: <img src={dice} className="img" /> },
-        { name: <img src={pawn} className="img" /> },
+        { name: <img src={card} alt="cartes" className="img_card" /> },
+        { name: <img src={dice} alt="dés" className="img" /> },
+        { name: <img src={pawn} alt="pions" className="img" /> },
     ]
     return (
         <div className="randomgame">
