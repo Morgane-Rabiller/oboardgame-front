@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN } from "../actions/user";
+import { LOGIN, savePseudo } from "../actions/user";
 
 const userMiddleware = (store) => (next) => (action) => {
     switch (action.type) {
@@ -7,10 +7,12 @@ const userMiddleware = (store) => (next) => (action) => {
             const { email, password } = store.getState().userReducer;
         console.log(email, password);
         axios.post("http://localhost:8080/login", {email, password}).then((res) => {
-                  console.log(res);
-                }).catch((err) => {
-                    console.error(err);
-                });
+            console.log(res.data.user);
+            const { pseudo } = res.data.user;
+            store.dispatch(savePseudo(pseudo));
+        }).catch((err) => {
+            console.error(err);
+        });
         }
             
             break;

@@ -5,17 +5,17 @@ export const setUserField = (value, field) => ({
   value,
   field,
 });
+
 export const LOGIN = 'LOGIN';
 
-// ACTION CREATOR login
 export const login = () => ({
   type: LOGIN,
 });
 
-// export const login = (data) => {
-//   return (dispatch) => {
-//     return axios.post("http://localhost:8080/login", data).then((res) => {
-//       dispatch({ type: LOGIN, payload: data })
-//     })
-//   }
-// }
+export const SAVE_PSEUDO = 'SAVE_PSEUDO';
+
+export const savePseudo = (pseudo) => ({
+  type: SAVE_PSEUDO,
+  pseudo
+});
+
