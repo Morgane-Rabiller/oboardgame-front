@@ -4,11 +4,14 @@ import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useDispatch, useSelector } from "react-redux";
 import { login, setUserField } from "../../actions/user";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const email = useSelector((state) => state.userReducer.email);
     const password = useSelector((state) => state.userReducer.password);
+    const logged = useSelector((state) => state.userReducer.logged);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const changeField = (e) => {
         dispatch(setUserField(e.target.value, e.target.name));
     }
@@ -16,7 +19,9 @@ const Login = () => {
     const handleForm = (e) => {
         e.preventDefault();
         dispatch(login());
-        
+        if(logged) {
+            navigate("/selection-aleatoire");
+        }
     }
     return (
         <div className="login">
