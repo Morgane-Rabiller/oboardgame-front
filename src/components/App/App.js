@@ -1,12 +1,19 @@
 
-import { Outlet, RouterProvider, createBrowserRouter} from 'react-router-dom';
+import { Navigate, Outlet, RouterProvider, createBrowserRouter} from 'react-router-dom';
 import Header from '../Header/Header';
 import './App.scss';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import RandomGame from '../RandomGame/Randomgame';
-// import { useState } from "react";
+import store from '../../store';
+
+const logged = store.getState().userReducer.logged;
+
+function ConditionalRoute(route) {
+  return logged ? route : <Navigate to="/connexion" />;
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "selection-aleatoire",
-        element: <RandomGame />,
+        element: ConditionalRoute(<RandomGame />) ,
       },
     ],
   }
@@ -43,7 +50,6 @@ function Root() {
 }
 
 function App() {
-  // const [isLogged, setIsLogged] = useState(false);
   return <RouterProvider router={router} />
 }
 
