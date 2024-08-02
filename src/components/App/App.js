@@ -7,11 +7,12 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import RandomGame from '../RandomGame/Randomgame';
 import store from '../../store';
+import { useSelector } from 'react-redux';
 
-const logged = store.getState().userReducer.logged;
+function PrivateRoute({ children }) {
+  const logged = useSelector((state) => state.userReducer.logged);
 
-function ConditionalRoute(route) {
-  return logged ? route : <Navigate to="/connexion" />;
+  return logged ? children : <Navigate to="/connexion" />;
 }
 
 const router = createBrowserRouter([
@@ -33,7 +34,11 @@ const router = createBrowserRouter([
       },
       {
         path: "selection-aleatoire",
-        element: ConditionalRoute(<RandomGame />) ,
+        element: (
+          <PrivateRoute>
+            <RandomGame />
+          </PrivateRoute>
+        ),
       },
     ],
   }
