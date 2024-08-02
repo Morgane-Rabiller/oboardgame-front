@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN, savePseudo } from "../actions/user";
+import { LOGIN, savePseudo, loginSuccess, loginFailure } from "../actions/user";
 
 const userMiddleware = (store) => (next) => (action) => {
     switch (action.type) {
@@ -9,8 +9,11 @@ const userMiddleware = (store) => (next) => (action) => {
             axios.post("http://localhost:8080/login", {email, password}).then((res) => {
                 const { pseudo } = res.data.user;
                 store.dispatch(savePseudo(pseudo));
-                }).catch((err) => {
-                    console.error(err);
+                store.dispatch(loginSuccess());
+            }).catch((err) => {
+                console.error(err);
+                const error = err.response.data.message;
+                store.dispatch(loginFailure(error));
                 });
             }
             

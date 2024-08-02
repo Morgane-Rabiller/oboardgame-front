@@ -1,11 +1,12 @@
-import { SAVE_PSEUDO, SET_USER_FIELD } from "../actions/user";
+import { SAVE_PSEUDO, SET_USER_FIELD, LOGIN_SUCCESS, LOGIN_FAILURE } from "../actions/user";
 
 const initialState = {
         logged: false,
         email: '',
         pseudo: '',
         password: '',
-        passwordRepeat: ''
+        passwordRepeat: '',
+        error: null,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -20,6 +21,18 @@ export default function userReducer(state = initialState, action) {
           ...state,
           pseudo: action.pseudo,
           logged: true
+        };
+      case LOGIN_SUCCESS:
+        return {
+          ...state,
+          logged: true,
+          error: null
+        }
+      case LOGIN_FAILURE:
+        return {
+          ...state,
+          logged: true,
+          error: action.error
         }
       default:
         return state;
