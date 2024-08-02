@@ -29,7 +29,7 @@ const Login = () => {
         <div className="login">
             <h1 className="login_title">Je me connecte</h1>
             <form className="login_form" onSubmit={e => handleForm(e)}>
-                <InputText type="text" className="login_form-pseudo p-inputtext-sm" placeholder="Adresse mail" name="email" value={email} onChange={changeField} />
+                <InputText type="text" className="login_form-email p-inputtext-sm" placeholder="Adresse mail" name="email" value={email} onChange={changeField} />
                 <Password value={password} className="login_form-password p-inputtext-sm" onChange={changeField} name="password" placeholder="Mot de passe" toggleMask />
                 {error && <p className="login_form-error">{ error }</p>}
                 <button type="submit" className="login_form-button">Connexion</button>
