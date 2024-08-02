@@ -31,7 +31,7 @@ export default function userReducer(state = initialState, action) {
       case LOGIN_FAILURE:
         return {
           ...state,
-          logged: true,
+          logged: false,
           error: action.error
         }
       default:

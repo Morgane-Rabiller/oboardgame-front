@@ -32,10 +32,10 @@
         &-link:hover {
             text-decoration: underline;
         }
-    }
-    &_error {
-        margin-top: 0.5rem;
-        color: rgb(243, 120, 120);
+        &-error {
+            margin-top: 0.5rem;
+            color: rgb(243, 120, 120);
+        }
     }
 }
 
