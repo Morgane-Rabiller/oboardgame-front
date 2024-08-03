@@ -12,6 +12,12 @@ export const login = () => ({
   type: LOGIN,
 });
 
+export const LOGOUT = 'LOGOUT';
+
+export const logout = () => ({
+  type: LOGOUT,
+});
+
 export const SAVE_PSEUDO = 'SAVE_PSEUDO';
 
 export const savePseudo = (pseudo) => ({
