@@ -1,13 +1,18 @@
 import axios from "axios";
-import { LOGIN, savePseudo, loginSuccess, loginFailure } from "../actions/user";
+import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT } from "../actions/user";
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:8080',
+  });
 
 const userMiddleware = (store) => (next) => (action) => {
     switch (action.type) {
         case LOGIN: {
             const { email, password } = store.getState().userReducer;
 
-            axios.post("http://localhost:8080/login", {email, password}).then((res) => {
+            axiosInstance.post("/login", {email, password}).then((res) => {
                 const { pseudo } = res.data.user;
+                axiosInstance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
                 store.dispatch(savePseudo(pseudo));
                 store.dispatch(loginSuccess());
             }).catch((err) => {
@@ -17,9 +22,15 @@ const userMiddleware = (store) => (next) => (action) => {
                 });
             }
             
-            break;
-        default: next(action);
-            break;
+            next(action);
+        break;
+        case LOGOUT:
+            axiosInstance.defaults.headers.common.Authorization = null;
+            next(action);
+        break;
+        default: 
+            next(action);
+        break;
     }
 }
 
