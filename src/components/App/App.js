@@ -6,12 +6,12 @@ import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import RandomGame from '../RandomGame/Randomgame';
-import store from '../../store';
 import { useSelector } from 'react-redux';
+import Footer from '../Footer/Footer';
 
 function PrivateRoute({ children }) {
   const logged = useSelector((state) => state.userReducer.logged);
-
+  
   return logged ? children : <Navigate to="/connexion" />;
 }
 
@@ -45,11 +45,13 @@ const router = createBrowserRouter([
 ]);
 
 function Root() {
+  const logged = useSelector((state) => state.userReducer.logged);
   return (
     <div className="App">
       <Header/>
       <Outlet />
       <hr className='separate'/>
+      {logged && <Footer />}
     </div>
   )
 }
