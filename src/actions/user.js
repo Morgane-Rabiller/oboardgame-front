@@ -6,6 +6,12 @@ export const setUserField = (value, field) => ({
   field,
 });
 
+export const REGISTER = 'REGISTER';
+
+export const register = () => ({
+  type: REGISTER,
+});
+
 export const LOGIN = 'LOGIN';
 
 export const login = () => ({
