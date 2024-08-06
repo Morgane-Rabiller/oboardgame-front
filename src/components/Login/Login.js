@@ -27,8 +27,7 @@ const Login = () => {
         if(logged) {
             navigate("/selection-aleatoire");
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [logged])
+    }, [logged, navigate])
     
     return (
         <div className="login">
