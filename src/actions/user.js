@@ -37,6 +37,13 @@ export const loginSuccess = () => ({
   type: LOGIN_SUCCESS,
 });
 
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+
+export const registerSuccess = (message) => ({
+  type: REGISTER_SUCCESS,
+  message
+});
+
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
 export const loginFailure = (error) => ({
