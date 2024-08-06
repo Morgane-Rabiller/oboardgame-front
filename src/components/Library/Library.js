@@ -20,8 +20,9 @@ const Library = () => {
         <div className="library_container">
             <div className="card">
                 <DataTable value={data} tableStyle={{ minWidth: '10rem' }}>
-                    {/* <Column field="name" header="Nom"></Column> */}
-                    <Column field="players" header="Joueurs"></Column>
+                    <Column field="name" header="Nom"></Column>
+                    <Column field="player_min" header="Min-joueur"></Column>
+                    <Column field="player_max" header="Max-joueur"></Column>
                     <Column field="type_game" header="Type"></Column>
                     <Column field="age" header="Age"></Column>
                     <Column field="time" header="Durée"></Column>
