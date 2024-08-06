@@ -10,8 +10,10 @@ const Header = () => {
         <header className="header">
             <div className="header-top">
                 <div className="header-left">
-                    <img src={logo} className="header-left_logo" alt="logo" />
-                    <h1 className="header-left_title">O'Boardgame</h1>
+                    <Link to={!logged ? "/" : "/selection-aleatoire"} className="header-link">
+                        <img src={logo} className="header-left_logo" alt="logo" />
+                        <h1 className="header-left_title">O'Boardgame</h1>
+                    </Link> 
                 </div>
                 {logged &&  
                 <div className="header-right">

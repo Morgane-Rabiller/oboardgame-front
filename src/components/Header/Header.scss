@@ -4,9 +4,13 @@
         justify-content: space-between;
         margin: 0.5rem;
     }
-    &-left {
+    &-link {
         display: flex;
         align-items: flex-end;
+    }
+    &-left {
+        // display: flex;
+        // align-items: flex-end;
         &_logo {
             width: 4rem;
             margin-right: 1rem;
