@@ -1,5 +1,6 @@
 import axios from "axios";
 import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess } from "../actions/user";
+import { FETCH_LIBRARY, saveData } from "../actions/library";
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:8080',
@@ -40,6 +41,16 @@ const userMiddleware = (store) => (next) => (action) => {
                 const error = err.response.data.message;
                 store.dispatch(loginFailure(error));
             });
+            next(action);
+            break;
+            case FETCH_LIBRARY: 
+                axiosInstance.get("/library").then((res) => {
+                    console.log(res.data.data);
+                    store.dispatch(saveData(res.data.data));
+                }).catch((err) => {
+                    console.log(err);    
+                });
+            
             next(action);
             break;
         default: 
