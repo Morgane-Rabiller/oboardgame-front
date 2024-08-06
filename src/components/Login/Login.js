@@ -5,6 +5,7 @@ import { Password } from 'primereact/password';
 import { useDispatch, useSelector } from "react-redux";
 import { login, setUserField } from "../../actions/user";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Login = () => {
     const email = useSelector((state) => state.userReducer.email);
@@ -20,10 +21,14 @@ const Login = () => {
     const handleForm = (e) => {
         e.preventDefault();
         dispatch(login());
+    }
+
+    useEffect(() =>{
         if(logged) {
             navigate("/selection-aleatoire");
         }
-    }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [logged])
     
     return (
         <div className="login">
