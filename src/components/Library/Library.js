@@ -4,8 +4,11 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { fetchLibrary } from "../../actions/library";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "react-router-dom";
+import Loader from '../Loader/Loader';
 
 const Library = () => {
+    const { state } = useNavigation();
     const data = useSelector((state) => state.libraryReducer.data);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -14,6 +17,7 @@ const Library = () => {
     
     return (
         <div className="library_container">
+            {state === 'loading' && <Loader />}
             {data && data.length !== 0 ? <div className="card">
                 <DataTable value={data} tableStyle={{ minWidth: '10rem' }}>
                     <Column field="name" header="Nom"></Column>
