@@ -12,13 +12,10 @@ const Library = () => {
     
     useEffect(() => {
         dispatch(fetchLibrary());
-        window.setTimeout(() => {
-            console.log(data);
-        }, 3000);
     }, []);
     return (
         <div className="library_container">
-            <div className="card">
+            {data.length !== 0 ? <div className="card">
                 <DataTable value={data} tableStyle={{ minWidth: '10rem' }}>
                     <Column field="name" header="Nom"></Column>
                     <Column field="player_min" header="Min-joueur"></Column>
@@ -27,7 +24,8 @@ const Library = () => {
                     <Column field="age" header="Age"></Column>
                     <Column field="time" header="Durée"></Column>
                 </DataTable>
-            </div>
+            </div> : <p className="text-center m-5">Tu n'as pas de jeux dans ta bibliothèque</p>
+            }
         </div>
     );
 };
