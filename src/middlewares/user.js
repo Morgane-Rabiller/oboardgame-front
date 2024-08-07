@@ -43,7 +43,7 @@ const userMiddleware = (store) => (next) => (action) => {
             });
             next(action);
             break;
-            case FETCH_LIBRARY: 
+            case FETCH_LIBRARY:
                 axiosInstance.get("/library").then((res) => {
                     console.log(res.data.data);
                     store.dispatch(saveData(res.data.data));

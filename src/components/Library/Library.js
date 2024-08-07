@@ -7,15 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Library = () => {
     const data = useSelector((state) => state.libraryReducer.data);
-    
     const dispatch = useDispatch();
-    
     useEffect(() => {
         dispatch(fetchLibrary());
     }, []);
+    
     return (
         <div className="library_container">
-            {data.length !== 0 ? <div className="card">
+            {data && data.length !== 0 ? <div className="card">
                 <DataTable value={data} tableStyle={{ minWidth: '10rem' }}>
                     <Column field="name" header="Nom"></Column>
                     <Column field="player_min" header="Min-joueur"></Column>
