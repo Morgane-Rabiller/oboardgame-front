@@ -39,16 +39,6 @@ const userMiddleware = (store) => (next) => (action) => {
             });
             next(action);
             break;
-            // case FETCH_LIBRARY:
-            //     axiosInstance.get("/library").then((res) => {
-            //         console.log(res.data.data);
-            //         store.dispatch(saveData(res.data.data));
-            //     }).catch((err) => {
-            //         console.log(err);    
-            //     });
-            
-            // next(action);
-            // break;
             case FETCH_BOARDGAMES:
                 axiosInstance.get("/boardgame").then((res) => {
                     console.log(res.data.data);

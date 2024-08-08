@@ -11,9 +11,6 @@ const libraryMiddleware = (store) => (next) => (action) => {
         }).catch((err) => {
             console.log(err);    
         });
-    
-    next(action);
-    
     next(action);
     break;
         default: 
