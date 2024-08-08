@@ -10,3 +10,11 @@ export const saveData = (data) => ({
   type: SAVE_DATA,
   data
 });
+
+export const ADD_BOARDGAME = 'ADD_BOARDGAME';
+
+export const addBoardgame = (name) => ({
+  type: ADD_BOARDGAME,
+  name
+});
+

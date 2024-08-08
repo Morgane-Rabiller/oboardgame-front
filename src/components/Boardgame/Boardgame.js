@@ -5,6 +5,7 @@ import { useNavigation } from "react-router-dom";
 import Loader from '../Loader/Loader';
 import TableDatas from "../TableDatas/TableDatas";
 import { fetchBoardgames } from "../../actions/boardgame";
+import { addBoardgame } from "../../actions/library";
 
 const Boardgame = () => {
     const { state } = useNavigation();
@@ -36,7 +37,7 @@ const Boardgame = () => {
                                 return (
                                         <tr className="library_table-line" key={data.id}>
                                             <TableDatas name={data.name} playerMin={data.player_min} playerMax={data.player_max} type={data.type} age={data.age} time={data.time} />
-                                            <td><i className="pi pi-plus"></i></td>
+                                            <td><i className="pi pi-plus" onClick={() => dispatch(addBoardgame(data.name))}></i></td>
                                         </tr>
                                     )
                             })}
