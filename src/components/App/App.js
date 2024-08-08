@@ -51,7 +51,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "Jeux-de-société",
+        path: "jeux-de-societe",
         element: (
           <PrivateRoute>
             <Boardgame />
