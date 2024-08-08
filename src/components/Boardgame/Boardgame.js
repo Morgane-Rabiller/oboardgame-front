@@ -1,17 +1,17 @@
 import "./Boardgame.scss";
 import React, { useEffect } from 'react';
-import { fetchLibrary } from "../../actions/library";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "react-router-dom";
 import Loader from '../Loader/Loader';
 import TableDatas from "../TableDatas/TableDatas";
+import { fetchBoardgames } from "../../actions/boardgame";
 
 const Boardgame = () => {
     const { state } = useNavigation();
-    const datas = useSelector((state) => state.libraryReducer.data);
+    const datas = useSelector((state) => state.boardgameReducer.data);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchLibrary());
+        dispatch(fetchBoardgames());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
@@ -28,17 +28,15 @@ const Boardgame = () => {
                             <th>Type</th>
                             <th>Age</th>
                             <th>Durée</th>
-                            <th>Edit</th>
-                            <th>Supp.</th>
+                            <th>Ajout</th>
                         </tr>
                     </thead>
                     <tbody className="library_table-tbody">
                             {datas.map((data) => {
                                 return (
                                         <tr className="library_table-line">
-                                            <TableDatas name={data.name} playerMin={data.player_min} playerMax={data.player_max} type={data.type_game} age={data.age} time={data.time} />
-                                            <td><i className="pi pi-pencil"></i></td>
-                                            <td><i className="pi pi-trash"></i></td>
+                                            <TableDatas name={data.name} playerMin={data.player_min} playerMax={data.player_max} type={data.type} age={data.age} time={data.time} />
+                                            <td><i className="pi pi-plus"></i></td>
                                         </tr>
                                     )
                             })}

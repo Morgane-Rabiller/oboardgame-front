@@ -1,6 +1,7 @@
 import axios from "axios";
 import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess } from "../actions/user";
 import { FETCH_LIBRARY, saveData } from "../actions/library";
+import { FETCH_BOARDGAMES, saveDataBoardGame } from "../actions/boardgame";
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:8080',
@@ -47,6 +48,16 @@ const userMiddleware = (store) => (next) => (action) => {
                 axiosInstance.get("/library").then((res) => {
                     console.log(res.data.data);
                     store.dispatch(saveData(res.data.data));
+                }).catch((err) => {
+                    console.log(err);    
+                });
+            
+            next(action);
+            break;
+            case FETCH_BOARDGAMES:
+                axiosInstance.get("/boardgame").then((res) => {
+                    console.log(res.data.data);
+                    store.dispatch(saveDataBoardGame(res.data.data));
                 }).catch((err) => {
                     console.log(err);    
                 });
