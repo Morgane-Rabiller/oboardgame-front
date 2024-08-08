@@ -1,3 +1,21 @@
-// .p-datatable-table {
-//     background-color: red;
-// }
+@use "src/styles/vars";
+
+.library {
+    &_table {
+        margin: 2rem auto 2rem auto;
+        font-size: small;
+        &-thead {
+            border-bottom: 1px solid vars.$writing-color;
+        }
+        &-line {
+            height: 1.5rem;
+        }
+        &-firstth {
+            text-align: left;
+            padding-left: 0.5rem;
+        }
+    }
+}
+td {
+    padding: 0.5rem;
+}

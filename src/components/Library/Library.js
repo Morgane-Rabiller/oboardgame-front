@@ -30,9 +30,9 @@ const Library = () => {
                     <Column field="time" header="Durée"></Column>
                 </DataTable> */}
                 <table className="library_table">
-                    <thead>
+                    <thead className="library_table-thead">
                         <tr className="library_table-line">
-                            <th>Nom</th>
+                            <th className="library_table-firstth">Nom</th>
                             <th>Joueurs</th>
                             <th>Type</th>
                             <th>Age</th>
@@ -41,13 +41,13 @@ const Library = () => {
                             <th>Supp.</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="library_table-tbody">
                             {data.map((dt) => {
                                 return (<tr className="library_table-line">
                                     <td>{dt.name}</td>
                                     <td>{dt.player_min} - {dt.player_max}</td>
                                     <td>{dt.type_game}</td>
-                                    <td>{dt.age}</td>
+                                    <td>{dt.age}+</td>
                                     <td>{dt.time}</td>
                                     <td><i className="pi pi-pencil"></i></td>
                                     <td><i className="pi pi-trash"></i></td>
