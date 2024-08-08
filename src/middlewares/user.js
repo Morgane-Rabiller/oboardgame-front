@@ -1,11 +1,6 @@
-import axios from "axios";
 import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess } from "../actions/user";
-import { FETCH_LIBRARY, saveData } from "../actions/library";
 import { FETCH_BOARDGAMES, saveDataBoardGame } from "../actions/boardgame";
-
-const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8080',
-  });
+import axiosInstance from "./axiosInstance";
 
 const userMiddleware = (store) => (next) => (action) => {
     switch (action.type) {
@@ -44,16 +39,16 @@ const userMiddleware = (store) => (next) => (action) => {
             });
             next(action);
             break;
-            case FETCH_LIBRARY:
-                axiosInstance.get("/library").then((res) => {
-                    console.log(res.data.data);
-                    store.dispatch(saveData(res.data.data));
-                }).catch((err) => {
-                    console.log(err);    
-                });
+            // case FETCH_LIBRARY:
+            //     axiosInstance.get("/library").then((res) => {
+            //         console.log(res.data.data);
+            //         store.dispatch(saveData(res.data.data));
+            //     }).catch((err) => {
+            //         console.log(err);    
+            //     });
             
-            next(action);
-            break;
+            // next(action);
+            // break;
             case FETCH_BOARDGAMES:
                 axiosInstance.get("/boardgame").then((res) => {
                     console.log(res.data.data);
