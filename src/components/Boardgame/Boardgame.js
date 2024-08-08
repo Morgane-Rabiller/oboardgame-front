@@ -34,7 +34,7 @@ const Boardgame = () => {
                     <tbody className="library_table-tbody">
                             {datas.map((data) => {
                                 return (
-                                        <tr className="library_table-line">
+                                        <tr className="library_table-line" key={data.id}>
                                             <TableDatas name={data.name} playerMin={data.player_min} playerMax={data.player_max} type={data.type} age={data.age} time={data.time} />
                                             <td><i className="pi pi-plus"></i></td>
                                         </tr>

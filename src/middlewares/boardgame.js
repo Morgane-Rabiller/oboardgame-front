@@ -6,7 +6,6 @@ const boardgameMiddleware = (store) => (next) => (action) => {
     switch (action.type) {
         case FETCH_BOARDGAMES:
             axiosInstance.get("/boardgame").then((res) => {
-                console.log(res.data.data);
                 store.dispatch(saveDataBoardGame(res.data.data));
             }).catch((err) => {
                 console.log(err);    

@@ -35,7 +35,7 @@ const Library = () => {
                     <tbody className="library_table-tbody">
                             {datas.map((data) => {
                                 return (
-                                        <tr className="library_table-line">
+                                        <tr className="library_table-line" key={data.boardgame_id}>
                                             <TableDatas name={data.name} playerMin={data.player_min} playerMax={data.player_max} type={data.type_game} age={data.age} time={data.time} />
                                             <td><i className="pi pi-pencil"></i></td>
                                             <td><i className="pi pi-trash"></i></td>
