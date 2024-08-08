@@ -6,6 +6,7 @@ import { fetchLibrary } from "../../actions/library";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "react-router-dom";
 import Loader from '../Loader/Loader';
+import TableDatas from "../TableDatas/TableDatas";
 
 const Library = () => {
     const { state } = useNavigation();
@@ -35,15 +36,13 @@ const Library = () => {
                     </thead>
                     <tbody className="library_table-tbody">
                             {data.map((dt) => {
-                                return (<tr className="library_table-line">
-                                    <td>{dt.name}</td>
-                                    <td>{dt.player_min} - {dt.player_max}</td>
-                                    <td>{dt.type_game}</td>
-                                    <td>{dt.age}+</td>
-                                    <td>{dt.time}</td>
-                                    <td><i className="pi pi-pencil"></i></td>
-                                    <td><i className="pi pi-trash"></i></td>
-                                </tr>)
+                                return (
+                                        <tr className="library_table-line">
+                                            <TableDatas name={dt.name} playerMin={dt.player_min} playerMax={dt.player_max} type={dt.type_game} age={dt.age} time={dt.time} />
+                                            <td><i className="pi pi-pencil"></i></td>
+                                            <td><i className="pi pi-trash"></i></td>
+                                        </tr>
+                                    )
                             })}
                     </tbody>
                 </table>
