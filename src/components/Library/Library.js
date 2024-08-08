@@ -21,14 +21,6 @@ const Library = () => {
             {state === 'loading' && <Loader />}
             {data && data.length !== 0 ? 
             <div className="card">
-                {/* <DataTable value={data} tableStyle={{ minWidth: '10rem' }}>
-                    <Column field="name" header="Nom"></Column>
-                    <Column field="player_min" header="Min-joueur"></Column>
-                    <Column field="player_max" header="Max-joueur"></Column>
-                    <Column field="type_game" header="Type"></Column>
-                    <Column field="age" header="Age"></Column>
-                    <Column field="time" header="Durée"></Column>
-                </DataTable> */}
                 <table className="library_table">
                     <thead className="library_table-thead">
                         <tr className="library_table-line">
