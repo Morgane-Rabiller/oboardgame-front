@@ -1,4 +1,4 @@
-import "./Library.scss";
+import "./Boardgame.scss";
 import React, { useEffect } from 'react';
 import { fetchLibrary } from "../../actions/library";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +6,7 @@ import { useNavigation } from "react-router-dom";
 import Loader from '../Loader/Loader';
 import TableDatas from "../TableDatas/TableDatas";
 
-const Library = () => {
+const Boardgame = () => {
     const { state } = useNavigation();
     const datas = useSelector((state) => state.libraryReducer.data);
     const dispatch = useDispatch();
@@ -46,10 +46,10 @@ const Library = () => {
                 </table>
             </div> 
             : 
-            <p className="text-center m-5">Tu n'as pas de jeux dans ta bibliothèque</p>
+            <p className="text-center m-5">Pas de jeux de société dans la base de données.</p>
             }
         </div>
     );
 };
 
-export default Library;
+export default Boardgame;

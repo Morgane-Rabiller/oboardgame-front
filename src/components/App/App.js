@@ -9,6 +9,7 @@ import RandomGame from '../RandomGame/Randomgame';
 import { useSelector } from 'react-redux';
 import Footer from '../Footer/Footer';
 import Library from '../Library/Library';
+import Boardgame from '../Boardgame/Boardgame';
 
 function PrivateRoute({ children }) {
   const logged = useSelector((state) => state.userReducer.logged);
@@ -46,6 +47,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Library />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "Jeux-de-société",
+        element: (
+          <PrivateRoute>
+            <Boardgame />
           </PrivateRoute>
         ),
       },
