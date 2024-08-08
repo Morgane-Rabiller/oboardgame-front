@@ -39,16 +39,6 @@ const userMiddleware = (store) => (next) => (action) => {
             });
             next(action);
             break;
-            case FETCH_BOARDGAMES:
-                axiosInstance.get("/boardgame").then((res) => {
-                    console.log(res.data.data);
-                    store.dispatch(saveDataBoardGame(res.data.data));
-                }).catch((err) => {
-                    console.log(err);    
-                });
-            
-            next(action);
-            break;
         default: 
             next(action);
             break;
