@@ -1,11 +1,14 @@
 import "./Header.scss";
 import logo from "../../assets/logo.png";
 import library from "../../assets/library.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-    const logged = useSelector((state) => state.userReducer.logged)
+    const logged = useSelector((state) => state.userReducer.logged);
+    console.log(useLocation());
+    const location = useLocation();
+    
     return (
         <header className="header">
             <div className="header-top">
@@ -23,7 +26,7 @@ const Header = () => {
                             alt="Bibliothèque"
                             className="header-right_logo"
                         />
-                        <p className="header-right_p">Ma bibliothèque</p>
+                        <p className={location.pathname === "/bibliotheque" ? "header-right_p header-right_p-active" : "header-right_p"}>Ma bibliothèque</p>
                     </Link>
                 </div>
                 } 

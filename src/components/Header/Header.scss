@@ -33,6 +33,9 @@
         &_p {
             font-size: 0.7rem;
             margin-top: 0.3rem;
+            &-active {
+                text-decoration: underline;
+            }
         }
     }
     &-separate {

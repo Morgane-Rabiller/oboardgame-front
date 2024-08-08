@@ -17,4 +17,10 @@
         background-color: transparent;
         border: none;
     }
+    &_link {
+        text-decoration: none;
+        &-active {
+            text-decoration: underline;
+        }
+    }
 }
