@@ -18,3 +18,16 @@ export const addBoardgame = (name) => ({
   name
 });
 
+export const ADD_BOARDGAME_SUCCESS = 'ADD_BOARDGAME_SUCCESS';
+
+export const addBoardgameSuccess = (message) => ({
+  type: ADD_BOARDGAME_SUCCESS,
+  message
+});
+
+export const ERASE_SUCCESS_MESSAGE = 'ERASE_SUCCESS_MESSAGE';
+
+export const eraseSuccessMessage = () => ({
+  type: ERASE_SUCCESS_MESSAGE,
+});
+

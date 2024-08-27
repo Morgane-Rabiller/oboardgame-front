@@ -1,24 +1,40 @@
 import "./Boardgame.scss";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "react-router-dom";
 import Loader from '../Loader/Loader';
 import TableDatas from "../TableDatas/TableDatas";
 import { fetchBoardgames } from "../../actions/boardgame";
-import { addBoardgame } from "../../actions/library";
+import { addBoardgame, eraseSuccessMessage } from "../../actions/library";
+import { Message } from 'primereact/message';
 
 const Boardgame = () => {
     const { state } = useNavigation();
     const datas = useSelector((state) => state.boardgameReducer.data);
+    const successMessage = useSelector((state) => state.libraryReducer.successMessage);
     const dispatch = useDispatch();
+    const [showMessage, setShowMessage] = useState(false);
     useEffect(() => {
         dispatch(fetchBoardgames());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        if (successMessage) {
+            setShowMessage(true);
+            const timer = setTimeout(() => {
+                setShowMessage(false);
+                dispatch(eraseSuccessMessage());
+            }, 3000); // Cache le message après 3 secondes (3000ms)
+            return () => clearTimeout(timer); // Nettoie le timeout si le composant se démonte
+        }
+    }, [successMessage]);
     
     return (
         <div className="library_container">
             {state === 'loading' && <Loader />}
+            {showMessage  && <Message severity="success" text={successMessage} />}
+            {/* <Message severity="success" text="message de succes" /> */}
             {datas && datas.length !== 0 ? 
             <div className="card">
                 <table className="library_table">

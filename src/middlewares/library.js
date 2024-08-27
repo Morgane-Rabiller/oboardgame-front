@@ -1,4 +1,4 @@
-import { ADD_BOARDGAME, FETCH_LIBRARY, saveData } from "../actions/library";
+import { ADD_BOARDGAME, addBoardgameSuccess, FETCH_LIBRARY, saveData } from "../actions/library";
 import axiosInstance from "./axiosInstance";
 
 
@@ -16,6 +16,7 @@ const libraryMiddleware = (store) => (next) => (action) => {
             axiosInstance.post("/library/addBoardgame", { name: action.name})
             .then((response) => {
                 console.log('Boardgame ajouté à la bibliothèque:', response.data);
+                store.dispatch(addBoardgameSuccess(response.data.message));
             })
             .catch((error) => {
                 console.error('Erreur lors de l\'ajout du jeu de société:', error);
