@@ -19,3 +19,47 @@
 td {
     padding: 0.5rem;
 }
+
+.p-confirm-popup {
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+    width: 50%;
+    background-color: vars.$writing-color;
+}
+
+.p-confirm-popup-icon {
+    margin-right: 0.5rem;
+}
+
+.p-confirm-popup-message {
+    margin-bottom: 0.5rem;
+}
+
+.p-confirm-popup-reject {
+    background-color: rgb(180, 6, 6);
+    color: black;
+}
+
+.p-confirm-popup-accept {
+    background-color: rgb(0, 170, 85);
+    color: black;
+}
+
+.p-confirm-popup:before {
+    bottom: 95%;
+    left: calc(var(--overlayArrowLeft, 0) + 0.4rem);
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.p-confirm-popup:after {
+    bottom: 95%;
+    left: calc(var(--overlayArrowLeft, 0) + 0.4rem);
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
