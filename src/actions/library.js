@@ -38,4 +38,10 @@ export const deleteBoardgame = (id) => ({
   id
 });
 
+export const ERASE_BOARDGAME_LINE = 'ERASE_BOARDGAME_LINE';
+
+export const eraseBoardgameLine = (id) => ({
+  type: ERASE_BOARDGAME_LINE,
+  id
+});
 

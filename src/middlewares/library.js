@@ -1,4 +1,4 @@
-import { ADD_BOARDGAME, addBoardgameSuccess, DELETE_BOARDGAME, FETCH_LIBRARY, saveData } from "../actions/library";
+import { ADD_BOARDGAME, addBoardgameSuccess, DELETE_BOARDGAME, eraseBoardgameLine, FETCH_LIBRARY, saveData } from "../actions/library";
 import axiosInstance from "./axiosInstance";
 
 
@@ -27,7 +27,7 @@ const libraryMiddleware = (store) => (next) => (action) => {
             axiosInstance.delete(`/library/delete/${action.id}`)
             .then((response) => {
                 console.log(response.data);
-                
+                store.dispatch(eraseBoardgameLine(action.id));
             })
             .catch((error) => {
                 console.log(error);
