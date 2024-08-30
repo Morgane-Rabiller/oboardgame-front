@@ -31,3 +31,11 @@ export const eraseSuccessMessage = () => ({
   type: ERASE_SUCCESS_MESSAGE,
 });
 
+export const DELETE_BOARDGAME = 'DELETE_BOARDGAME';
+
+export const deleteBoardgame = (id) => ({
+  type: DELETE_BOARDGAME,
+  id
+});
+
+

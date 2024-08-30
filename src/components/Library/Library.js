@@ -1,6 +1,6 @@
 import "./Library.scss";
 import React, { useEffect, useRef } from 'react';
-import { fetchLibrary } from "../../actions/library";
+import { deleteBoardgame, fetchLibrary } from "../../actions/library";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "react-router-dom";
 import Loader from '../Loader/Loader';
@@ -20,6 +20,7 @@ const Library = () => {
 
     const accept = () => {
         toast.current.show({ severity: 'info', summary: 'Confirmation', detail: 'Jeu supprimé', life: 3000 });
+        dispatch(deleteBoardgame());
     };
 
     const reject = () => {
