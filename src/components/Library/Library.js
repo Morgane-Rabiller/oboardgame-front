@@ -18,23 +18,23 @@ const Library = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const accept = () => {
+    const accept = (boardgameId) => {
         toast.current.show({ severity: 'info', summary: 'Confirmation', detail: 'Jeu supprimé', life: 3000 });
-        dispatch(deleteBoardgame());
+        dispatch(deleteBoardgame(boardgameId))
     };
 
     const reject = () => {
         toast.current.show({ severity: 'warn', summary: 'Annulé', detail: 'Jeu gardé dans la bibliothèque', life: 3000 });
     };
 
-    const confirm = (event) => {
+    const confirm = (event, boardgameId) => {
         confirmPopup({
             target: event.currentTarget,
             message: 'Veux-tu vraiment supprimer ce jeu?',
             icon: 'pi pi-info-circle',
             defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
-            accept,
+            accept: () => accept(boardgameId),
             reject
         });
     };
@@ -63,7 +63,7 @@ const Library = () => {
                                         <tr className="library_table-line" key={data.boardgame_id}>
                                             <TableDatas name={data.name} playerMin={data.player_min} playerMax={data.player_max} type={data.type_game} age={data.age} time={data.time} />
                                             <td><i className="pi pi-pencil"></i></td>
-                                            <td><i className="pi pi-trash" onClick={confirm} ></i></td>
+                                            <td><i className="pi pi-trash" onClick={(event) => confirm(event, data.boardgame_id)} ></i></td>
                                         </tr>
                                     )
                                 })}
