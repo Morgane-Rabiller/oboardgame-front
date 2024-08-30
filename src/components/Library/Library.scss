@@ -24,77 +24,59 @@ td {
     margin-right: 0.5rem;
     padding: 0.5rem;
     width: 51%;
-    border: 1px solid rgb(195, 104, 238)
-    // background-color: vars.$writing-color;
-}
-
-.p-confirm-popup-icon {
-    margin-top: -1rem;
-    margin-left: 0.5rem;
-}
-
-.p-confirm-popup-message {
-    margin-bottom: 0.5rem;
-    text-align: center;
-}
-
-.p-confirm-popup-reject {
-    background-color: rgb(180, 6, 6);
-    color: black;
-}
-
-.p-confirm-popup-accept {
-    background-color: rgb(0, 170, 85);
-    color: black;
-}
-
-.p-confirm-popup:before {
-    bottom: 95%;
-    left: calc(var(--overlayArrowLeft, 0) + 0.4rem);
-    content: "";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-bottom-color: rgb(195, 104, 238);
-}
-.p-confirm-popup:after {
-    bottom: 95%;
-    left: calc(var(--overlayArrowLeft, 0) + 0.4rem);
-    content: "";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
+    border: 1px solid rgb(195, 104, 238);
+    &-icon {
+        margin-top: -1rem;
+        margin-left: 0.5rem;
+    }
+    &-message {
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    &-reject {
+        background-color: rgb(180, 6, 6);
+        color: black;
+    }
+    &-accept {
+        background-color: rgb(0, 170, 85);
+        color: black;
+    }
+    &:before {
+        bottom: 95%;
+        left: calc(var(--overlayArrowLeft, 0) + 0.4rem);
+        content: "";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-bottom-color: rgb(195, 104, 238);
+    }
+    &:after {
+        bottom: 95%;
+        left: calc(var(--overlayArrowLeft, 0) + 0.4rem);
+        content: "";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
 }
 
 .p-toast {
     text-align: center;
     display: flex;
     justify-content: center;
-    // &-message {
-        //     margin: 0 1rem 0 1rem;
-        // }
-}
-    
-.p-toast-container {
-    padding: 1rem;
-}
-
-.p-toast-message {
-    margin: 0 1rem 0 1rem;
-    margin-left: 1rem;
-    padding: 5px;
-}
-
-.p-toast-icon-close {
-    padding-left: 12px;
+    &-message {
+        padding: 0.5rem;
+    }
+    &-icon-close {
+        padding-left: 12px;
+    }
+    &-message-text {
+        padding-left: 12px;
+    }
+    &-summary {
+        font-weight: bold;
+    }
 }
 
-.p-toast-message-text {
-    padding-left: 12px;
-}
-
-.p-toast-summary {
-    font-weight: bold;
-}
