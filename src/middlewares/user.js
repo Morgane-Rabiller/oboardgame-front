@@ -1,5 +1,4 @@
 import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess } from "../actions/user";
-import { FETCH_BOARDGAMES, saveDataBoardGame } from "../actions/boardgame";
 import axiosInstance from "./axiosInstance";
 
 const userMiddleware = (store) => (next) => (action) => {

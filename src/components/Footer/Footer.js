@@ -3,7 +3,7 @@ import profile from "../../assets/profile.png";
 import power from "../../assets/power.png";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/user";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
     const dispatch = useDispatch();
