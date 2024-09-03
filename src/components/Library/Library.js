@@ -1,5 +1,5 @@
 import "./Library.scss";
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { deleteBoardgame, fetchLibrary } from "../../actions/library";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "react-router-dom";
@@ -7,12 +7,18 @@ import Loader from '../Loader/Loader';
 import TableDatas from "../TableDatas/TableDatas";
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
+import { Dialog } from 'primereact/dialog';
 
 const Library = () => {
     const toast = useRef(null);
     const { state } = useNavigation();
     const datas = useSelector((state) => state.libraryReducer.data);
+    const [visible, setVisible] = useState(false);
+    const [editMode, setEditMode] = useState(null); // State to track which row is being edited
+    const [editedData, setEditedData] = useState({}); // State to store edited data
+
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(fetchLibrary());
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,6 +44,21 @@ const Library = () => {
             reject
         });
     };
+
+    const handleEditClick = (boardgameId, data) => {
+        setEditMode(boardgameId);
+        setEditedData(data);
+    };
+
+    const handleSaveClick = () => {
+        // Implement save functionality here (e.g., dispatch an action to save changes)
+        console.log("Saving data:", editedData);
+        setEditMode(null); // Exit edit mode
+    };
+
+    const handleChange = (field, value) => {
+        setEditedData({ ...editedData, [field]: value });
+    };
     
     return (
         <div className="library_container">
@@ -59,17 +80,41 @@ const Library = () => {
                     </thead>
                     <tbody className="library_table-tbody">
                             {datas.map((data) => {
+                                const isEditing = editMode === data.boardgame_id;
                                 return (
-                                        <tr className="library_table-line" key={data.boardgame_id}>
-                                            <TableDatas name={data.name} playerMin={data.player_min} playerMax={data.player_max} type={data.type_game} age={data.age} time={data.time} />
-                                            <td><i className="pi pi-pencil"></i></td>
-                                            <td><i className="pi pi-trash" onClick={(event) => confirm(event, data.boardgame_id)} ></i></td>
-                                        </tr>
-                                    )
-                                })}
-                                <ConfirmPopup />
+                                    <tr className="library_table-line" key={data.boardgame_id}>
+                                        <TableDatas
+                                            name={isEditing ? <input type="text" className="w-12" value={editedData.name} onChange={(e) => handleChange('name', e.target.value)} /> : data.name}
+                                            playerMin={isEditing ? <input type="text" className="w-6"  value={editedData.player_min} onChange={(e) => handleChange('player_min', e.target.value)} /> : data.player_min}
+                                            playerMax={isEditing ? <input type="text" className="w-6"  value={editedData.player_max} onChange={(e) => handleChange('player_max', e.target.value)} /> : data.player_max}
+                                            type={isEditing ? <input type="text" className="w-12"  value={editedData.type_game} onChange={(e) => handleChange('type_game', e.target.value)} /> : data.type_game}
+                                            age={isEditing ? <input type="text" className="w-12"  value={editedData.age} onChange={(e) => handleChange('age', e.target.value)} /> : data.age}
+                                            time={isEditing ? <input type="text" className="w-12"  value={editedData.time} onChange={(e) => handleChange('time', e.target.value)} /> : data.time}
+                                        />
+                                        <td>
+                                            {isEditing ? (
+                                                <i className="pi pi-check" onClick={handleSaveClick}></i>
+                                            ) : (
+                                                <i className="pi pi-pencil" onClick={() => handleEditClick(data.boardgame_id, data)}></i>
+                                            )}
+                                        </td>
+                                        <td>
+                                            <i className="pi pi-trash" onClick={(event) => confirm(event, data.boardgame_id)}></i>
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                            <ConfirmPopup />
                     </tbody>
                 </table>
+                <Dialog header="Modifier le jeu" visible={visible} style={{ width: '50vw' }} onHide={() => { if (!visible) return; setVisible(false); }}>
+                    <p className="m-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </Dialog>
             </div> 
             : 
             <p className="text-center m-5">Tu n'as pas de jeux dans ta bibliothèque</p>
