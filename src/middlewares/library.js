@@ -1,4 +1,4 @@
-import { ADD_BOARDGAME, addBoardgameSuccess, DELETE_BOARDGAME, eraseBoardgameLine, FETCH_LIBRARY, saveData } from "../actions/library";
+import { ADD_BOARDGAME, addBoardgameSuccess, DELETE_BOARDGAME, eraseBoardgameLine, FETCH_LIBRARY, saveData, saveDataAfterUpdate, UPDATE_LIBRARY_LINE } from "../actions/library";
 import axiosInstance from "./axiosInstance";
 
 
@@ -17,6 +17,17 @@ const libraryMiddleware = (store) => (next) => (action) => {
             .then((response) => {
                 console.log('Boardgame ajouté à la bibliothèque:', response.data);
                 store.dispatch(addBoardgameSuccess(response.data.message));
+            })
+            .catch((error) => {
+                console.error('Erreur lors de l\'ajout du jeu de société:', error);
+            });
+            next(action);
+            break;
+        case UPDATE_LIBRARY_LINE:
+            axiosInstance.put(`/library/update/${action.data.boardgame_id}`, action.data)
+            .then((response) => {
+                console.log('Boardgame modifié:', response.data);
+                store.dispatch(saveDataAfterUpdate(action.data));
             })
             .catch((error) => {
                 console.error('Erreur lors de l\'ajout du jeu de société:', error);

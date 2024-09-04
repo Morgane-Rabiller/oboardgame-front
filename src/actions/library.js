@@ -51,3 +51,10 @@ export const saveDataAfterUpdate = (data) => ({
   type: SAVE_DATA_AFTER_UPDATE,
   data
 });
+
+export const UPDATE_LIBRARY_LINE = 'UPDATE_LIBRARY_LINE';
+
+export const updateLibraryLine = (data) => ({
+  type: UPDATE_LIBRARY_LINE,
+  data
+});

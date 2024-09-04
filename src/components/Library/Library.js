@@ -1,6 +1,6 @@
 import "./Library.scss";
 import React, { useEffect, useRef, useState } from 'react';
-import { deleteBoardgame, fetchLibrary, saveDataAfterUpdate } from "../../actions/library";
+import { deleteBoardgame, fetchLibrary, saveDataAfterUpdate, updateLibraryLine } from "../../actions/library";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "react-router-dom";
 import Loader from '../Loader/Loader';
@@ -52,8 +52,7 @@ const Library = () => {
     
     const handleSaveClick = () => {
         console.log("Saving data:", editedData);
-        // Enregistrer les données dans le store redux
-        dispatch(saveDataAfterUpdate(editedData));
+        dispatch(updateLibraryLine(editedData));
         setEditMode(null);
     };
 
