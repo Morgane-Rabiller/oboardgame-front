@@ -85,10 +85,14 @@ const Library = () => {
                                     <tr className="library_table-line" key={data.boardgame_id}>
                                         <TableDatas
                                             name={isEditing ? <input type="text" className="w-12" value={editedData.name} onChange={(e) => handleChange('name', e.target.value)} /> : data.name}
-                                            playerMin={isEditing ? <input type="text" className="w-6"  value={editedData.player_min} onChange={(e) => handleChange('player_min', e.target.value)} /> : data.player_min}
-                                            playerMax={isEditing ? <input type="text" className="w-6"  value={editedData.player_max} onChange={(e) => handleChange('player_max', e.target.value)} /> : data.player_max}
-                                            type={isEditing ? <input type="text" className="w-12"  value={editedData.type_game} onChange={(e) => handleChange('type_game', e.target.value)} /> : data.type_game}
-                                            age={isEditing ? <input type="text" className="w-12"  value={editedData.age} onChange={(e) => handleChange('age', e.target.value)} /> : data.age}
+                                            playerMin={isEditing ? <input type="number" className="w-6"  value={editedData.player_min} onChange={(e) => handleChange('player_min', e.target.value)} /> : data.player_min}
+                                            playerMax={isEditing ? <input type="number" className="w-6"  value={editedData.player_max} onChange={(e) => handleChange('player_max', e.target.value)} /> : data.player_max}
+                                            type={isEditing ? <select className="w-12"  value={editedData.type_game} onChange={(e) => handleChange('type_game', e.target.value)} >
+                                                <option value="Cartes" key="1">Cartes</option>
+                                                <option value="Dés" key="2">Dés</option>
+                                                <option value="Plateau" key="3">Plateau</option>
+                                            </select> : data.type_game}
+                                            age={isEditing ? <input type="number" className="w-12"  value={editedData.age} onChange={(e) => handleChange('age', e.target.value)} /> : data.age}
                                             time={isEditing ? <input type="text" className="w-12"  value={editedData.time} onChange={(e) => handleChange('time', e.target.value)} /> : data.time}
                                         />
                                         <td>
