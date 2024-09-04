@@ -1,6 +1,6 @@
 import "./Library.scss";
 import React, { useEffect, useRef, useState } from 'react';
-import { deleteBoardgame, fetchLibrary } from "../../actions/library";
+import { deleteBoardgame, fetchLibrary, saveDataAfterUpdate } from "../../actions/library";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "react-router-dom";
 import Loader from '../Loader/Loader';
@@ -49,11 +49,12 @@ const Library = () => {
         setEditMode(boardgameId);
         setEditedData(data);
     };
-
+    
     const handleSaveClick = () => {
-        // Implement save functionality here (e.g., dispatch an action to save changes)
         console.log("Saving data:", editedData);
-        setEditMode(null); // Exit edit mode
+        // Enregistrer les données dans le store redux
+        dispatch(saveDataAfterUpdate(editedData));
+        setEditMode(null);
     };
 
     const handleChange = (field, value) => {

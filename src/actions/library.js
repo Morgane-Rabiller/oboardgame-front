@@ -45,3 +45,9 @@ export const eraseBoardgameLine = (id) => ({
   id
 });
 
+export const SAVE_DATA_AFTER_UPDATE = 'SAVE_DATA_AFTER_UPDATE';
+
+export const saveDataAfterUpdate = (data) => ({
+  type: SAVE_DATA_AFTER_UPDATE,
+  data
+});
