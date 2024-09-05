@@ -33,7 +33,7 @@ const Library = () => {
             const timer = setTimeout(() => {
                 setShowMessage(false);
                 dispatch(eraseErrorMessage());
-            }, 3000); // Cache le message après 3 secondes (3000ms)
+            }, 3000); 
             return () => clearTimeout(timer); // Nettoie le timeout si le composant se démonte
         }
     }, [errorMessage]);
