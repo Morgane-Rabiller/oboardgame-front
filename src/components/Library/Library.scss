@@ -80,3 +80,20 @@ td {
     }
 }
 
+.p-messages	 {
+    padding: 1rem;
+    margin: 2rem;
+    height: 3rem;
+    width: 20rem;
+}
+.p-messages-error {
+    padding: 1rem;
+    margin: 2rem;
+}
+.p-messages-summary {
+    padding: 2rem;
+}
+.p-inline-message-error {
+    padding: 0.5rem;
+    // opacity: 0.4;
+}

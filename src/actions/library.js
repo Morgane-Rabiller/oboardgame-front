@@ -31,6 +31,19 @@ export const eraseSuccessMessage = () => ({
   type: ERASE_SUCCESS_MESSAGE,
 });
 
+export const ADD_ERROR_MESSAGE = 'ADD_ERROR_MESSAGE';
+
+export const addErrorMessage = (message) => ({
+  type: ADD_ERROR_MESSAGE,
+  message
+});
+
+export const ERASE_ERROR_MESSAGE = 'ERASE_ERROR_MESSAGE';
+
+export const eraseErrorMessage = () => ({
+  type: ERASE_ERROR_MESSAGE,
+});
+
 export const DELETE_BOARDGAME = 'DELETE_BOARDGAME';
 
 export const deleteBoardgame = (id) => ({

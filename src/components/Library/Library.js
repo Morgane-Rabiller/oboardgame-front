@@ -1,6 +1,6 @@
 import "./Library.scss";
 import React, { useEffect, useRef, useState } from 'react';
-import { deleteBoardgame, fetchLibrary, saveDataAfterUpdate, updateLibraryLine } from "../../actions/library";
+import { deleteBoardgame, eraseErrorMessage, fetchLibrary, updateLibraryLine } from "../../actions/library";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "react-router-dom";
 import Loader from '../Loader/Loader';
@@ -8,14 +8,17 @@ import TableDatas from "../TableDatas/TableDatas";
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
 import { Dialog } from 'primereact/dialog';
+import { Message } from "primereact/message";
 
 const Library = () => {
     const toast = useRef(null);
     const { state } = useNavigation();
     const datas = useSelector((state) => state.libraryReducer.data);
     const [visible, setVisible] = useState(false);
-    const [editMode, setEditMode] = useState(null); // State to track which row is being edited
-    const [editedData, setEditedData] = useState({}); // State to store edited data
+    const [editMode, setEditMode] = useState(null); 
+    const [editedData, setEditedData] = useState({}); 
+    const errorMessage = useSelector((state) => state.libraryReducer.errorMessage);
+    const [showMessage, setShowMessage] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -23,6 +26,17 @@ const Library = () => {
         dispatch(fetchLibrary());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        if (errorMessage) {
+            setShowMessage(true);
+            const timer = setTimeout(() => {
+                setShowMessage(false);
+                dispatch(eraseErrorMessage());
+            }, 3000); // Cache le message après 3 secondes (3000ms)
+            return () => clearTimeout(timer); // Nettoie le timeout si le composant se démonte
+        }
+    }, [errorMessage]);
 
     const accept = (boardgameId) => {
         toast.current.show({ severity: 'info', summary: 'Confirmation', detail: 'Jeu supprimé', life: 3000 });
@@ -62,6 +76,7 @@ const Library = () => {
     
     return (
         <div className="library_container">
+            {showMessage  && <Message severity="error" text={errorMessage} />}
             <Toast ref={toast} />
             {state === 'loading' && <Loader />}
             {datas && datas.length !== 0 ? 
@@ -85,20 +100,20 @@ const Library = () => {
                                     <tr className="library_table-line" key={data.boardgame_id}>
                                         <TableDatas
                                             name={isEditing ? <input type="text" className="w-12" value={editedData.name} onChange={(e) => handleChange('name', e.target.value)} /> : data.name}
-                                            playerMin={isEditing ? <input type="number" className="w-6"  value={editedData.player_min} onChange={(e) => handleChange('player_min', e.target.value)} /> : data.player_min}
-                                            playerMax={isEditing ? <input type="number" className="w-6"  value={editedData.player_max} onChange={(e) => handleChange('player_max', e.target.value)} /> : data.player_max}
+                                            playerMin={isEditing ? <input type="number"className="w-6" min="1" max="10" value={editedData.player_min} onChange={(e) => handleChange('player_min', e.target.value)} /> : data.player_min}
+                                            playerMax={isEditing ? <input type="number" className="w-6" min="1" max="50" value={editedData.player_max} onChange={(e) => handleChange('player_max', e.target.value)} /> : data.player_max}
                                             type={isEditing ? <select className="w-12"  value={editedData.type_game} onChange={(e) => handleChange('type_game', e.target.value)} >
                                                 <option value="Cartes" key="1">Cartes</option>
                                                 <option value="Dés" key="2">Dés</option>
                                                 <option value="Plateau" key="3">Plateau</option>
                                             </select> : data.type_game}
-                                            age={isEditing ? <input type="number" className="w-12"  value={editedData.age} onChange={(e) => handleChange('age', e.target.value)} /> : data.age}
+                                            age={isEditing ? <input type="number" className="w-12" min="2" value={editedData.age} onChange={(e) => handleChange('age', e.target.value)} /> : data.age}
                                             time={isEditing ? <select className="w-13"  value={editedData.time} onChange={(e) => handleChange('time', e.target.value)} >
                                                 <option value="15" key="1">15</option>
                                                 <option value="20" key="2">20</option>
                                                 <option value="30" key="3">30</option>
                                                 <option value="45" key="4">45</option>
-                                                <option value="60+" key="5">60+</option>
+                                                <option value="60" key="5">60</option>
                                             </select> : data.time}
                                         />
                                         <td>
