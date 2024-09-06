@@ -7,14 +7,12 @@ import Loader from '../Loader/Loader';
 import TableDatas from "../TableDatas/TableDatas";
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
-import { Dialog } from 'primereact/dialog';
 import { Message } from "primereact/message";
 
 const Library = () => {
     const toast = useRef(null);
     const { state } = useNavigation();
     const datas = useSelector((state) => state.libraryReducer.data);
-    const [visible, setVisible] = useState(false);
     const [editMode, setEditMode] = useState(null); 
     const [editedData, setEditedData] = useState({}); 
     const errorMessage = useSelector((state) => state.libraryReducer.errorMessage);
@@ -36,6 +34,7 @@ const Library = () => {
             }, 3000); 
             return () => clearTimeout(timer); // Nettoie le timeout si le composant se démonte
         }
+        // eslint-disable-next-line
     }, [errorMessage]);
 
     const accept = (boardgameId) => {
@@ -132,14 +131,6 @@ const Library = () => {
                             <ConfirmPopup />
                     </tbody>
                 </table>
-                <Dialog header="Modifier le jeu" visible={visible} style={{ width: '50vw' }} onHide={() => { if (!visible) return; setVisible(false); }}>
-                    <p className="m-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                </Dialog>
             </div> 
             : 
             <p className="text-center m-5">Tu n'as pas de jeux dans ta bibliothèque</p>
