@@ -6,6 +6,7 @@ import { Dropdown } from 'primereact/dropdown';
 import card from "../../assets/card.png";
 import dice from "../../assets/dice.png";
 import pawn from "../../assets/pawn.png";
+import { useSelector } from "react-redux";
 
 const Randomgame = () => {
     const [checked, setChecked] = useState(false);
@@ -13,6 +14,7 @@ const Randomgame = () => {
     const [maxPlayer, setMaxPlayer] = useState(25);
     const [age, setAge] = useState(25);
     const [selectedDuration, setSelectedDuration] = useState(null);
+    const userPseudo = useSelector((state) => state.userReducer.pseudo);
     const durations = [
         { name: '---' },
         { name: '15' },
@@ -29,6 +31,7 @@ const Randomgame = () => {
     ]
     return (
         <div className="randomgame">
+            <p className="mb-5">Bonjour { userPseudo } 👋</p>
             <div>
                 <ToggleButton invalid onIcon="pi pi-eye" offIcon="pi pi-eye-slash" checked={checked} onChange={(e) => setChecked(e.value)} className="toggle-button w-8rem" onLabel="Filtres" offLabel="Filtres"/>
             </div>
