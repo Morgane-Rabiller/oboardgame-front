@@ -21,15 +21,17 @@
         &-firstth {
             text-align: left;
             padding-left: 0.5rem;
+            width: 5rem;
         }
     }
 }
 td {
     padding: 0.5rem;
-    text-align: right;
+    text-align: center;
 }
 td:first-of-type {
     text-align: left;
+    width: 5rem;
 }
 
 tr {
