@@ -10,6 +10,8 @@ import { Toast } from 'primereact/toast';
 import { Message } from "primereact/message";
 
 const Library = () => {
+    console.log("Je passe dans le composant");
+    
     const toast = useRef(null);
     const { state } = useNavigation();
     const datas = useSelector((state) => state.libraryReducer.data);
@@ -17,11 +19,21 @@ const Library = () => {
     const [editedData, setEditedData] = useState({}); 
     const errorMessage = useSelector((state) => state.libraryReducer.errorMessage);
     const [showMessage, setShowMessage] = useState(false);
-
     const dispatch = useDispatch();
+
+    const accept = (boardgameId) => {
+        toast.current.show({ severity: 'info', summary: 'Confirmation', detail: 'Jeu supprimé', life: 3000 });
+        dispatch(deleteBoardgame(boardgameId))
+    };
+
+    const reject = () => {
+        toast.current.show({ severity: 'warn', summary: 'Annulé', detail: 'Jeu gardé dans la bibliothèque', life: 3000 });
+    };
 
     useEffect(() => {
         dispatch(fetchLibrary());
+        console.log("je passe dans le useEffect");
+        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -37,14 +49,6 @@ const Library = () => {
         // eslint-disable-next-line
     }, [errorMessage]);
 
-    const accept = (boardgameId) => {
-        toast.current.show({ severity: 'info', summary: 'Confirmation', detail: 'Jeu supprimé', life: 3000 });
-        dispatch(deleteBoardgame(boardgameId))
-    };
-
-    const reject = () => {
-        toast.current.show({ severity: 'warn', summary: 'Annulé', detail: 'Jeu gardé dans la bibliothèque', life: 3000 });
-    };
 
     const confirm = (event, boardgameId) => {
         confirmPopup({
@@ -139,4 +143,4 @@ const Library = () => {
     );
 };
 
-export default Library;
+export default React.memo(Library);

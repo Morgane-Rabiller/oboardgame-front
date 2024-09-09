@@ -81,4 +81,4 @@ const Boardgame = () => {
     );
 };
 
-export default Boardgame;
+export default React.memo(Boardgame);
