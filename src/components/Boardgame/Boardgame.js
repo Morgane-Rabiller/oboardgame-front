@@ -8,6 +8,7 @@ import { fetchBoardgames } from "../../actions/boardgame";
 import { addBoardgame, eraseSuccessMessage } from "../../actions/library";
 import { Message } from 'primereact/message';
 import { Dialog } from 'primereact/dialog';
+import CreatePopUp from "./CreatePopUp/CreatePopUp";
 
 const Boardgame = () => {
     const { state } = useNavigation();
@@ -38,7 +39,7 @@ const Boardgame = () => {
             {state === 'loading' && <Loader />}
             {showMessage  && <Message severity="success" className="absolute" text={successMessage} />}
             <div className="text-center">
-            <p className="text-sm">Mon jeu n'est pas présent dans la liste ?</p>
+            <p className="text-sm mb-2">Mon jeu n'est pas présent dans la liste ?</p>
             <button type="button" className="" onClick={() => setVisible(true)}>Ajouter un jeu</button>
             </div>
             {datas && datas.length !== 0 ? 
@@ -70,12 +71,7 @@ const Boardgame = () => {
             <p className="text-center m-5">Pas de jeux de société dans la base de données.</p>
             }
                 <Dialog header="Ajouter un jeu" visible={visible} style={{ width: '50vw' }} onHide={() => { if (!visible) return; setVisible(false); }}>
-                    <p className="m-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                    <CreatePopUp></CreatePopUp>
                 </Dialog>
         </div>
     );
