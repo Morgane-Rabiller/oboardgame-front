@@ -36,7 +36,7 @@ const Boardgame = () => {
     return (
         <div className="library_container h-30rem">
             {state === 'loading' && <Loader />}
-            {showMessage  && <Message severity="success" text={successMessage} />}
+            {showMessage  && <Message severity="success" className="absolute" text={successMessage} />}
             <div className="text-center">
             <p className="text-sm">Mon jeu n'est pas présent dans la liste ?</p>
             <button type="button" className="" onClick={() => setVisible(true)}>Ajouter un jeu</button>
