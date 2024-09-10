@@ -1,3 +1,5 @@
+@use "src/styles/vars";
+
 td {
     padding: 0.6rem;
 }
@@ -17,4 +19,13 @@ td {
 .p-inline-message-success {
     padding: 0.5rem;
     opacity: 0.9;
+}
+
+.library_button-addgame {
+    background: vars.$button-color;
+    color: white;
+    font-family: vars.$font-family-general;
+    border: none;
+    border-radius: 5px;
+    padding: 0.3rem;
 }

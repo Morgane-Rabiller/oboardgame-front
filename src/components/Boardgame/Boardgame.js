@@ -40,7 +40,7 @@ const Boardgame = () => {
             {showMessage  && <Message severity="success" className="absolute" text={successMessage} />}
             <div className="text-center">
             <p className="text-sm mb-2">Mon jeu n'est pas présent dans la liste ?</p>
-            <button type="button" className="" onClick={() => setVisible(true)}>Ajouter un jeu</button>
+            <button type="button" className="library_button-addgame" onClick={() => setVisible(true)}>Ajouter un jeu</button>
             </div>
             {datas && datas.length !== 0 ? 
             <div className="card">
