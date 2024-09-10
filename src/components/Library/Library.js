@@ -10,8 +10,6 @@ import { Toast } from 'primereact/toast';
 import { Message } from "primereact/message";
 
 const Library = () => {
-    console.log("Je passe dans le composant");
-    
     const toast = useRef(null);
     const { state } = useNavigation();
     const datas = useSelector((state) => state.libraryReducer.data);
@@ -32,8 +30,6 @@ const Library = () => {
 
     useEffect(() => {
         dispatch(fetchLibrary());
-        console.log("je passe dans le useEffect");
-        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -68,7 +64,6 @@ const Library = () => {
     };
     
     const handleSaveClick = () => {
-        console.log("Saving data:", editedData);
         dispatch(updateLibraryLine(editedData));
         setEditMode(null);
     };
