@@ -5,7 +5,7 @@ import { useNavigation } from "react-router-dom";
 import Loader from '../Loader/Loader';
 import TableDatas from "../TableDatas/TableDatas";
 import { fetchBoardgames } from "../../actions/boardgame";
-import { addBoardgame, eraseSuccessMessage } from "../../actions/library";
+import { addBoardgame, eraseErrorMessage, eraseSuccessMessage } from "../../actions/library";
 import { Message } from 'primereact/message';
 import { Dialog } from 'primereact/dialog';
 import CreatePopUp from "./CreatePopUp/CreatePopUp";
@@ -14,8 +14,10 @@ const Boardgame = () => {
     const { state } = useNavigation();
     const datas = useSelector((state) => state.boardgameReducer.data);
     const successMessage = useSelector((state) => state.libraryReducer.successMessage);
+    const errorMessage = useSelector((state) => state.libraryReducer.errorMessage);
     const dispatch = useDispatch();
-    const [showMessage, setShowMessage] = useState(false);
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
     const [visible, setVisible] = useState(false);
     useEffect(() => {
         dispatch(fetchBoardgames());
@@ -24,20 +26,29 @@ const Boardgame = () => {
 
     useEffect(() => {
         if (successMessage) {
-            setShowMessage(true);
+            setShowSuccessMessage(true);
             const timer = setTimeout(() => {
-                setShowMessage(false);
+                setShowSuccessMessage(false);
                 dispatch(eraseSuccessMessage());
             }, 3000); // Cache le message après 3 secondes (3000ms)
             return () => clearTimeout(timer); // Nettoie le timeout si le composant se démonte
         }
+        if (errorMessage) {
+            setShowErrorMessage(true);
+            const timer = setTimeout(() => {
+                setShowErrorMessage(false);
+                dispatch(eraseErrorMessage());
+            }, 3000); // Cache le message après 3 secondes (3000ms)
+            return () => clearTimeout(timer); // Nettoie le timeout si le composant se démonte
+        }
         // eslint-disable-next-line
-    }, [successMessage]);
+    }, [successMessage, errorMessage]);
     
     return (
         <div className="library_container h-30rem">
             {state === 'loading' && <Loader />}
-            {showMessage  && <Message severity="success" className="absolute" text={successMessage} />}
+            {showSuccessMessage  && <Message severity="success" className="absolute" text={successMessage} />}
+            {showErrorMessage  && <Message severity="error" className="absolute" text={errorMessage} />}
             <div className="text-center">
             <p className="text-sm mb-2">Mon jeu n'est pas présent dans la liste ?</p>
             <button type="button" className="library_button-addgame" onClick={() => setVisible(true)}>Ajouter un jeu</button>

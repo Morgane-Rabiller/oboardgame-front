@@ -20,6 +20,7 @@ const libraryMiddleware = (store) => (next) => (action) => {
             })
             .catch((error) => {
                 console.error('Erreur lors de l\'ajout du jeu de société:', error);
+                store.dispatch(addErrorMessage(error.response.data.message));
             });
             next(action);
             break;
