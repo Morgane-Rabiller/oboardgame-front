@@ -11,9 +11,16 @@ export const saveDataBoardGame = (data) => ({
   data
 });
 
-export const ADD_BOARDGAME = 'ADD_BOARDGAME';
+export const ADD_GENERAL_BOARDGAME = 'ADD_GENERAL_BOARDGAME';
 
-export const addBoardgame = (data) => ({
-  type: ADD_BOARDGAME,
+export const addGeneralBoardgame = (data) => ({
+  type: ADD_GENERAL_BOARDGAME,
+  data
+});
+
+export const SAVE_BOARDGAME = 'SAVE_BOARDGAME';
+
+export const saveBoardGame = (data) => ({
+  type: SAVE_BOARDGAME,
   data
 });

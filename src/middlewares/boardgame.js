@@ -1,4 +1,4 @@
-import { FETCH_BOARDGAMES, saveDataBoardGame } from "../actions/boardgame";
+import { ADD_GENERAL_BOARDGAME, FETCH_BOARDGAMES, saveBoardGame, saveDataBoardGame } from "../actions/boardgame";
 import axiosInstance from "./axiosInstance";
 
 
@@ -10,10 +10,20 @@ const boardgameMiddleware = (store) => (next) => (action) => {
             }).catch((err) => {
                 console.log(err);    
             });
+        next(action);
+        break;
+    case ADD_GENERAL_BOARDGAME:
+        console.log("action", action.data);
+        
+        axiosInstance.post("/boardgame/create", action.data).then((response) => {
+            console.log("response", response.data);
+            store.dispatch(saveBoardGame(response.data));
+        }).catch((err) => {
+            console.log(err);    
+        });
         
         next(action);
         break;
-    break;
         default: 
             next(action);
             break;
