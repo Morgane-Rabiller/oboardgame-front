@@ -26,8 +26,13 @@ const CreatePopUp = () => {
         { name: 45 },
         { name: 60 },
     ];
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+    }
     return (
-        <form>
+        <form onSubmit={(e) => handleSubmit(e)} >
             <InputText type="text" value={name} className="p-inputtext-sm mb-3" onChange={(e) => setName(e.target.value)} placeholder="Nom du jeu"/>
             <div className="flex-auto">
                 <label htmlFor="min-buttons" className="block mb-2 text-sm">Nombre de joueurs minimum et maximum</label>
