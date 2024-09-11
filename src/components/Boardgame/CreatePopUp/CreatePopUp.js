@@ -14,21 +14,9 @@ const CreatePopUp = ({ onSuccess }) => {
     const [age, setAge] = useState(2);
     const [selectedType, setSelectedType] = useState(null);
     const dispatch = useDispatch();
-    const types = [
-        { name: 'Cartes' },
-        { name: 'Dés' },
-        { name: 'Plateau' },
-    ];
+    const types = [ "Cartes", "Dés", "Plateau" ];
     const [selectedTime, setselectedTime] = useState(null);
-    const times = [
-        { name: 10 },
-        { name: 15 },
-        { name: 20 },
-        { name: 25 },
-        { name: 30 },
-        { name: 45 },
-        { name: 60 },
-    ];
+    const times = [ 10, 15, 20, 25, 30, 45, 60];
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,9 +25,9 @@ const CreatePopUp = ({ onSuccess }) => {
                 name, 
                 player_min: minPlayer,
                 player_max: maxPlayer,
-                type: selectedType.name,
+                type: selectedType,
                 age,
-                time: selectedTime.name 
+                time: selectedTime 
             }
         ));
 
