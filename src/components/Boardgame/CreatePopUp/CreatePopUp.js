@@ -2,10 +2,10 @@ import { InputNumber } from "primereact/inputnumber";
 import "./CreatePopUp.scss";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dropdown } from "primereact/dropdown";
-import { addGeneralBoardgame } from "../../../actions/boardgame";
-import { useDispatch } from "react-redux";
+import { addGeneralBoardgame, eraseErrorMessage } from "../../../actions/boardgame";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreatePopUp = ({ onSuccess }) => {
     const [name, setName] = useState('');
@@ -13,10 +13,27 @@ const CreatePopUp = ({ onSuccess }) => {
     const [maxPlayer, setMaxPlayer] = useState(5);
     const [age, setAge] = useState(2);
     const [selectedType, setSelectedType] = useState(null);
-    const dispatch = useDispatch();
-    const types = [ "Cartes", "Dés", "Plateau" ];
     const [selectedTime, setselectedTime] = useState(null);
+    const [displayMessage, setDisplayMessage] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const types = [ "Cartes", "Dés", "Plateau" ];
     const times = [ 10, 15, 20, 25, 30, 45, 60];
+    const errorMessage = useSelector((state) => state.boardgameReducer.errorMessage);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (errorMessage) {
+            setDisplayMessage(true);
+
+            window.setTimeout(() => {
+                setDisplayMessage(false);
+                dispatch(eraseErrorMessage());
+            }, 3000);
+        } else if (submitted) {
+            onSuccess();
+        }
+        setSubmitted(false);
+    }, [errorMessage, dispatch, displayMessage, onSuccess]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -30,9 +47,9 @@ const CreatePopUp = ({ onSuccess }) => {
                 time: selectedTime 
             }
         ));
-
-        onSuccess();
+        setSubmitted(true);
     }
+    
     return (
         <form onSubmit={(e) => handleSubmit(e)} >
             <InputText type="text" value={name} className="p-inputtext-sm mb-3" onChange={(e) => setName(e.target.value)} placeholder="Nom du jeu"/>
@@ -53,6 +70,7 @@ const CreatePopUp = ({ onSuccess }) => {
             <div className="flex justify-content-center">
                 <Button type="submit" className="text-sm mt-3">Ajouter</Button>
             </div>
+            {displayMessage && <p className="text-red-800 mt-3">{errorMessage}</p>}
         </form>
     )
 }

@@ -24,3 +24,16 @@ export const saveBoardGame = (data) => ({
   type: SAVE_BOARDGAME,
   data
 });
+
+export const FETCH_ERROR_MESSAGE = 'FETCH_ERROR_MESSAGE';
+
+export const fetchErrorMessage = (message) => ({
+  type: FETCH_ERROR_MESSAGE,
+  message
+});
+
+export const ERASE_ERROR_MESSAGE = 'ERASE_ERROR_MESSAGE';
+
+export const eraseErrorMessage = () => ({
+  type: ERASE_ERROR_MESSAGE
+});
