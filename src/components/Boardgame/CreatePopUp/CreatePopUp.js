@@ -7,7 +7,7 @@ import { Dropdown } from "primereact/dropdown";
 import { addGeneralBoardgame } from "../../../actions/boardgame";
 import { useDispatch } from "react-redux";
 
-const CreatePopUp = () => {
+const CreatePopUp = ({ onSuccess }) => {
     const [name, setName] = useState('');
     const [minPlayer, setMinPlayer] = useState(1);
     const [maxPlayer, setMaxPlayer] = useState(5);
@@ -42,6 +42,8 @@ const CreatePopUp = () => {
                 time: selectedTime.name 
             }
         ));
+
+        onSuccess();
     }
     return (
         <form onSubmit={(e) => handleSubmit(e)} >

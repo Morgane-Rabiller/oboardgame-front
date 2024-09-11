@@ -43,6 +43,11 @@ const Boardgame = () => {
         }
         // eslint-disable-next-line
     }, [successMessage, errorMessage]);
+
+    const handleSuccess = () => {
+        // Ferme la popup si l'ajout est réussi
+        setVisible(false);
+    }
     
     return (
         <div className="library_container h-30rem">
@@ -82,7 +87,7 @@ const Boardgame = () => {
             <p className="text-center m-5">Pas de jeux de société dans la base de données.</p>
             }
                 <Dialog header="Ajouter un jeu" visible={visible} style={{ width: '50vw' }} onHide={() => { if (!visible) return; setVisible(false); }}>
-                    <CreatePopUp></CreatePopUp>
+                    <CreatePopUp onSuccess={handleSuccess} />
                 </Dialog>
         </div>
     );

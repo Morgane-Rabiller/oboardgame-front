@@ -14,7 +14,7 @@ export default function boardgameReducer(state = initialState, action) {
       case SAVE_BOARDGAME:
         return {
           ...state,
-          data: state.data.push(action.data)
+          data: [...state.data, action.data]
         };
       default:
         return state;

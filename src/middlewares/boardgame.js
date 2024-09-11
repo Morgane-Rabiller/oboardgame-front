@@ -16,8 +16,8 @@ const boardgameMiddleware = (store) => (next) => (action) => {
         console.log("action", action.data);
         
         axiosInstance.post("/boardgame/create", action.data).then((response) => {
-            console.log("response", response.data);
-            store.dispatch(saveBoardGame(response.data));
+            console.log("response.data.newBoardgame", response.data.newBoardgame);
+            store.dispatch(saveBoardGame(response.data.newBoardgame));
         }).catch((err) => {
             console.log(err);    
         });
