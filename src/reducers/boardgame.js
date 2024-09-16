@@ -1,7 +1,8 @@
-import { ERASE_ERROR_MESSAGE, FETCH_ERROR_MESSAGE, SAVE_BOARDGAME, SAVE_DATA_BOARDGAME } from "../actions/boardgame";
+import { ERASE_ERROR_MESSAGE, ERASE_SUCCESS_MESSAGE_BOARDGAME, FETCH_ERROR_MESSAGE, SAVE_BOARDGAME, SAVE_DATA_BOARDGAME } from "../actions/boardgame";
 
 const initialState = {
     data: null,
+    successMessage: null,
     errorMessage: null
 };
 
@@ -15,7 +16,8 @@ export default function boardgameReducer(state = initialState, action) {
       case SAVE_BOARDGAME:
         return {
           ...state,
-          data: [...state.data, action.data]
+          data: [...state.data, action.data],
+          successMessage: action.message
         };
       case FETCH_ERROR_MESSAGE:
         return {
@@ -26,6 +28,11 @@ export default function boardgameReducer(state = initialState, action) {
         return {
           ...state,
           errorMessage: null
+        }
+      case ERASE_SUCCESS_MESSAGE_BOARDGAME:
+        return {
+          ...state,
+          successMessage: null
         }
       default:
         return state;

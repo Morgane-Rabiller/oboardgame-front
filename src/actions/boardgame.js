@@ -20,9 +20,10 @@ export const addGeneralBoardgame = (data) => ({
 
 export const SAVE_BOARDGAME = 'SAVE_BOARDGAME';
 
-export const saveBoardGame = (data) => ({
+export const saveBoardGame = (data, message) => ({
   type: SAVE_BOARDGAME,
-  data
+  data,
+  message
 });
 
 export const FETCH_ERROR_MESSAGE = 'FETCH_ERROR_MESSAGE';
@@ -36,4 +37,10 @@ export const ERASE_ERROR_MESSAGE = 'ERASE_ERROR_MESSAGE';
 
 export const eraseErrorMessage = () => ({
   type: ERASE_ERROR_MESSAGE
+});
+
+export const ERASE_SUCCESS_MESSAGE_BOARDGAME = 'ERASE_SUCCESS_MESSAGE_BOARDGAME';
+
+export const eraseSuccessMessageBoardgame = () => ({
+  type: ERASE_SUCCESS_MESSAGE_BOARDGAME
 });
