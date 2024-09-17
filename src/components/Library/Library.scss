@@ -57,10 +57,12 @@ tr {
     &-reject {
         background-color: rgb(180, 6, 6);
         color: black;
+        width: 45px;
     }
     &-accept {
         background-color: rgb(0, 170, 85);
         color: black;
+        border-color: rgb(0, 170, 85);
     }
     &:before {
         bottom: 95%;
