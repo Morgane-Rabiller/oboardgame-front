@@ -24,6 +24,9 @@ const Boardgame = () => {
     const [showSuccessBoardgameMessage, setShowSuccessBoardgameMessage] = useState(false);
     const [showErrorMessage, setShowErrorMessage] = useState(false);
     const [visible, setVisible] = useState(false);
+    const [name, setName] = useState('');
+    const [filteredDatas, setFilteredDatas] = useState([]);
+
     useEffect(() => {
         dispatch(fetchBoardgames());
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,6 +52,14 @@ const Boardgame = () => {
         // eslint-disable-next-line
     }, [successMessage, successMessageBoardgame, errorMessage]);
 
+    useEffect(() => {
+        // Filtrer les données à chaque changement du champ de recherche ou des données
+        const filtered = datas.filter((game) =>
+            game.name.toLowerCase().includes(name.toLowerCase())
+        );
+        setFilteredDatas(filtered);
+    }, [name, datas]);
+
     const handleSuccess = () => {
         // Ferme la popup si l'ajout est réussi
         setVisible(false);
@@ -63,6 +74,11 @@ const Boardgame = () => {
             return () => clearTimeout(timer); // Nettoie le timeout si le composant se démonte
         }
     }
+
+    const handleChange = (e) => {
+        setName(e);
+        // findBoardgame(datas, name);
+    }
     
     return (
         <div className="library_container h-30rem">
@@ -71,16 +87,16 @@ const Boardgame = () => {
             {showSuccessBoardgameMessage  && <Message severity="success" className="absolute" text={successMessageBoardgame} />}
             {showErrorMessage  && <Message severity="error" className="absolute" text={errorMessage} />}
             <div className="text-left ml-2">
-            <p className="text-sm mb-2">Mon jeu n'est pas présent dans la liste ?</p>
-            <div className="flex justify-content-between align-items-start">
-            <button type="button" className="library_button-addgame mt-2" onClick={() => setVisible(true)}>Ajouter un jeu</button>
-            <IconField iconPosition="right" className="mt-2 ml-2 mr-2 text-right">
-                <InputIcon className="pi pi-search"> </InputIcon>
-                <InputText placeholder="Je recherche mon jeu" className="p-inputtext-sm"/>
-            </IconField>
+                <p className="text-sm mb-2">Mon jeu n'est pas présent dans la liste ?</p>
+                <div className="flex justify-content-between align-items-start">
+                    <button type="button" className="library_button-addgame mt-2" onClick={() => setVisible(true)}>Ajouter un jeu</button>
+                    <IconField iconPosition="right" className="mt-2 ml-2 mr-2 text-right">
+                        <InputIcon className="pi pi-search"> </InputIcon>
+                        <InputText placeholder="Je recherche mon jeu" className="p-inputtext-sm" value={name} onChange={(e) => handleChange(e.target.value)} />
+                    </IconField>
+                </div>
             </div>
-            </div>
-            {datas && datas.length !== 0 ? 
+            {filteredDatas && filteredDatas.length !== 0 ? 
             <div className="card">
                 <table className="library_table">
                     <thead className="library_table-thead">
@@ -94,7 +110,7 @@ const Boardgame = () => {
                         </tr>
                     </thead>
                     <tbody className="library_table-tbody">
-                            {datas.map((data) => {
+                            {filteredDatas.map((data) => {
                                 return (
                                         <tr className="library_table-line" key={data.id}>
                                             <TableDatas name={data.name} playerMin={data.player_min} playerMax={data.player_max} type={data.type} age={data.age} time={data.time} />
