@@ -8,6 +8,9 @@ import { eraseSuccessMessageBoardgame, fetchBoardgames } from "../../actions/boa
 import { addBoardgame, eraseErrorMessage, eraseSuccessMessage } from "../../actions/library";
 import { Message } from 'primereact/message';
 import { Dialog } from 'primereact/dialog';
+import { InputText } from 'primereact/inputtext';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import CreatePopUp from "./CreatePopUp/CreatePopUp";
 
 const Boardgame = () => {
@@ -67,9 +70,15 @@ const Boardgame = () => {
             {showSuccessMessage  && <Message severity="success" className="absolute" text={successMessage} />}
             {showSuccessBoardgameMessage  && <Message severity="success" className="absolute" text={successMessageBoardgame} />}
             {showErrorMessage  && <Message severity="error" className="absolute" text={errorMessage} />}
-            <div className="text-center">
+            <div className="text-left ml-2">
             <p className="text-sm mb-2">Mon jeu n'est pas présent dans la liste ?</p>
-            <button type="button" className="library_button-addgame" onClick={() => setVisible(true)}>Ajouter un jeu</button>
+            <div className="flex justify-content-between align-items-start">
+            <button type="button" className="library_button-addgame mt-2" onClick={() => setVisible(true)}>Ajouter un jeu</button>
+            <IconField iconPosition="right" className="mt-2 ml-2 mr-2 text-right">
+                <InputIcon className="pi pi-search"> </InputIcon>
+                <InputText placeholder="Je recherche mon jeu" className="p-inputtext-sm"/>
+            </IconField>
+            </div>
             </div>
             {datas && datas.length !== 0 ? 
             <div className="card">
