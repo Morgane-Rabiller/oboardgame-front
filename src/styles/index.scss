@@ -2,8 +2,20 @@
 @use 'vars';
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
+// body {
+//     font-family: "Raleway", sans-serif;
+//     background-color: vars.$background-color;
+//     color: vars.$writing-color;
+// }
+
+:root {
+    --background-color: #2d2d2d;
+    --writing-color: #D0D0D0;
+    --button-color: linear-gradient(90deg, rgb(13, 175, 211) 0%, rgb(91, 106, 235) 51.5%, rgb(157, 49, 254) 100%);
+}
+
 body {
     font-family: "Raleway", sans-serif;
-    background-color: vars.$background-color;
-    color: vars.$writing-color;
+    background-color: var(--background-color);
+    color: var(--writing-color);
 }
