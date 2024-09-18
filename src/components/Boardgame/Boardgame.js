@@ -53,11 +53,13 @@ const Boardgame = () => {
     }, [successMessage, successMessageBoardgame, errorMessage]);
 
     useEffect(() => {
-        // Filtrer les données à chaque changement du champ de recherche ou des données
-        const filtered = datas.filter((game) =>
-            game.name.toLowerCase().includes(name.toLowerCase())
-        );
-        setFilteredDatas(filtered);
+        if(datas) {
+            // Filtrer les données à chaque changement du champ de recherche ou des données
+            const filtered = datas.filter((game) =>
+                game.name.toLowerCase().includes(name.toLowerCase())
+            );
+            setFilteredDatas(filtered);
+        }
     }, [name, datas]);
 
     const handleSuccess = () => {
