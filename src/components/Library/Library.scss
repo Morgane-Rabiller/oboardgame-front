@@ -1,10 +1,14 @@
 @use "src/styles/vars";
 
 .library {
+    &_container {
+        height: calc(100% - 87px);
+        // padding-bottom: 6.5rem;
+    }
     &_table {
-        margin: 2rem auto 50px auto;
+        margin-top: 1.5rem;
         font-size: small;
-        height: 1em;
+        height: 100%;
         &-thead {
             border-bottom: 1px solid vars.$writing-color;
             width: 100%;
@@ -12,9 +16,9 @@
         }
         &-tbody {
             display: block;
-            max-height: 24.7rem;
             overflow: auto;
             margin-bottom: 50px;
+            height: 100%;
         }
         &-line {
             height: 1.5rem;
@@ -26,10 +30,17 @@
         }
     }
 }
+
+.card {
+    height: 100%;
+    // height: calc(100%);
+}
+
 td {
-    padding: 0.5rem;
+    padding: 0.5rem; // ou 0.6rem ?
     text-align: center;
 }
+
 td:first-of-type {
     text-align: left;
     width: 5rem;
