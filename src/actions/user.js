@@ -51,3 +51,9 @@ export const loginFailure = (error) => ({
   error
 });
 
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
+
+export const updatePassword = (data) => ({
+  type: UPDATE_PASSWORD,
+  data
+});
