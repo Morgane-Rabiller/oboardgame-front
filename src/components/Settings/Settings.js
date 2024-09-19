@@ -3,8 +3,11 @@ import { InputSwitch } from 'primereact/inputswitch';
 import { Button } from 'primereact/button';
 import "./Settings.scss";
 import { useEffect, useState } from "react";
+import { Dialog } from "primereact/dialog";
+import ChangePassword from "./ChangePassword/ChangePassword";
 
 const Settings = () => {
+    const [visible, setVisible] = useState(false);
     const [checked, setChecked] = useState(() => {
         const savedTheme = localStorage.getItem('theme');
         return savedTheme === 'light';
@@ -29,7 +32,10 @@ const Settings = () => {
                 <p>Thème { checked ? "clair" : "sombre" }</p>
                 <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
             </div>
-            <Button className="mb-2">Changer mon mot de passe</Button>
+            <Button type="button" className="mb-2" onClick={() => setVisible(true)}>Changer mon mot de passe</Button>
+            <Dialog header="Change ton mot de passe" visible={visible} onHide={() => { if (!visible) return; setVisible(false); }}>
+                    <ChangePassword  />
+            </Dialog>
             <Button className="mb-2">Tuto</Button>
         </div>
     );
