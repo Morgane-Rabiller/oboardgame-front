@@ -1,8 +1,57 @@
 @use "src/styles/vars";
 
-td {
-    padding: 0.6rem;
+.boardgame {
+    &_container {
+        height: calc(100% - 155px);
+        // padding-bottom: 6.5rem;
+    }
+    &_table {
+        margin-top: 1.5rem;
+        font-size: small;
+        height: 100%;
+        &-thead {
+            border-bottom: 1px solid vars.$writing-color;
+            width: 100%;
+            table-layout: fixed;
+        }
+        &-tbody {
+            display: block;
+            overflow: auto;
+            margin-bottom: 50px;
+            height: 100%;
+        }
+        &-line {
+            height: 1.5rem;
+        }
+        &-firstth {
+            text-align: left;
+            padding-left: 0.5rem;
+            width: 5rem;
+        }
+    }
 }
+
+.card {
+    height: 100%;
+    height: calc(100% - 85px);
+}
+
+td {
+    padding: 0.5rem; // ou 0.6rem ?
+    text-align: center;
+}
+
+td:first-of-type {
+    text-align: left;
+    width: 5rem;
+}
+
+tr {
+    display: table;
+    width: 100%;
+    table-layout:fixed;
+}
+
 .p-messages	 {
     padding: 1rem;
     margin: 2rem;
@@ -21,7 +70,7 @@ td {
     opacity: 0.9;
 }
 
-.library_button-addgame {
+.boardgame_button-addgame {
     background: vars.$button-color;
     color: white;
     font-family: vars.$font-family-general;

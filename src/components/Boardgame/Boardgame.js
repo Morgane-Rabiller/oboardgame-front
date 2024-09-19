@@ -83,7 +83,7 @@ const Boardgame = () => {
     }
     
     return (
-        <div className="library_container h-30rem">
+        <div className="boardgame_container">
             {state === 'loading' && <Loader />}
             {showSuccessMessage  && <Message severity="success" className="absolute" text={successMessage} />}
             {showSuccessBoardgameMessage  && <Message severity="success" className="absolute" text={successMessageBoardgame} />}
@@ -91,7 +91,7 @@ const Boardgame = () => {
             <div className="text-left ml-2">
                 <p className="text-sm mb-2">Mon jeu n'est pas présent dans la liste ?</p>
                 <div className="flex justify-content-between align-items-start">
-                    <button type="button" className="library_button-addgame mt-2" onClick={() => setVisible(true)}>Ajouter un jeu</button>
+                    <button type="button" className="boardgame_button-addgame mt-2" onClick={() => setVisible(true)}>Ajouter un jeu</button>
                     <IconField iconPosition="right" className="mt-2 ml-2 mr-2 text-right">
                         <InputIcon className="pi pi-search"> </InputIcon>
                         <InputText placeholder="Je recherche mon jeu" className="p-inputtext-sm" value={name} onChange={(e) => handleChange(e.target.value)} />
@@ -100,10 +100,10 @@ const Boardgame = () => {
             </div>
             {filteredDatas && filteredDatas.length !== 0 ? 
             <div className="card">
-                <table className="library_table">
-                    <thead className="library_table-thead">
-                        <tr className="library_table-line">
-                            <th className="library_table-firstth">Nom</th>
+                <table className="boardgame_table">
+                    <thead className="boardgame_table-thead">
+                        <tr className="boardgame_table-line">
+                            <th className="boardgame_table-firstth">Nom</th>
                             <th>Joueurs</th>
                             <th>Type</th>
                             <th>Age</th>
@@ -111,10 +111,10 @@ const Boardgame = () => {
                             <th>Ajout</th>
                         </tr>
                     </thead>
-                    <tbody className="library_table-tbody">
+                    <tbody className="boardgame_table-tbody">
                             {filteredDatas.map((data) => {
                                 return (
-                                        <tr className="library_table-line" key={data.id}>
+                                        <tr className="boardgame_table-line" key={data.id}>
                                             <TableDatas name={data.name} playerMin={data.player_min} playerMax={data.player_max} type={data.type} age={data.age} time={data.time} />
                                             <td><i className="pi pi-plus" onClick={() => dispatch(addBoardgame(data.name))}></i></td>
                                         </tr>

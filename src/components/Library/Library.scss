@@ -12,8 +12,9 @@
         }
         &-tbody {
             display: block;
-            height: 24.7rem;
+            max-height: 24.7rem;
             overflow: auto;
+            margin-bottom: 50px;
         }
         &-line {
             height: 1.5rem;
