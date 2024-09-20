@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { InputSwitch } from 'primereact/inputswitch';
 import { Button } from 'primereact/button';
 import "./Settings.scss";
@@ -33,7 +32,7 @@ const Settings = () => {
                 <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
             </div>
             <Button type="button" className="mb-2" onClick={() => setVisible(true)}>Changer mon mot de passe</Button>
-            <Dialog header="Change ton mot de passe" visible={visible} onHide={() => { if (!visible) return; setVisible(false); }}>
+            <Dialog header="Changer le mot de passe" className="changePassword" visible={visible} onHide={() => { if (!visible) return; setVisible(false); }}>
                     <ChangePassword  />
             </Dialog>
             <Button className="mb-2">Tuto</Button>
