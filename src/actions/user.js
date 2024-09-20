@@ -71,3 +71,9 @@ export const updateSuccess = (message) => ({
   type: UPDATE_SUCCESS,
   message
 });
+
+export const ERASE_MESSAGE = 'ERASE_MESSAGE';
+
+export const eraseMessage = () => ({
+  type: ERASE_MESSAGE,
+});

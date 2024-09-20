@@ -3,7 +3,7 @@ import "./ChangePassword.scss";
 import { useEffect, useState } from "react";
 import { Button } from "primereact/button";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePassword } from "../../../actions/user";
+import { eraseMessage, updatePassword } from "../../../actions/user";
 
 const ChangePassword = () => {
     const [password, setPassword] = useState('');
@@ -25,8 +25,8 @@ const ChangePassword = () => {
             
             setShowError(true);
             window.setTimeout(() => {
-
                 setShowError(false);
+                dispatch(eraseMessage());
             }, 3000);
         }
     }, [errorMessage]);
