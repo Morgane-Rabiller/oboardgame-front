@@ -1,4 +1,4 @@
-import { SAVE_PSEUDO, SET_USER_FIELD, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT, REGISTER_SUCCESS, UPDATE_FAILURE, ERASE_MESSAGE } from "../actions/user";
+import { SAVE_PSEUDO, SET_USER_FIELD, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT, REGISTER_SUCCESS, UPDATE_FAILURE, ERASE_MESSAGE, UPDATE_SUCCESS } from "../actions/user";
 
 const initialState = {
         logged: false,
@@ -58,6 +58,11 @@ export default function userReducer(state = initialState, action) {
         return {
           ...state,
           error: action.message
+        }
+      case UPDATE_SUCCESS:
+        return {
+          ...state,
+          message: action.message
         }
       case ERASE_MESSAGE:
         return {

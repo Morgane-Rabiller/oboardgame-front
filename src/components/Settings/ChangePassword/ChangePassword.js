@@ -5,32 +5,36 @@ import { Button } from "primereact/button";
 import { useDispatch, useSelector } from "react-redux";
 import { eraseMessage, updatePassword } from "../../../actions/user";
 
-const ChangePassword = () => {
+const ChangePassword = ({ onSuccess }) => {
     const [password, setPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [newPasswordRepeat, setNewPasswordRepeat] = useState('');
     const [showError, setShowError] = useState(false);
     const errorMessage = useSelector((state) => state.userReducer.error);
+    const [submitted, setSubmitted] = useState(false);
     const dispatch = useDispatch();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(updatePassword({password, newPassword, newPasswordRepeat}));
-
-    }
-
+    
     useEffect(() => {
         if(errorMessage) {
             console.log("je suis dans le useEffect");
-            
             setShowError(true);
+            setSubmitted(false);
             window.setTimeout(() => {
                 setShowError(false);
                 dispatch(eraseMessage());
             }, 3000);
+        } else if(submitted){
+            console.log("Je suis dans le submitted");     
+            onSuccess();
         }
-    }, [errorMessage, dispatch]);
-
+    }, [errorMessage, dispatch, onSuccess]);
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(updatePassword({password, newPassword, newPasswordRepeat}));
+        setSubmitted(true);
+    }
+    
     return (
         <form className="settings_changePassword mt-4" onSubmit={(e) => {handleSubmit(e)}}>
             <label>Ancien de passe</label>
