@@ -29,16 +29,16 @@ const ChangePassword = () => {
                 dispatch(eraseMessage());
             }, 3000);
         }
-    }, [errorMessage]);
+    }, [errorMessage, dispatch]);
 
     return (
         <form className="settings_changePassword mt-4" onSubmit={(e) => {handleSubmit(e)}}>
             <label>Ancien de passe</label>
-            <Password value={password} className="mb-2" onChange={(e) => setPassword(e.target.value)} toggleMask />
+            <Password value={password} className="mb-3" onChange={(e) => setPassword(e.target.value)} toggleMask />
             <label>Nouveau mot de passe</label>
-            <Password value={newPassword} className="mb-2" onChange={(e) => setNewPassword(e.target.value)} toggleMask />
+            <Password value={newPassword} className="mb-3" onChange={(e) => setNewPassword(e.target.value)} toggleMask />
             <label>Confirmation du nouveau mot de passe</label>
-            <Password value={newPasswordRepeat} className="mb-2" onChange={(e) => setNewPasswordRepeat(e.target.value)} toggleMask />
+            <Password value={newPasswordRepeat} className="mb-5" onChange={(e) => setNewPasswordRepeat(e.target.value)} toggleMask />
             <div className="text-center">
                 <Button type="submit">Valider</Button>
             </div>
