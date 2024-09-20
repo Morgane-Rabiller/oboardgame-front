@@ -57,3 +57,17 @@ export const updatePassword = (data) => ({
   type: UPDATE_PASSWORD,
   data
 });
+
+export const UPDATE_FAILURE = 'UPDATE_FAILURE';
+
+export const updateFailure = (message) => ({
+  type: UPDATE_FAILURE,
+  message
+});
+
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
+
+export const updateSuccess = (message) => ({
+  type: UPDATE_SUCCESS,
+  message
+});

@@ -1,4 +1,4 @@
-import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess } from "../actions/user";
+import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess, UPDATE_PASSWORD, updateSuccess, updateFailure } from "../actions/user";
 import axiosInstance from "./axiosInstance";
 
 const userMiddleware = (store) => (next) => (action) => {
@@ -17,7 +17,6 @@ const userMiddleware = (store) => (next) => (action) => {
                 store.dispatch(loginFailure(error));
                 });
             }
-            
             next(action);
             break;
         case LOGOUT:
@@ -36,6 +35,16 @@ const userMiddleware = (store) => (next) => (action) => {
                 const error = err.response.data.message;
                 store.dispatch(loginFailure(error));
             });
+            next(action);
+            break;
+            case UPDATE_PASSWORD:
+                axiosInstance.put("/updatePassword", action.data).then((res) => {
+                    console.log("Mot de passe mis à jour !", res.data.message);
+                    store.dispatch(updateSuccess(res.data.message));
+                }).catch((err) => {
+                    console.log("Erreur lors de la mise à jour du mot de passe :",err.response.data.message);
+                    store.dispatch(updateFailure(err.response.data.message));
+                });
             next(action);
             break;
         default: 
