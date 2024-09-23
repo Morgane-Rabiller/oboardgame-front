@@ -1,4 +1,4 @@
-import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess, UPDATE_PASSWORD, updateSuccess, updateFailure } from "../actions/user";
+import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess, UPDATE_PASSWORD, updateSuccess, updateFailure, DELETE_ACCOUNT, logout } from "../actions/user";
 import axiosInstance from "./axiosInstance";
 
 const userMiddleware = (store) => (next) => (action) => {
@@ -45,6 +45,15 @@ const userMiddleware = (store) => (next) => (action) => {
                     console.log("Erreur lors de la mise à jour du mot de passe :",err.response.data.message);
                     store.dispatch(updateFailure(err.response.data.message));
                 });
+            next(action);
+            break;
+        case DELETE_ACCOUNT:
+            axiosInstance.delete("/deleteAccount").then((res) => {
+                console.log("Compte supprimé !", res.data.message);
+                store.dispatch(logout());
+            }).catch((err) => {
+                console.log("Erreur lors de la suppression du compte :",err.response.data.message);
+            });;
             next(action);
             break;
         default: 

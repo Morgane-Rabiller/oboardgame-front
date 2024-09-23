@@ -50,6 +50,7 @@ const Settings = () => {
     const handleClick = () => {
         setShowDelete(false);
         dispatch(deleteAccount());
+        
     }
 
     return (
