@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Dialog } from "primereact/dialog";
 import ChangePassword from "./ChangePassword/ChangePassword";
 import { useDispatch, useSelector } from 'react-redux';
-import { eraseMessage } from '../../actions/user';
+import { deleteAccount, eraseMessage } from '../../actions/user';
 import { Message } from 'primereact/message';
 import { Link } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ const Settings = () => {
         const savedTheme = localStorage.getItem('theme');
         return savedTheme === 'light';
     });
+    const [showDelete, setShowDelete] = useState(false)
     const successMessage = useSelector((state) => state.userReducer.message);
     const [showSuccess, setShowSuccess] = useState(false);
     const dispatch = useDispatch();
@@ -47,7 +48,8 @@ const Settings = () => {
     }
 
     const handleClick = () => {
-
+        setShowDelete(false);
+        dispatch(deleteAccount());
     }
 
     return (
@@ -62,7 +64,14 @@ const Settings = () => {
                 <ChangePassword onSuccess={handleSuccess} />
             </Dialog>
             <Link to="/tuto"><Button className="mb-2 w-full">Tuto</Button></Link>
-            <Button className="mb-2 bg-red-700 border-red-700 focus:shadow-5" onClick={() => handleClick()}>Supprimer mon compte</Button>      
+            <Button className="mb-2 bg-red-700 border-red-700 focus:shadow-5" onClick={() => setShowDelete(true)}>Supprimer mon compte</Button>
+            <Dialog header="Suppression du compte" className="settings_delete" visible={showDelete} onHide={() => { if (!showDelete) return; setShowDelete(false); }}>
+                <p className='mb-4'>Es-tu sûr de vouloir supprimer ton compte ?</p>
+                <div className='flex justify-content-around'>
+                    <Button className=' bg-green-500 border-green-500' onClick={() => handleClick()}>OUI</Button>
+                    <Button className=' bg-red-500 border-red-500' onClick={() => setShowDelete(false)}>NON</Button>
+                </div>
+            </Dialog>
         </div>
     );
 };

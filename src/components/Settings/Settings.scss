@@ -2,4 +2,7 @@
     display: flex;
     flex-direction: column;
     margin: 2rem;
+    &_delete {
+        height: 10rem !important;
+    }
 }
