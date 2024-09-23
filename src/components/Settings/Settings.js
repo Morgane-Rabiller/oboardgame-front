@@ -7,6 +7,7 @@ import ChangePassword from "./ChangePassword/ChangePassword";
 import { useDispatch, useSelector } from 'react-redux';
 import { eraseMessage } from '../../actions/user';
 import { Message } from 'primereact/message';
+import { Link } from 'react-router-dom';
 
 const Settings = () => {
     const [visible, setVisible] = useState(false);
@@ -56,8 +57,9 @@ const Settings = () => {
             <Dialog header="Changer le mot de passe" className="changePassword" visible={visible} onHide={() => { if (!visible) return; setVisible(false); }}>
                 <ChangePassword onSuccess={handleSuccess} />
             </Dialog>
-            <Button className="mb-2">Tuto</Button>
-            <Button className="mb-2 bg-red-700 border-red-700 focus:shadow-5">Supprimer mon compte</Button>        </div>
+            <Link to="/tuto"><Button className="mb-2 w-full">Tuto</Button></Link>
+            <Button className="mb-2 bg-red-700 border-red-700 focus:shadow-5">Supprimer mon compte</Button>        
+        </div>
     );
 };
 
