@@ -46,6 +46,10 @@ const Settings = () => {
         }
     }
 
+    const handleClick = () => {
+
+    }
+
     return (
         <div className="settings">
             {showSuccess  && <Message severity="success" className="absolute" text={successMessage} />}
@@ -58,7 +62,7 @@ const Settings = () => {
                 <ChangePassword onSuccess={handleSuccess} />
             </Dialog>
             <Link to="/tuto"><Button className="mb-2 w-full">Tuto</Button></Link>
-            <Button className="mb-2 bg-red-700 border-red-700 focus:shadow-5">Supprimer mon compte</Button>        
+            <Button className="mb-2 bg-red-700 border-red-700 focus:shadow-5" onClick={() => handleClick()}>Supprimer mon compte</Button>      
         </div>
     );
 };

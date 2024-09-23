@@ -77,3 +77,9 @@ export const ERASE_MESSAGE = 'ERASE_MESSAGE';
 export const eraseMessage = () => ({
   type: ERASE_MESSAGE,
 });
+
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
+
+export const deleteAccount = () => ({
+  type: DELETE_ACCOUNT
+});
