@@ -57,7 +57,7 @@ const Settings = () => {
                 <ChangePassword onSuccess={handleSuccess} />
             </Dialog>
             <Button className="mb-2">Tuto</Button>
-        </div>
+            <Button className="mb-2 bg-red-700 border-red-700 focus:shadow-5">Supprimer mon compte</Button>        </div>
     );
 };
 
