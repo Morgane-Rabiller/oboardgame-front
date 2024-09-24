@@ -10,8 +10,7 @@ import { useSelector } from "react-redux";
 
 const Randomgame = () => {
     const [checked, setChecked] = useState(false);
-    const [minPlayer, setMinPlayer] = useState(25);
-    const [maxPlayer, setMaxPlayer] = useState(25);
+    const [players, setPlayers] = useState(1);
     const [age, setAge] = useState(25);
     const [selectedDuration, setSelectedDuration] = useState(null);
     const userPseudo = useSelector((state) => state.userReducer.pseudo);
@@ -37,12 +36,8 @@ const Randomgame = () => {
             </div>
             {checked && <div className="randomgame_filters">
                 <div>
-                    <label htmlFor="minmax-buttons" className="block mb-2">Min joueurs</label>
-                    <InputNumber inputId="minmax-buttons" size={1} maxLength={2} value={minPlayer} onValueChange={(e) => setMinPlayer(e.value)} mode="decimal" showButtons min={1} max={20} />
-                </div>
-                <div>
-                    <label htmlFor="minmax-buttons" className="block mb-2">Max joueurs</label>
-                    <InputNumber inputId="minmax-buttons" size={1} maxLength={2} value={maxPlayer} onValueChange={(e) => setMaxPlayer(e.value)} mode="decimal" showButtons min={1} max={99} />
+                    <label htmlFor="minmax-buttons" className="block mb-2">Nb joueurs</label>
+                    <InputNumber inputId="minmax-buttons" size={1} maxLength={2} value={players} onValueChange={(e) => setPlayers(e.value)} mode="decimal" showButtons min={1} max={20} />
                 </div>
                 <div>
                     <label htmlFor="minmax-buttons" className="block mb-2">Durée</label>
