@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register, setUserField } from "../../actions/user";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Message } from "primereact/message";
 
 const Register = () => {
     const pseudo = useSelector((state) => state.userReducer.pseudo);
@@ -26,12 +27,15 @@ const Register = () => {
 
     useEffect(() => {
         if(message) {
-            navigate("/connexion");
+            window.setTimeout(() => {
+                navigate("/connexion");
+            }, 3000);
         }
     }, [message, navigate]);
 
     return (
         <div className="register">
+            {message && <Message severity="success" text={message} />}
             <h1 className="register_title">Je m'inscris</h1>
             <form className="register_form" onSubmit={e => handleForm(e)}>
                 <InputText type="text" name="pseudo" className="register_form-pseudo p-inputtext-sm" value={pseudo} onChange={changeField} placeholder="Pseudo" />
