@@ -1,9 +1,10 @@
-import { ADD_BOARDGAME_SUCCESS, ADD_ERROR_MESSAGE, ERASE_BOARDGAME_LINE, ERASE_ERROR_MESSAGE, ERASE_SUCCESS_MESSAGE, SAVE_DATA, SAVE_DATA_AFTER_UPDATE } from "../actions/library";
+import { ADD_BOARDGAME_SUCCESS, ADD_ERROR_MESSAGE, ERASE_BOARDGAME_LINE, ERASE_ERROR_MESSAGE, ERASE_SUCCESS_MESSAGE, SAVE_BOARDGAME_NAME, SAVE_DATA, SAVE_DATA_AFTER_UPDATE } from "../actions/library";
 
 const initialState = {
     data: null,
     successMessage: null,
-    errorMessage: null
+    errorMessage: null,
+    boardgameSelected: null
 };
 
 export default function libraryReducer(state = initialState, action) {
@@ -43,6 +44,11 @@ export default function libraryReducer(state = initialState, action) {
         return {
           ...state,
           data: state.data.map(item => item.boardgame_id === action.data.boardgame_id ? action.data : item)
+        }
+      case SAVE_BOARDGAME_NAME:
+        return {
+          ...state,
+          boardgameSelected: action.boardgame
         }
       default:
         return state;

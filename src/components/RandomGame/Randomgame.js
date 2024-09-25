@@ -15,6 +15,8 @@ const Randomgame = () => {
     const [age, setAge] = useState(25);
     const [selectedDuration, setSelectedDuration] = useState(null);
     const userPseudo = useSelector((state) => state.userReducer.pseudo);
+    const message = useSelector((state) => state.libraryReducer.successMessage);
+    const boardgameSelected = useSelector((state) => state.libraryReducer.boardgameSelected);
     const durations = [
         { name: '---' },
         { name: '15' },
@@ -32,7 +34,7 @@ const Randomgame = () => {
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        dispatch(selectRandomBoardgame());
+        dispatch(selectRandomBoardgame({players, selectedDuration, age, selectedType}));
     };
 
     return (
@@ -64,6 +66,9 @@ const Randomgame = () => {
             
             <div className="randomgame_button-container">
                 <button className="randomgame_button" onClick={() => handleClick()}>Lancer la sélection aléatoire</button>
+            </div>
+            <div>
+                <p className="mt-8 font-bold border-2 border-purple-500 p-3 text-center">{boardgameSelected}</p>
             </div>
         </div>
     );
