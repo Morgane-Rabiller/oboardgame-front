@@ -1,4 +1,4 @@
-import { ADD_BOARDGAME, addBoardgameSuccess, addErrorMessage, DELETE_BOARDGAME, eraseBoardgameLine, FETCH_LIBRARY, saveData, saveDataAfterUpdate, UPDATE_LIBRARY_LINE } from "../actions/library";
+import { ADD_BOARDGAME, addBoardgameSuccess, addErrorMessage, DELETE_BOARDGAME, eraseBoardgameLine, FETCH_LIBRARY, saveData, saveDataAfterUpdate, saveMessage, UPDATE_LIBRARY_LINE } from "../actions/library";
 import axiosInstance from "./axiosInstance";
 
 
@@ -7,6 +7,14 @@ const libraryMiddleware = (store) => (next) => (action) => {
         case FETCH_LIBRARY: 
             axiosInstance.get("/library").then((res) => {
                 store.dispatch(saveData(res.data.data));
+            }).catch((err) => {
+                console.log(err);    
+            });
+            next(action);
+            break;
+        case FETCH_LIBRARY: 
+            axiosInstance.get("/library/random").then((res) => {
+                store.dispatch(saveMessage(res.data.message, res.data.boardgameName));
             }).catch((err) => {
                 console.log(err);    
             });

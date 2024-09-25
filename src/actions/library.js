@@ -78,3 +78,11 @@ export const selectRandomBoardgame = (data) => ({
   type: SELECT_RANDOM_BOARDGAME,
   data
 });
+
+export const SAVE_MESSAGE = 'SAVE_MESSAGE';
+
+export const saveMessage = (message, boardgame) => ({
+  type: SAVE_MESSAGE,
+  message,
+  boardgame
+});
