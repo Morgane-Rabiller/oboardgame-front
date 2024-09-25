@@ -1,5 +1,5 @@
 import "./Randomgame.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ToggleButton } from 'primereact/togglebutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
@@ -15,7 +15,7 @@ const Randomgame = () => {
     const [age, setAge] = useState(25);
     const [selectedDuration, setSelectedDuration] = useState(null);
     const userPseudo = useSelector((state) => state.userReducer.pseudo);
-    const message = useSelector((state) => state.libraryReducer.successMessage);
+    const errorMessage = useSelector((state) => state.libraryReducer.errorMessage);
     const boardgameSelected = useSelector((state) => state.libraryReducer.boardgameSelected);
     const durations = [
         { name: '---' },
@@ -36,7 +36,7 @@ const Randomgame = () => {
     const handleClick = () => {
         dispatch(selectRandomBoardgame({players, selectedDuration, age, selectedType}));
     };
-
+    
     return (
         <div className="randomgame">
             <p className="mb-5">Bonjour { userPseudo } 👋</p>
@@ -68,7 +68,8 @@ const Randomgame = () => {
                 <button className="randomgame_button" onClick={() => handleClick()}>Lancer la sélection aléatoire</button>
             </div>
             <div>
-                <p className="mt-8 font-bold border-2 border-purple-500 p-3 text-center">{boardgameSelected}</p>
+                {boardgameSelected && <p className="mt-8 font-bold border-2 border-purple-500 p-3 text-center">{boardgameSelected}</p>}
+                {errorMessage && <p className="mt-8 font-bold border-2 border-red-500 p-3 text-center">{errorMessage}</p>}
             </div>
         </div>
     );

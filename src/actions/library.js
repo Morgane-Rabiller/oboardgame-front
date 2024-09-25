@@ -88,7 +88,7 @@ export const saveBoardgameName = (boardgame) => ({
 
 export const SAVE_MESSAGE = 'SAVE_MESSAGE';
 
-export const saveMessage = (boardgame) => ({
+export const saveMessage = (message) => ({
   type: SAVE_MESSAGE,
-  boardgame
+  message
 });
