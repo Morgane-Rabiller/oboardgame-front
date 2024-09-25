@@ -92,3 +92,9 @@ export const saveMessage = (message) => ({
   type: SAVE_MESSAGE,
   message
 });
+
+export const ERASE_BOARDGAME_SELECTED = 'ERASE_BOARDGAME_SELECTED';
+
+export const eraseBoardgameSelected = () => ({
+  type: ERASE_BOARDGAME_SELECTED,
+});

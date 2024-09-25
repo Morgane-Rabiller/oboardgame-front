@@ -7,7 +7,7 @@ import card from "../../assets/card.png";
 import dice from "../../assets/dice.png";
 import pawn from "../../assets/pawn.png";
 import { useDispatch, useSelector } from "react-redux";
-import { selectRandomBoardgame } from "../../actions/library";
+import { eraseBoardgameSelected, eraseErrorMessage, selectRandomBoardgame } from "../../actions/library";
 
 const Randomgame = () => {
     const [checked, setChecked] = useState(false);
@@ -36,7 +36,19 @@ const Randomgame = () => {
     const handleClick = () => {
         dispatch(selectRandomBoardgame({players, selectedDuration, age, selectedType}));
     };
-    
+
+    useEffect(() => {
+        if(errorMessage) {
+            window.setTimeout(() => {
+                dispatch(eraseErrorMessage());
+            }, 1000);
+        }
+        if(boardgameSelected) {
+            window.setTimeout(() => {
+                dispatch(eraseBoardgameSelected());
+            }, 5000);
+        }
+    })
     return (
         <div className="randomgame">
             <p className="mb-5">Bonjour { userPseudo } 👋</p>
