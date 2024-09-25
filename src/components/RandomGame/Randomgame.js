@@ -6,7 +6,8 @@ import { Dropdown } from 'primereact/dropdown';
 import card from "../../assets/card.png";
 import dice from "../../assets/dice.png";
 import pawn from "../../assets/pawn.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectRandomBoardgame } from "../../actions/library";
 
 const Randomgame = () => {
     const [checked, setChecked] = useState(false);
@@ -27,7 +28,13 @@ const Randomgame = () => {
         { name: <img src={card} alt="cartes" className="img_card" /> },
         { name: <img src={dice} alt="dés" className="img" /> },
         { name: <img src={pawn} alt="pions" className="img" /> },
-    ]
+    ];
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(selectRandomBoardgame());
+    };
+
     return (
         <div className="randomgame">
             <p className="mb-5">Bonjour { userPseudo } 👋</p>
@@ -56,7 +63,7 @@ const Randomgame = () => {
             </div>}
             
             <div className="randomgame_button-container">
-                <button className="randomgame_button">Lancer la sélection aléatoire</button>
+                <button className="randomgame_button" onClick={() => handleClick()}>Lancer la sélection aléatoire</button>
             </div>
         </div>
     );

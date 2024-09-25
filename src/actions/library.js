@@ -71,3 +71,10 @@ export const updateLibraryLine = (data) => ({
   type: UPDATE_LIBRARY_LINE,
   data
 });
+
+export const SELECT_RANDOM_BOARDGAME = 'SELECT_RANDOM_BOARDGAME';
+
+export const selectRandomBoardgame = (data) => ({
+  type: SELECT_RANDOM_BOARDGAME,
+  data
+});
