@@ -13,8 +13,6 @@ const libraryMiddleware = (store) => (next) => (action) => {
             next(action);
             break;
         case SELECT_RANDOM_BOARDGAME: 
-        console.log(action.data);
-        
             axiosInstance.get("/library/random", {params: action.data}).then((res) => {
                 store.dispatch(saveBoardgameName(res.data.boardgameName));
             }).catch((err) => {

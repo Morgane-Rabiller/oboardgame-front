@@ -31,8 +31,6 @@ const Randomgame = () => {
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        console.log(selectedDuration);
-        
         dispatch(selectRandomBoardgame({players, time: selectedDuration && selectedDuration.name, age, type: selectedType && selectedType.name}));
     };
 
