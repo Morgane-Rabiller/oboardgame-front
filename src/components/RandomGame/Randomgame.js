@@ -23,7 +23,7 @@ const Randomgame = () => {
     ];
     const [ selectedType, setSelectedType] = useState(null);
     const types = [
-        { name: "-" },
+        { name: "---" },
         { name: "Cartes" },
         { name: "Dés" },
         { name: "Plateau" },
@@ -31,7 +31,9 @@ const Randomgame = () => {
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        dispatch(selectRandomBoardgame({players, selectedDuration, age, type: selectedType && selectedType.name}));
+        console.log(selectedDuration);
+        
+        dispatch(selectRandomBoardgame({players, time: selectedDuration && selectedDuration.name, age, type: selectedType && selectedType.name}));
     };
 
     useEffect(() => {
