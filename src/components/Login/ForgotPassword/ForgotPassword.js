@@ -20,7 +20,9 @@ const ForgotPassword = () => {
         dispatch(forgotPassword(email));
         if(emailSuccess) {
             setShowDialog(true);
-            dispatch(eraseMessage());
+            window.setTimeout(() => {
+                dispatch(eraseMessage());
+            }, 3000);
         }
     };
 
