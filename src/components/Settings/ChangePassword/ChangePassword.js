@@ -1,5 +1,4 @@
 import { Password } from "primereact/password";
-import "./ChangePassword.scss";
 import { useEffect, useState } from "react";
 import { Button } from "primereact/button";
 import { useDispatch, useSelector } from "react-redux";

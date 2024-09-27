@@ -83,3 +83,24 @@ export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 export const deleteAccount = () => ({
   type: DELETE_ACCOUNT
 });
+
+export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
+
+export const forgotPassword = (email) => ({
+  type: FORGOT_PASSWORD,
+  email
+});
+
+export const SEND_EMAIL_SUCCESS = 'SEND_EMAIL_SUCCESS';
+
+export const sendEmailSuccess = (message) => ({
+  type: SEND_EMAIL_SUCCESS,
+  message
+});
+
+export const SEND_EMAIL_FAILURE = 'SEND_EMAIL_FAILURE';
+
+export const sendEmailFailure = (error) => ({
+  type: SEND_EMAIL_FAILURE,
+  error
+});

@@ -126,7 +126,7 @@ const Boardgame = () => {
             : 
             <p className="text-center m-5">Pas de jeux de société dans la base de données.</p>
             }
-                <Dialog header="Ajouter un jeu" visible={visible} style={{ width: '50vw' }} onHide={() => { if (!visible) return; setVisible(false); }}>
+                <Dialog header="Ajouter un jeu" className="boardgame_dialog" visible={visible} onHide={() => { if (!visible) return; setVisible(false); }}>
                     <CreatePopUp onSuccess={handleSuccess} />
                 </Dialog>
         </div>
