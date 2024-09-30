@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./ForgotPassword.scss";
 import { InputText } from 'primereact/inputtext';
 import { Button } from "primereact/button";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,15 +17,15 @@ const ForgotPassword = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(forgotPassword(email));
+    };
+
+    useEffect(() => {
         if(emailSuccess) {
             setShowDialog(true);
             window.setTimeout(() => {
                 dispatch(eraseMessage());
             }, 3000);
         }
-    };
-
-    useEffect(() => {
         if(emailFailure) {
             window.setTimeout(() => {
                 dispatch(eraseMessage());

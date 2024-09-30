@@ -19,16 +19,15 @@ const UpdatePasword = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(newPasswordIfForgot(token, password, passwordRepeat));
-        
+    };
+
+    useEffect(() => {
         if(passwordSuccess) {
             setShowDialog(true);
             window.setTimeout(() => {
                 dispatch(eraseMessage());
             }, 3000);
         }
-    };
-
-    useEffect(() => {
         if(passwordFailure) {
             window.setTimeout(() => {
                 dispatch(eraseMessage());
@@ -37,7 +36,7 @@ const UpdatePasword = () => {
     })
 
     return (
-        <div className="forgotPassword text-center">
+        <div className="updatePasword text-center">
             <h1 className="mt-3 mb-3">Mot de passe oublié ?</h1>
             <form className="card flex justify-content-center flex-column mt-5 ml-5 mr-5" onSubmit={(e) => handleSubmit(e)}>
                 <label className="text-sm text-left">Tu peux maintenant mettre à jour ton mot de passe</label>
