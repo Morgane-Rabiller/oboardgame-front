@@ -1,20 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "primereact/button";
-// import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "primereact/dialog";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Password } from "primereact/password";
+import { eraseMessage, newPasswordIfForgot } from "../../../actions/user";
 
 const UpdatePasword = () => {
     const [showDialog, setShowDialog] = useState(false); 
     const [password, setPassword] = useState(""); 
-    const [passwordRepeat, setPasswordRepeat] = useState(""); 
-    // const dispatch = useDispatch();
+    const [passwordRepeat, setPasswordRepeat] = useState("");
+    const passwordSuccess = useSelector((state) => state.userReducer.message);
+    const passwordFailure = useSelector((state) => state.userReducer.error); 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {token} = useParams();
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        dispatch(newPasswordIfForgot(token, password, passwordRepeat));
+        
+        if(passwordSuccess) {
+            setShowDialog(true);
+            window.setTimeout(() => {
+                dispatch(eraseMessage());
+            }, 3000);
+        }
     };
+
+    useEffect(() => {
+        if(passwordFailure) {
+            window.setTimeout(() => {
+                dispatch(eraseMessage());
+            }, 3000);
+        }
+    })
 
     return (
         <div className="forgotPassword text-center">
@@ -23,11 +43,13 @@ const UpdatePasword = () => {
                 <label className="text-sm text-left">Tu peux maintenant mettre à jour ton mot de passe</label>
                 <Password value={password} className="mb-3 mt-2" onChange={(e) => setPassword(e.target.value)} placeholder="Nouveau mot de passe" toggleMask />
                 <Password value={passwordRepeat} onChange={(e) => setPasswordRepeat(e.target.value)} placeholder="Confirmation du mot de passe"  toggleMask />
+                {passwordFailure && <p className="text-red-300 text-left mt-2">{passwordFailure}</p>}
                 <div>
                     <Button type="submit" className="mt-3 w-5 flex justify-content-center">Envoyer</Button>
                 </div>
                 <Dialog header="Mail envoyé ✔" className="forgotPassword_dialog" visible={showDialog} onHide={() => { if (!showDialog) return; setShowDialog(false); }} >
-                    <p>Check ta boite mail et met à jour ton mot de passe !</p>
+                    <p>Ton mot de passe est bien modifié ! <br />
+                    Tu peux te connecter à ton compte.</p>
                     <div className="text-center mt-3">
                     <Button type="button" onClick={() => navigate("/connexion")}>Retour</Button>
                     </div>

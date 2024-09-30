@@ -105,9 +105,25 @@ export const sendEmailFailure = (error) => ({
   error
 });
 
+export const SEND_PASSWORD_SUCCESS = 'SEND_PASSWORD_SUCCESS';
+
+export const sendPasswordSuccess = (message) => ({
+  type: SEND_PASSWORD_SUCCESS,
+  message
+});
+
+export const SEND_PASSWORD_FAILURE = 'SEND_PASSWORD_FAILURE';
+
+export const sendPasswordFailure = (error) => ({
+  type: SEND_PASSWORD_FAILURE,
+  error
+});
+
 export const NEW_PASSWORD_AFTER_FORGOT = 'NEW_PASSWORD_AFTER_FORGOT'; 
 
-export const newPasswordIfForgot = (data) => ({
+export const newPasswordIfForgot = (token, password, passwordRepeat) => ({
   type: NEW_PASSWORD_AFTER_FORGOT,
-  data
+  token,
+  password,
+  passwordRepeat
 });

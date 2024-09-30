@@ -1,4 +1,4 @@
-import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess, UPDATE_PASSWORD, updateSuccess, updateFailure, DELETE_ACCOUNT, logout, FORGOT_PASSWORD, sendEmailSuccess, sendEmailFailure } from "../actions/user";
+import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess, UPDATE_PASSWORD, updateSuccess, updateFailure, DELETE_ACCOUNT, logout, FORGOT_PASSWORD, sendEmailSuccess, sendEmailFailure, NEW_PASSWORD_AFTER_FORGOT, sendPasswordSuccess, sendPasswordFailure } from "../actions/user";
 import axiosInstance from "./axiosInstance";
 
 const userMiddleware = (store) => (next) => (action) => {
@@ -28,6 +28,18 @@ const userMiddleware = (store) => (next) => (action) => {
                 console.error(err);
                 const error = err.response.data.message;
                 store.dispatch(sendEmailFailure(error));
+                });
+            }
+            next(action);
+            break;
+        case NEW_PASSWORD_AFTER_FORGOT: {
+            axiosInstance.put(`/updatePassword/${action.token}`, {password: action.password, passwordRepeat: action.passwordRepeat}).then((res) => {
+                console.log(res);
+                store.dispatch(sendPasswordSuccess(res.data.message));
+            }).catch((err) => {
+                console.error(err);
+                const error = err.response.data.message;
+                store.dispatch(sendPasswordFailure(error));
                 });
             }
             next(action);
