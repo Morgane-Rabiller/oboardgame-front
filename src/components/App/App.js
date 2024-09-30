@@ -13,6 +13,7 @@ import Boardgame from '../Boardgame/Boardgame';
 import Settings from '../Settings/Settings';
 import Tuto from '../Settings/Tuto/Tuto';
 import ForgotPassword from '../Login/ForgotPassword/ForgotPassword';
+import UpdatePasword from '../Login/UpdatePassword/UpdatePassword';
 
 function PrivateRoute({ children }) {
   const logged = useSelector((state) => state.userReducer.logged);
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "mot-de-passe-oublie",
         element: <ForgotPassword />,
+      },
+      {
+        path: "nouveau-mot-de-passe",
+        element: <UpdatePasword />,
       },
       {
         path: "inscription",

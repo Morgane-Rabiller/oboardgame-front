@@ -104,3 +104,10 @@ export const sendEmailFailure = (error) => ({
   type: SEND_EMAIL_FAILURE,
   error
 });
+
+export const NEW_PASSWORD_AFTER_FORGOT = 'NEW_PASSWORD_AFTER_FORGOT'; 
+
+export const newPasswordIfForgot = (data) => ({
+  type: NEW_PASSWORD_AFTER_FORGOT,
+  data
+});
