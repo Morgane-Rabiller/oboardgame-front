@@ -50,7 +50,7 @@ const UpdatePasword = () => {
                     <p>Ton mot de passe est bien modifié ! <br />
                     Tu peux te connecter à ton compte.</p>
                     <div className="text-center mt-3">
-                    <Button type="button" onClick={() => navigate("/connexion")}>Retour</Button>
+                    <Button type="button" onClick={() => navigate("/connexion")}>Se connecter</Button>
                     </div>
                 </Dialog>
             </form>
