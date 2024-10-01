@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, setUserField } from "../../actions/user";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import ForgotPassword from "./ForgotPassword/ForgotPassword";
 
 const Login = () => {
     const email = useSelector((state) => state.userReducer.email);

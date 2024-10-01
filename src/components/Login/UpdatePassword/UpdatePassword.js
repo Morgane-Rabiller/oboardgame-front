@@ -33,15 +33,15 @@ const UpdatePasword = () => {
                 dispatch(eraseMessage());
             }, 3000);
         }
-    })
+    }, [passwordSuccess, passwordFailure, dispatch])
 
     return (
         <div className="updatePasword text-center">
             <h1 className="mt-3 mb-3">Mot de passe oublié ?</h1>
             <form className="card flex justify-content-center flex-column mt-5 ml-5 mr-5" onSubmit={(e) => handleSubmit(e)}>
                 <label className="text-sm text-left">Tu peux maintenant mettre à jour ton mot de passe</label>
-                <Password value={password} className="mb-3 mt-2" onChange={(e) => setPassword(e.target.value)} placeholder="Nouveau mot de passe" toggleMask />
-                <Password value={passwordRepeat} onChange={(e) => setPasswordRepeat(e.target.value)} placeholder="Confirmation du mot de passe"  toggleMask />
+                <Password value={password} className="mb-3 mt-2" onChange={(e) => setPassword(e.target.value)} placeholder="Nouveau mot de passe" toggleMask promptLabel="Entre un mot de passe" weakLabel="Trop faible" mediumLabel="Complexité moyenne" strongLabel="Mot de passe fort"/>
+                <Password value={passwordRepeat} onChange={(e) => setPasswordRepeat(e.target.value)} placeholder="Confirmation du mot de passe" toggleMask feedback={false}/>
                 {passwordFailure && <p className="text-red-300 text-left mt-2">{passwordFailure}</p>}
                 <div>
                     <Button type="submit" className="mt-3 w-5 flex justify-content-center">Envoyer</Button>

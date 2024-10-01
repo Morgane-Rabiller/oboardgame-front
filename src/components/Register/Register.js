@@ -40,8 +40,8 @@ const Register = () => {
             <form className="register_form" onSubmit={e => handleForm(e)}>
                 <InputText type="text" name="pseudo" className="register_form-pseudo p-inputtext-sm" value={pseudo} onChange={changeField} placeholder="Pseudo" />
                 <InputText type="email" name="email" className="register_form-email p-inputtext-sm" value={email} onChange={changeField} placeholder="Adresse mail" />
-                <Password value={password} name="password" className="register_form-password p-inputtext-sm" onChange={changeField} placeholder="Mot de passe" toggleMask />
-                <Password value={passwordRepeat} name="passwordRepeat" className="register_form-password p-inputtext-sm" onChange={changeField} placeholder="Confirmation du mot de passe" toggleMask />
+                <Password value={password} name="password" className="register_form-password p-inputtext-sm" onChange={changeField} placeholder="Mot de passe" toggleMask promptLabel="Entre un mot de passe" weakLabel="Trop faible" mediumLabel="Complexité moyenne" strongLabel="Mot de passe fort"/>
+                <Password value={passwordRepeat} name="passwordRepeat" className="register_form-password p-inputtext-sm" onChange={changeField} placeholder="Confirmation du mot de passe" toggleMask  feedback={false}/>
                 {error && <p className="login_form-error">{ error }</p>}
                 <button type="submit" className="register_form-button">Créer mon compte</button>
                 <p className="register_form-register">Déjà un compte ? <br/><br/> <a href="/connexion" className="register_form-link">Je me connecte</a></p>
