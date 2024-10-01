@@ -9,7 +9,7 @@ const Header = () => {
     const location = useLocation();
     
     return (
-        <header className="header">
+        <header className="header my-first-step">
             <div className="header-top">
                 <div className="header-left">
                     <Link to={!logged ? "/" : "/selection-aleatoire"} className="header-link">
