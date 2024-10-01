@@ -60,7 +60,7 @@ const Randomgame = () => {
                 <div>
                     <label htmlFor="minmax-buttons" className="block mb-2">Durée</label>
                     <Dropdown value={selectedDuration} onChange={(e) => setSelectedDuration(e.value)} options={durations} optionLabel="name" 
-                    placeholder="" className="w-full md:w-8rem" />
+                    placeholder="" className="w-full w-5rem" />
                 </div>
                 <div>
                     <label htmlFor="minmax-buttons" className="block mb-2">Age (Max)</label>
@@ -69,7 +69,7 @@ const Randomgame = () => {
                 <div>
                     <label htmlFor="minmax-buttons" className="block mb-2">Type</label>
                     <Dropdown value={selectedType} onChange={(e) => setSelectedType(e.value)} options={types} optionLabel="name" 
-                    placeholder="" className="w-full md:w-10rem" />
+                    placeholder="" className="w-full w-7rem" />
                 </div>
             </div>}
             
