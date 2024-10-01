@@ -34,7 +34,7 @@ const Login = () => {
             <h1 className="login_title">Je me connecte</h1>
             <form className="login_form" onSubmit={e => handleForm(e)}>
                 <InputText type="text" className="login_form-email p-inputtext-sm" placeholder="Adresse mail" name="email" value={email} onChange={changeField} />
-                <Password value={password} className="login_form-password p-inputtext-sm" onChange={changeField} name="password" placeholder="Mot de passe" toggleMask />
+                <Password value={password} className="login_form-password p-inputtext-sm" onChange={changeField} name="password" placeholder="Mot de passe" toggleMask feedback={false}/>
                 <Link to="/mot-de-passe-oublie" className="mt-2 text-sm">Mot de passe oublié ?</Link>
                 {error && <p className="login_form-error">{ error }</p>}
                 <button type="submit" className="login_form-button">Connexion</button>
