@@ -98,7 +98,6 @@ const Boardgame = () => {
 
     const handleChange = (e) => {
         setName(e);
-        // findBoardgame(datas, name);
     }
     
     return (

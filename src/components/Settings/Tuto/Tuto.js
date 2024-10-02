@@ -4,7 +4,7 @@ import filterTuto from "../../../assets/tuto/filterTuto.png";
 import boardgameTuto from "../../../assets/tuto/boardgameTuto.png";
 import libraryTuto from "../../../assets/tuto/libraryTuto.png";
 import { Button } from "primereact/button";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Tuto = () => { 
     const navigate = useNavigate();

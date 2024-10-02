@@ -36,7 +36,6 @@ const Settings = () => {
     const handleSuccess = () => {
         // Ferme la popup si l'ajout est réussi
         setVisible(false);
-        
         if (successMessage) {
             setShowSuccess(true);
             const timer = setTimeout(() => {

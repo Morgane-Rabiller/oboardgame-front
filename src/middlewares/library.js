@@ -24,11 +24,9 @@ const libraryMiddleware = (store) => (next) => (action) => {
         case ADD_BOARDGAME:
             axiosInstance.post("/library/addBoardgame", { name: action.name})
             .then((response) => {
-                console.log('Boardgame ajouté à la bibliothèque:', response.data);
                 store.dispatch(addBoardgameSuccess(response.data.message));
             })
             .catch((error) => {
-                console.error('Erreur lors de l\'ajout du jeu de société:', error);
                 store.dispatch(addErrorMessage(error.response.data.message));
             });
             next(action);
@@ -36,7 +34,6 @@ const libraryMiddleware = (store) => (next) => (action) => {
         case UPDATE_LIBRARY_LINE:
             axiosInstance.put(`/library/update/${action.data.boardgame_id}`, action.data)
             .then((response) => {
-                console.log('Boardgame modifié:', response.data);
                 store.dispatch(saveDataAfterUpdate(action.data));
             })
             .catch((error) => {
@@ -48,7 +45,6 @@ const libraryMiddleware = (store) => (next) => (action) => {
         case DELETE_BOARDGAME:
             axiosInstance.delete(`/library/delete/${action.id}`)
             .then((response) => {
-                console.log(response.data);
                 store.dispatch(eraseBoardgameLine(action.id));
             })
             .catch((error) => {

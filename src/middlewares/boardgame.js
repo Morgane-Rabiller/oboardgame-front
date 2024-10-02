@@ -12,18 +12,14 @@ const boardgameMiddleware = (store) => (next) => (action) => {
             });
         next(action);
         break;
-    case ADD_GENERAL_BOARDGAME:
-        console.log("action", action.data);
-        
-        axiosInstance.post("/boardgame/create", action.data).then((response) => {
-            console.log("response.data.newBoardgame", response.data.newBoardgame);
-            console.log("response.data.message", response.data.message);
-            store.dispatch(saveBoardGame(response.data.newBoardgame, response.data.message));
-        }).catch((err) => {
-            console.log(err);
-            store.dispatch(fetchErrorMessage(err.response.data.message));
-        });
-        
+        case ADD_GENERAL_BOARDGAME:
+            axiosInstance.post("/boardgame/create", action.data).then((response) => {
+                store.dispatch(saveBoardGame(response.data.newBoardgame, response.data.message));
+            }).catch((err) => {
+                console.log(err);
+                store.dispatch(fetchErrorMessage(err.response.data.message));
+            });
+            
         next(action);
         break;
         default: 
