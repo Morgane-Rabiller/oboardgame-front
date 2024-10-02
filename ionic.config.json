@@ -1,0 +1,7 @@
+{
+    "name": "O'Boardgame",
+    "integrations": {
+      "capacitor": {}
+    },
+    "type": "react"
+  }
