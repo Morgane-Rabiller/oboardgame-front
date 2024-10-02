@@ -11,7 +11,7 @@ const Randomgame = () => {
     const steps = [
       {
         target: '.my-first-step',
-        content: 'Bienvenue sur l\'application O\'Boardgame !',
+        content: 'Bienvenue sur l\'application O\'Boardgame ! En cliquant sur ce logo, tu peux te rendre sur la page principale.',
       },
       {
         target: '.my-third-step',
@@ -23,7 +23,7 @@ const Randomgame = () => {
       },
       {
         target: '.my-fifth-step',
-        content: 'Ici l\'application sélectionne pour toi un jeu aléatoire de ta bibliothèque personnelle en fonction des filtres que tu as demandé',
+        content: 'Ici l\'application sélectionne pour toi un jeu aléatoire de ta bibliothèque personnelle en fonction des filtres que tu as déterminé.',
       },
     ];
     const [checked, setChecked] = useState(false);

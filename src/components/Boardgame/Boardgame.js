@@ -12,8 +12,27 @@ import { InputText } from 'primereact/inputtext';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
 import CreatePopUp from "./CreatePopUp/CreatePopUp";
+import Joyride from 'react-joyride';
 
 const Boardgame = () => {
+    const steps = [
+      {
+        target: '.first-step',
+        content: 'La liste peut-être longue, alors si tu cherches un jeu en particulier, tu peux le trouver grâce à ce champ.',
+      },
+      {
+        target: '.my-second-step',
+        content: 'Tu ne trouves pas ton jeu dans la liste ? Ajoute ton jeu ici en respectant les informations indiqués sur la boite de jeu !',
+      },
+      {
+        target: '.my-third-step',
+        content: 'Liste des jeux de sociétés présents dans l\'application.',
+      },
+      {
+        target: '.my-fourth-step',
+        content: 'Ajoute les jeux que tu détiens chez toi à ta bibliothèque personnelle.',
+      },
+    ];
     const { state } = useNavigation();
     const datas = useSelector((state) => state.boardgameReducer.data);
     const successMessage = useSelector((state) => state.libraryReducer.successMessage);
@@ -84,6 +103,12 @@ const Boardgame = () => {
     
     return (
         <div className="boardgame_container">
+        <Joyride
+          steps={steps}
+          continuous
+          showProgress
+          showSkipButton
+        />
             {state === 'loading' && <Loader />}
             {showSuccessMessage  && <Message severity="success" className="absolute" text={successMessage} />}
             {showSuccessBoardgameMessage  && <Message severity="success" className="absolute" text={successMessageBoardgame} />}
@@ -91,16 +116,16 @@ const Boardgame = () => {
             <div className="text-left ml-2">
                 <p className="text-sm mb-2">Mon jeu n'est pas présent dans la liste ?</p>
                 <div className="flex justify-content-between align-items-start">
-                    <button type="button" className="boardgame_button-addgame mt-2" onClick={() => setVisible(true)}>Ajouter un jeu</button>
+                    <button type="button" className="boardgame_button-addgame mt-2 my-second-step" onClick={() => setVisible(true)}>Ajouter un jeu</button>
                     <IconField iconPosition="right" className="mt-2 ml-2 mr-2 text-right">
                         <InputIcon className="pi pi-search"> </InputIcon>
-                        <InputText placeholder="Je recherche mon jeu" className="p-inputtext-sm" value={name} onChange={(e) => handleChange(e.target.value)} />
+                        <InputText placeholder="Je recherche mon jeu" className="p-inputtext-sm  first-step" value={name} onChange={(e) => handleChange(e.target.value)} />
                     </IconField>
                 </div>
             </div>
             {filteredDatas && filteredDatas.length !== 0 ? 
             <div className="card">
-                <table className="boardgame_table">
+                <table className="boardgame_table my-third-step">
                     <thead className="boardgame_table-thead">
                         <tr className="boardgame_table-line">
                             <th className="boardgame_table-firstth">Nom</th>
@@ -108,7 +133,7 @@ const Boardgame = () => {
                             <th>Type</th>
                             <th>Age</th>
                             <th>Durée</th>
-                            <th>Ajout</th>
+                            <th className=" my-fourth-step">Ajout</th>
                         </tr>
                     </thead>
                     <tbody className="boardgame_table-tbody">
