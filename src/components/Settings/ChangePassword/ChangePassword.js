@@ -15,7 +15,6 @@ const ChangePassword = ({ onSuccess }) => {
     
     useEffect(() => {
         if(errorMessage) {
-            console.log("je suis dans le useEffect");
             setShowError(true);
             setSubmitted(false);
             window.setTimeout(() => {
@@ -23,7 +22,6 @@ const ChangePassword = ({ onSuccess }) => {
                 dispatch(eraseMessage());
             }, 3000);
         } else if(submitted){
-            console.log("Je suis dans le submitted");     
             onSuccess();
         }
     }, [errorMessage, dispatch, onSuccess]);
