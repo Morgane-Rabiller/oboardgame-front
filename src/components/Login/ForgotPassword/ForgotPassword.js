@@ -31,7 +31,8 @@ const ForgotPassword = () => {
                 dispatch(eraseMessage());
             }, 3000);
         }
-    })
+        // eslint-disable-next-line
+    }, [emailSuccess, emailFailure, dispatch]);
 
     return (
         <div className="forgotPassword text-center">

@@ -24,6 +24,7 @@ const ChangePassword = ({ onSuccess }) => {
         } else if(submitted){
             onSuccess();
         }
+        // eslint-disable-next-line
     }, [errorMessage, dispatch, onSuccess]);
     
     const handleSubmit = (e) => {

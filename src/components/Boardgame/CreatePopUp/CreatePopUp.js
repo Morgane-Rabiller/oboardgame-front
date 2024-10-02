@@ -33,6 +33,7 @@ const CreatePopUp = ({ onSuccess }) => {
             onSuccess();
         }
         setSubmitted(false);
+        // eslint-disable-next-line
     }, [errorMessage, dispatch, displayMessage, onSuccess]);
 
     const handleSubmit = (e) => {

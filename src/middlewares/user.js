@@ -19,6 +19,7 @@ const userMiddleware = (store) => (next) => (action) => {
             }
             next(action);
             break;
+            // eslint-disable-next-line
         case FORGOT_PASSWORD: {
             axiosInstance.post("/forgotPassword", {email: action.email}).then((res) => {
                 store.dispatch(sendEmailSuccess(res.data.message));
@@ -30,6 +31,7 @@ const userMiddleware = (store) => (next) => (action) => {
             }
             next(action);
             break;
+            // eslint-disable-next-line
         case NEW_PASSWORD_AFTER_FORGOT: {
             axiosInstance.put(`/updatePassword/${action.token}`, {password: action.password, passwordRepeat: action.passwordRepeat}).then((res) => {
                 store.dispatch(sendPasswordSuccess(res.data.message));
