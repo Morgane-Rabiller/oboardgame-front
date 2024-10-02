@@ -1,14 +1,16 @@
 @use "src/styles/vars";
 
 .home {
+    margin: 2rem;
     &_description {
         margin-top: 3rem;
         display: flex;
         flex-direction: column;
         line-height: 3rem;
     }
-    p {
+    &_p {
         margin: auto;
+        font-size: small;
     }
 
     &_button {
