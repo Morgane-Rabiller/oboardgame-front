@@ -17,19 +17,19 @@ import Joyride from 'react-joyride';
 const Boardgame = () => {
     const steps = [
       {
-        target: '.first-step',
+        target: '.search-game-tuto',
         content: 'La liste peut-être longue, alors si tu cherches un jeu en particulier, tu peux le trouver grâce à ce champ.',
       },
       {
-        target: '.my-second-step',
+        target: '.add-game-tuto',
         content: 'Tu ne trouves pas ton jeu dans la liste ? Ajoute ton jeu ici en respectant les informations indiqués sur la boite de jeu !',
       },
       {
-        target: '.my-third-step',
+        target: '.game-list-tuto',
         content: 'Liste des jeux de sociétés présents dans l\'application.',
       },
       {
-        target: '.my-fourth-step',
+        target: '.add-in-library-tuto',
         content: 'Ajoute les jeux que tu détiens chez toi à ta bibliothèque personnelle.',
       },
     ];
@@ -116,16 +116,16 @@ const Boardgame = () => {
             <div className="text-left ml-2">
                 <p className="text-sm mb-2">Mon jeu n'est pas présent dans la liste ?</p>
                 <div className="flex justify-content-between align-items-start">
-                    <button type="button" className="boardgame_button-addgame mt-2 my-second-step" onClick={() => setVisible(true)}>Ajouter un jeu</button>
+                    <button type="button" className="boardgame_button-addgame mt-2 add-game-tuto" onClick={() => setVisible(true)}>Ajouter un jeu</button>
                     <IconField iconPosition="right" className="mt-2 ml-2 mr-2 text-right">
                         <InputIcon className="pi pi-search"> </InputIcon>
-                        <InputText placeholder="Je recherche mon jeu" className="p-inputtext-sm  first-step" value={name} onChange={(e) => handleChange(e.target.value)} />
+                        <InputText placeholder="Je recherche mon jeu" className="p-inputtext-sm  search-game-tuto" value={name} onChange={(e) => handleChange(e.target.value)} />
                     </IconField>
                 </div>
             </div>
             {filteredDatas && filteredDatas.length !== 0 ? 
             <div className="card">
-                <table className="boardgame_table my-third-step">
+                <table className="boardgame_table game-list-tuto">
                     <thead className="boardgame_table-thead">
                         <tr className="boardgame_table-line">
                             <th className="boardgame_table-firstth">Nom</th>
@@ -133,7 +133,7 @@ const Boardgame = () => {
                             <th>Type</th>
                             <th>Age</th>
                             <th>Durée</th>
-                            <th className=" my-fourth-step">Ajout</th>
+                            <th className="add-in-library-tuto">Ajout</th>
                         </tr>
                     </thead>
                     <tbody className="boardgame_table-tbody">

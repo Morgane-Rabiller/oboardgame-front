@@ -9,7 +9,7 @@ const Header = () => {
     const location = useLocation();
     
     return (
-        <header className="header my-first-step">
+        <header className="header logo-tuto">
             <div className="header-top">
                 <div className="header-left">
                     <Link to={!logged ? "/" : "/selection-aleatoire"} className="header-link">
@@ -18,7 +18,7 @@ const Header = () => {
                     </Link> 
                 </div>
                 {logged &&  
-                <div className="header-right">
+                <div className="header-right library-tuto">
                     <Link to="/bibliotheque" className="header-right_link">
                         <img
                             src={library}
