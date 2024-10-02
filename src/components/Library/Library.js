@@ -8,8 +8,19 @@ import TableDatas from "../TableDatas/TableDatas";
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
 import { Message } from "primereact/message";
+import Joyride from 'react-joyride';
 
 const Library = () => {
+    const steps = [
+      {
+        target: '.edit-tuto',
+        content: 'Tu peux personnaliser les paramètres du jeu ici, si tu trouves qu\'ils ne correspondent pas à ta façon de jouer.',
+      },
+      {
+        target: '.delete-tuto',
+        content: 'Tu n\'a plus ce jeu chez toi ? Tu peux le supprimer de ta bibliothèque personnelle.',
+      },
+    ];
     const toast = useRef(null);
     const { state } = useNavigation();
     const datas = useSelector((state) => state.libraryReducer.data);
@@ -74,6 +85,12 @@ const Library = () => {
     
     return (
         <div className="library_container">
+            <Joyride
+                steps={steps}
+                continuous
+                showProgress
+                showSkipButton
+            />
             {showMessage  && <Message severity="error" text={errorMessage} />}
             <Toast ref={toast} />
             {state === 'loading' && <Loader />}
@@ -87,8 +104,8 @@ const Library = () => {
                             <th>Type</th>
                             <th>Age</th>
                             <th>Durée</th>
-                            <th>Edit</th>
-                            <th>Supp.</th>
+                            <th className="edit-tuto">Edit</th>
+                            <th className="delete-tuto">Supp.</th>
                         </tr>
                     </thead>
                     <tbody className="library_table-tbody">
