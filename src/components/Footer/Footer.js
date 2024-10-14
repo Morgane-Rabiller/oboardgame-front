@@ -5,8 +5,10 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../actions/user";
 import { Link, NavLink } from "react-router-dom";
 import Joyride from 'react-joyride';
+import { useState } from "react";
 
-const Footer = () => {
+const Footer = ({ checkAccount }) => {
+  const hasSeenTutorial = localStorage.getItem('hasSeenFooterTutorial');
     const steps = [
       {
         target: '.my-second-step',
@@ -26,14 +28,26 @@ const Footer = () => {
     const handleClick = () => {
         dispatch(logout());
     }
+
+    const handleJoyrideCallback = (data) => {
+      const { status } = data;
+      const finishedStatuses = ['finished', 'skipped'];
+      
+      if (finishedStatuses.includes(status)) {
+        localStorage.setItem('hasSeenFooterTutorial', true);
+      }
+    };
+    
+
     return (
         <>
-        <Joyride
+        {!checkAccount && !hasSeenTutorial && <Joyride
           steps={steps}
           continuous
           showProgress
           showSkipButton
-        />
+          callback={handleJoyrideCallback}
+        />}
         <footer className="footer">
             <Link to="/parametres"><img src={settings} alt="profile" className="footer_setting my-sixth-step" /></Link>
             <NavLink className={({isActive}) => isActive ? "footer_link footer_link-active" : "footer_link my-second-step"} to="/jeux-de-societe">Jeux de société</NavLink>

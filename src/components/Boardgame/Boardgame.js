@@ -1,7 +1,7 @@
 import "./Boardgame.scss";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigation } from "react-router-dom";
+import { useNavigation, useOutletContext } from "react-router-dom";
 import Loader from '../Loader/Loader';
 import TableDatas from "../TableDatas/TableDatas";
 import { eraseSuccessMessageBoardgame, fetchBoardgames } from "../../actions/boardgame";
@@ -15,6 +15,9 @@ import CreatePopUp from "./CreatePopUp/CreatePopUp";
 import Joyride from 'react-joyride';
 
 const Boardgame = () => {
+    const { checkAccount } = useOutletContext();
+    const hasSeenTutorial = localStorage.getItem('hasSeenBoardgameTutorial');
+    
     const steps = [
       {
         target: '.search-game-tuto',
@@ -99,15 +102,27 @@ const Boardgame = () => {
     const handleChange = (e) => {
         setName(e);
     }
+
+    const handleJoyrideCallback = (data) => {
+        const { status } = data;
+        const finishedStatuses = ['finished', 'skipped'];
+        
+        if (finishedStatuses.includes(status)) {
+            localStorage.setItem('hasSeenBoardgameTutorial', true);
+        }
+        console.log(hasSeenTutorial);
+        
+    };
     
     return (
         <div className="boardgame_container">
-        <Joyride
+        {!checkAccount && !hasSeenTutorial && <Joyride
           steps={steps}
           continuous
           showProgress
           showSkipButton
-        />
+          callback={handleJoyrideCallback}
+        />}
             {state === 'loading' && <Loader />}
             {showSuccessMessage  && <Message severity="success" className="absolute" text={successMessage} />}
             {showSuccessBoardgameMessage  && <Message severity="success" className="absolute" text={successMessageBoardgame} />}

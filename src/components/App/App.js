@@ -14,11 +14,12 @@ import Settings from '../Settings/Settings';
 import Tuto from '../Settings/Tuto/Tuto';
 import ForgotPassword from '../Login/ForgotPassword/ForgotPassword';
 import UpdatePasword from '../Login/UpdatePassword/UpdatePassword';
+import React, { useState } from 'react';
 
-function PrivateRoute({ children }) {
+function PrivateRoute({ children, ...rest }) {
   const logged = useSelector((state) => state.userReducer.logged);
   
-  return logged ? children : <Navigate to="/connexion" />;
+  return logged ? React.cloneElement(children, { ...rest }) : <Navigate to="/connexion" />;
 }
 
 const router = createBrowserRouter([
@@ -92,12 +93,17 @@ const router = createBrowserRouter([
 
 function Root() {
   const logged = useSelector((state) => state.userReducer.logged);
+  const checkAccount = useSelector((state) => state.userReducer.check);
+  const [checkPage, setCheckPage] = useState(0);
+  
+  // if(checkPag)
+  
   return (
     <div className="App">
       <Header/>
-      <Outlet />
+      <Outlet context={{ checkPage, setCheckPage, checkAccount }} />
       <hr className='separate'/>
-      {logged && <Footer />}
+      {logged && <Footer checkAccount={checkAccount}/>}
     </div>
   )
 }

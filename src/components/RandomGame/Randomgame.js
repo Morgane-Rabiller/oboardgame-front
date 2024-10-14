@@ -6,8 +6,13 @@ import { Dropdown } from 'primereact/dropdown';
 import { useDispatch, useSelector } from "react-redux";
 import { eraseBoardgameSelected, eraseErrorMessage, selectRandomBoardgame } from "../../actions/library";
 import Joyride from 'react-joyride';
+import { useOutletContext } from "react-router-dom";
 
 const Randomgame = () => {
+    const { checkAccount } = useOutletContext();
+    const hasSeenTutorial = localStorage.getItem('hasSeenRandomGameTutorial');
+    
+    
     const steps = [
       {
         target: '.logo-tuto',
@@ -69,14 +74,25 @@ const Randomgame = () => {
             }, 5000);
         }
     })
+
+    const handleJoyrideCallback = (data) => {
+        const { status } = data;
+        const finishedStatuses = ['finished', 'skipped'];
+        
+        if (finishedStatuses.includes(status)) {
+            localStorage.setItem('hasSeenRandomGameTutorial', true);
+        }
+    };
+
     return (
         <div className="randomgame">
-        <Joyride
+        {!checkAccount && !hasSeenTutorial && <Joyride
           steps={steps}
           continuous
           showProgress
           showSkipButton
-        />
+          callback={handleJoyrideCallback}
+        />}
             <p className="mb-5">Bonjour { userPseudo } 👋</p>
             <div className="mb-3 flex justify-content-between align-items-baseline nb-player-tuto">
                 <label htmlFor="minmax-buttons" className="block mb-2">Combien êtes-vous ?</label>
