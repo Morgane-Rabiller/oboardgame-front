@@ -33,8 +33,9 @@ export const savePseudo = (pseudo) => ({
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
-export const loginSuccess = () => ({
+export const loginSuccess = (check) => ({
   type: LOGIN_SUCCESS,
+  check
 });
 
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';

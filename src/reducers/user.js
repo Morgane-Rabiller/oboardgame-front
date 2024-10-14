@@ -7,7 +7,8 @@ const initialState = {
         password: '',
         passwordRepeat: '',
         error: null,
-        message: null
+        message: null,
+        check: false
 };
 
 export default function userReducer(state = initialState, action) {
@@ -37,7 +38,8 @@ export default function userReducer(state = initialState, action) {
         return {
           ...state,
           logged: true,
-          error: null
+          error: null,
+          check: action.check
         }
       case LOGIN_FAILURE:
         return {
@@ -53,6 +55,7 @@ export default function userReducer(state = initialState, action) {
           password: '',
           passwordRepeat: '',
           error: null,
+          check: false
         }
       case UPDATE_FAILURE:
         return {

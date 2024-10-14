@@ -8,9 +8,11 @@ const userMiddleware = (store) => (next) => (action) => {
 
             axiosInstance.post("/login", {email, password}).then((res) => {
                 const { pseudo } = res.data.user;
+                const { check } = res.data.user;
+                
                 axiosInstance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
                 store.dispatch(savePseudo(pseudo));
-                store.dispatch(loginSuccess());
+                store.dispatch(loginSuccess(check));
             }).catch((err) => {
                 console.error(err);
                 const error = err.response.data.message;
