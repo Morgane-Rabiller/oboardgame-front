@@ -110,8 +110,6 @@ const Boardgame = () => {
         if (finishedStatuses.includes(status)) {
             localStorage.setItem('hasSeenBoardgameTutorial', true);
         }
-        console.log(hasSeenTutorial);
-        
     };
     
     return (

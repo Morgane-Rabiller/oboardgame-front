@@ -3,7 +3,7 @@ import "./Login.scss";
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useDispatch, useSelector } from "react-redux";
-import { login, setUserField } from "../../actions/user";
+import { login, setUserField, validateAccount } from "../../actions/user";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -12,8 +12,14 @@ const Login = () => {
     const password = useSelector((state) => state.userReducer.password);
     const logged = useSelector((state) => state.userReducer.logged);
     const error = useSelector((state) => state.userReducer.error);
+    const checkAccount = useSelector((state) => state.userReducer.check);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
+    const randomgameTuto = localStorage.getItem('hasSeenRandomGameTutorial');
+    const footerTuto = localStorage.getItem('hasSeenFooterTutorial');
+    const boardgameTuto = localStorage.getItem('hasSeenBoardgameTutorial');
+    const libraryTuto = localStorage.getItem('hasSeenLibraryTutorial');
     const changeField = (e) => {
         dispatch(setUserField(e.target.value, e.target.name));
     }
@@ -26,8 +32,12 @@ const Login = () => {
     useEffect(() =>{
         if(logged) {
             navigate("/selection-aleatoire");
+            if (randomgameTuto && footerTuto && boardgameTuto && libraryTuto && !checkAccount) {
+                // Changer check dans la base de données et dans le store
+                dispatch(validateAccount());
+            }
         }
-    }, [logged, navigate])
+    }, [logged, navigate, randomgameTuto, footerTuto, boardgameTuto, libraryTuto])
     
     return (
         <div className="login">

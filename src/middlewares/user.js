@@ -78,10 +78,10 @@ const userMiddleware = (store) => (next) => (action) => {
             next(action);
             break;
         case VALIDATE_ACCOUNT:
-            axiosInstance.delete("/validateAccount").then((res) => {
+            axiosInstance.put("/validateAccount").then((res) => {
                 store.dispatch(accountValidated());
             }).catch((err) => {
-                console.log("Erreur lors de la validation du compte",err.response.data.message);
+                console.log("Erreur lors de la validation du compte :",err.response.data.message);
             });;
             next(action);
             break;
