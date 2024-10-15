@@ -37,7 +37,7 @@ const Randomgame = () => {
     ];
     const [checked, setChecked] = useState(false);
     const [players, setPlayers] = useState(3);
-    const [age, setAge] = useState(25);
+    const [age, setAge] = useState(2);
     const [selectedDuration, setSelectedDuration] = useState(null);
     const userPseudo = useSelector((state) => state.userReducer.pseudo);
     const errorMessage = useSelector((state) => state.libraryReducer.errorMessage);
@@ -108,7 +108,7 @@ const Randomgame = () => {
                     placeholder="" className="w-full w-5rem" />
                 </div>
                 <div>
-                    <label htmlFor="minmax-buttons" className="block mb-2">Age (Max)</label>
+                    <label htmlFor="minmax-buttons" className="block mb-2">Age (Min)</label>
                     <InputNumber inputId="minmax-buttons" size={1} maxLength={2} value={age} onValueChange={(e) => setAge(e.value)} mode="decimal" showButtons min={2} max={18} />
                 </div>
                 <div>
