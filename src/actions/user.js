@@ -128,3 +128,15 @@ export const newPasswordIfForgot = (token, password, passwordRepeat) => ({
   password,
   passwordRepeat
 });
+
+export const VALIDATE_ACCOUNT = 'VALIDATE_ACCOUNT';
+
+export const validateAccount = () => ({
+  type: VALIDATE_ACCOUNT,
+});
+
+export const ACCOUNT_VALIDATED = 'ACCOUNT_VALIDATED';
+
+export const accountValidated = () => ({
+  type: ACCOUNT_VALIDATED,
+});

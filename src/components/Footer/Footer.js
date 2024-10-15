@@ -5,10 +5,10 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../actions/user";
 import { Link, NavLink } from "react-router-dom";
 import Joyride from 'react-joyride';
-import { useState } from "react";
 
 const Footer = ({ checkAccount }) => {
   const hasSeenTutorial = localStorage.getItem('hasSeenFooterTutorial');
+  
     const steps = [
       {
         target: '.my-second-step',

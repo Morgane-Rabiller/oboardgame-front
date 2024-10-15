@@ -6,7 +6,7 @@ import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import RandomGame from '../RandomGame/Randomgame';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../Footer/Footer';
 import Library from '../Library/Library';
 import Boardgame from '../Boardgame/Boardgame';
@@ -14,7 +14,8 @@ import Settings from '../Settings/Settings';
 import Tuto from '../Settings/Tuto/Tuto';
 import ForgotPassword from '../Login/ForgotPassword/ForgotPassword';
 import UpdatePasword from '../Login/UpdatePassword/UpdatePassword';
-import React, { useState } from 'react';
+import React from 'react';
+import { validateAccount } from '../../actions/user';
 
 function PrivateRoute({ children, ...rest }) {
   const logged = useSelector((state) => state.userReducer.logged);
@@ -94,14 +95,29 @@ const router = createBrowserRouter([
 function Root() {
   const logged = useSelector((state) => state.userReducer.logged);
   const checkAccount = useSelector((state) => state.userReducer.check);
-  const [checkPage, setCheckPage] = useState(0);
+  const dispatch = useDispatch();
+  
+  const randomgameTuto = localStorage.getItem('hasSeenRandomGameTutorial');
+  const footerTuto = localStorage.getItem('hasSeenFooterTutorial');
+  const boardgameTuto = localStorage.getItem('hasSeenBoardgameTutorial');
+  const libraryTuto = localStorage.getItem('hasSeenLibraryTutorial');
+  console.log("randomgameTuto", randomgameTuto);
+  console.log("footerTuto", footerTuto);
+  console.log("boardgameTuto", boardgameTuto);
+  console.log("libraryTuto", libraryTuto);
+
+  if (!randomgameTuto && !footerTuto && !boardgameTuto && !libraryTuto && !checkAccount) {
+    // Changer check dans la base de données et dans le store
+    dispatch(validateAccount());
+
+  }
   
   // if(checkPag)
   
   return (
     <div className="App">
       <Header/>
-      <Outlet context={{ checkPage, setCheckPage, checkAccount }} />
+      <Outlet context={{ checkAccount }} />
       <hr className='separate'/>
       {logged && <Footer checkAccount={checkAccount}/>}
     </div>
