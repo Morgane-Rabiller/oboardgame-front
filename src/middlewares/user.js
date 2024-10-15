@@ -1,4 +1,4 @@
-import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess, UPDATE_PASSWORD, updateSuccess, updateFailure, DELETE_ACCOUNT, logout, FORGOT_PASSWORD, sendEmailSuccess, sendEmailFailure, NEW_PASSWORD_AFTER_FORGOT, sendPasswordSuccess, sendPasswordFailure } from "../actions/user";
+import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess, UPDATE_PASSWORD, updateSuccess, updateFailure, DELETE_ACCOUNT, logout, FORGOT_PASSWORD, sendEmailSuccess, sendEmailFailure, NEW_PASSWORD_AFTER_FORGOT, sendPasswordSuccess, sendPasswordFailure, VALIDATE_ACCOUNT, accountValidated } from "../actions/user";
 import axiosInstance from "./axiosInstance";
 
 const userMiddleware = (store) => (next) => (action) => {
@@ -74,6 +74,14 @@ const userMiddleware = (store) => (next) => (action) => {
                 store.dispatch(logout());
             }).catch((err) => {
                 console.log("Erreur lors de la suppression du compte :",err.response.data.message);
+            });;
+            next(action);
+            break;
+        case VALIDATE_ACCOUNT:
+            axiosInstance.delete("/validateAccount").then((res) => {
+                store.dispatch(accountValidated());
+            }).catch((err) => {
+                console.log("Erreur lors de la validation du compte",err.response.data.message);
             });;
             next(action);
             break;
