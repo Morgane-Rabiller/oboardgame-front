@@ -11,7 +11,6 @@ import { Message } from "primereact/message";
 import Joyride from 'react-joyride';
 
 const Library = () => {
-    // const { checkAccount } = useOutletContext();
     const hasSeenTutorial = localStorage.getItem('hasSeenLibraryTutorial');
     // eslint-disable-next-line
     const steps = [
