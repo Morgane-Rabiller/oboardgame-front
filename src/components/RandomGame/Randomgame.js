@@ -122,7 +122,7 @@ const Randomgame = () => {
                 <button className="randomgame_button select-random-game-tuto" onClick={() => handleClick()}>Lancer la sélection aléatoire</button>
             </div>
             <div>
-                {boardgameSelected && <p className="mt-7 font-bold border-2 border-purple-500 p-3 text-center">{boardgameSelected}</p>}
+                {boardgameSelected && <p className="randomgame_selectedgame mt-7 font-bold border-2 border-purple-500 p-3 text-center">{boardgameSelected}</p>}
                 {errorMessage && <p className="mt-7 font-bold border-2 border-red-500 p-3 text-center">{errorMessage}</p>}
             </div>
         </div>
