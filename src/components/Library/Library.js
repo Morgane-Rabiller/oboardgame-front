@@ -17,14 +17,18 @@ const Library = () => {
     const hasSeenTutorial = localStorage.getItem('hasSeenLibraryTutorial');
     // eslint-disable-next-line
     const steps = [
-      {
-        target: '.edit-tuto',
-        content: 'Tu peux personnaliser les paramètres du jeu ici, si tu trouves qu\'ils ne correspondent pas à ta façon de jouer.',
-      },
-      {
-        target: '.delete-tuto',
-        content: 'Tu n\'a plus ce jeu chez toi ? Tu peux le supprimer de ta bibliothèque personnelle.',
-      },
+        {
+            target: '.search-library-tuto',
+            content: 'Tu veux modifier ou supprimer un jeu mais ta liste est longue ? Cherche ton jeu facilement ici.',
+        },
+        {
+            target: '.edit-tuto',
+            content: 'Tu peux personnaliser les paramètres du jeu ici, si tu trouves qu\'ils ne correspondent pas à ta façon de jouer.',
+        },
+        {
+            target: '.delete-tuto',
+            content: 'Tu n\'a plus ce jeu chez toi ? Tu peux le supprimer de ta bibliothèque personnelle.',
+        },
     ];
     const toast = useRef(null);
     const { state } = useNavigation();
@@ -145,7 +149,7 @@ const Library = () => {
             
             <IconField iconPosition="right" className="mt-3 ml-2 mr-2 text-right">
                 <InputIcon className="pi pi-search"> </InputIcon>
-                <InputText placeholder="Je recherche un jeu" className="p-inputtext-sm  search-game-tuto" value={name} onChange={(e) => handleChangeName(e.target.value)} />
+                <InputText placeholder="Je recherche un jeu" className="p-inputtext-sm  search-library-tuto" value={name} onChange={(e) => handleChangeName(e.target.value)} />
             </IconField>
             {filteredDatas && filteredDatas.length !== 0 ? 
             <div className="card">
