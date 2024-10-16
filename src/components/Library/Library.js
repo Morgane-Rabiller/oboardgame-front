@@ -143,7 +143,7 @@ const Library = () => {
             <Toast ref={toast} />
             {state === 'loading' && <Loader />}
             
-            <IconField iconPosition="right" className="mt-2 ml-2 mr-2 text-right">
+            <IconField iconPosition="right" className="mt-3 ml-2 mr-2 text-right">
                 <InputIcon className="pi pi-search"> </InputIcon>
                 <InputText placeholder="Je recherche un jeu" className="p-inputtext-sm  search-game-tuto" value={name} onChange={(e) => handleChangeName(e.target.value)} />
             </IconField>
