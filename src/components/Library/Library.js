@@ -9,6 +9,9 @@ import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
 import { Message } from "primereact/message";
 import Joyride from 'react-joyride';
+import { IconField } from "primereact/iconfield";
+import { InputIcon } from "primereact/inputicon";
+import { InputText } from "primereact/inputtext";
 
 const Library = () => {
     const hasSeenTutorial = localStorage.getItem('hasSeenLibraryTutorial');
@@ -27,7 +30,9 @@ const Library = () => {
     const { state } = useNavigation();
     const datas = useSelector((state) => state.libraryReducer.data);
     const [editMode, setEditMode] = useState(null); 
-    const [editedData, setEditedData] = useState({}); 
+    const [editedData, setEditedData] = useState({});
+    const [name, setName] = useState('');
+    const [filteredDatas, setFilteredDatas] = useState([]);
     const errorMessage = useSelector((state) => state.libraryReducer.errorMessage);
     const [showMessage, setShowMessage] = useState(false);
     const dispatch = useDispatch();
@@ -47,6 +52,13 @@ const Library = () => {
     }, []);
 
     useEffect(() => {
+        if(datas) {
+            // Filtrer les données à chaque changement du champ de recherche ou des données
+            const filtered = datas.filter((game) =>
+                game.name.toLowerCase().includes(name.toLowerCase())
+            );
+            setFilteredDatas(filtered);
+        }
         if (errorMessage) {
             setShowMessage(true);
             const timer = setTimeout(() => {
@@ -56,7 +68,7 @@ const Library = () => {
             return () => clearTimeout(timer); // Nettoie le timeout si le composant se démonte
         }
         // eslint-disable-next-line
-    }, [errorMessage]);
+    }, [name, datas, errorMessage]);
 
 
     const confirm = (event, boardgameId) => {
@@ -84,6 +96,9 @@ const Library = () => {
     const handleChange = (field, value) => {
         setEditedData({ ...editedData, [field]: value });
     };
+    const handleChangeName = (e) => {
+        setName(e);
+    }
 
     const [isReady, setIsReady] = useState(false);
 
@@ -127,7 +142,12 @@ const Library = () => {
             {showMessage  && <Message severity="error" text={errorMessage} />}
             <Toast ref={toast} />
             {state === 'loading' && <Loader />}
-            {datas && datas.length !== 0 ? 
+            
+            <IconField iconPosition="right" className="mt-2 ml-2 mr-2 text-right">
+                <InputIcon className="pi pi-search"> </InputIcon>
+                <InputText placeholder="Je recherche un jeu" className="p-inputtext-sm  search-game-tuto" value={name} onChange={(e) => handleChangeName(e.target.value)} />
+            </IconField>
+            {filteredDatas && filteredDatas.length !== 0 ? 
             <div className="card">
                 <table className="library_table">
                     <thead className="library_table-thead">
@@ -142,7 +162,7 @@ const Library = () => {
                         </tr>
                     </thead>
                     <tbody className="library_table-tbody">
-                            {datas.map((data) => {
+                            {filteredDatas.map((data) => {
                                 const isEditing = editMode === data.boardgame_id;
                                 return (
                                     <tr className="library_table-line" key={data.boardgame_id}>
@@ -177,6 +197,7 @@ const Library = () => {
                                     </tr>
                                 )
                             })}
+                            {!filteredDatas && <p>Pas de jeu correspondant à ta recherche</p>}
                             <ConfirmPopup />
                     </tbody>
                 </table>
