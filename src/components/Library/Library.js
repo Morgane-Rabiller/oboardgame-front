@@ -2,7 +2,7 @@ import "./Library.scss";
 import React, { useEffect, useRef, useState } from 'react';
 import { deleteBoardgame, eraseErrorMessage, fetchLibrary, updateLibraryLine } from "../../actions/library";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigation, useOutletContext } from "react-router-dom";
+import { useNavigation } from "react-router-dom";
 import Loader from '../Loader/Loader';
 import TableDatas from "../TableDatas/TableDatas";
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
@@ -11,9 +11,9 @@ import { Message } from "primereact/message";
 import Joyride from 'react-joyride';
 
 const Library = () => {
-    const { checkAccount } = useOutletContext();
+    // const { checkAccount } = useOutletContext();
     const hasSeenTutorial = localStorage.getItem('hasSeenLibraryTutorial');
-    
+    // eslint-disable-next-line
     const steps = [
       {
         target: '.edit-tuto',
@@ -85,24 +85,45 @@ const Library = () => {
     const handleChange = (field, value) => {
         setEditedData({ ...editedData, [field]: value });
     };
+
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() => {
+        // Attendre que les éléments cibles soient montés avant de démarrer Joyride
+        const checkTargets = () => {
+            const allTargetsExist = steps.every(step => document.querySelector(step.target));
+            if (allTargetsExist) {
+                setIsReady(true);
+            }
+        };
+
+        checkTargets();  // Vérification initiale
+
+        // Si les cibles sont montées plus tard, on relance la vérification
+        const interval = setInterval(checkTargets, 500);
+        return () => clearInterval(interval);  // Nettoyage du timer
+    }, [steps]);
     
     const handleJoyrideCallback = (data) => {
         const { status } = data;
         const finishedStatuses = ['finished', 'skipped'];
         
         if (finishedStatuses.includes(status)) {
-            localStorage.setItem('hasSeenLibraryTutorial', true);
+            setTimeout(() => {
+                localStorage.setItem('hasSeenLibraryTutorial', true);
+            }); 
         }
     };
 
     return (
         <div className="library_container">
-        {!checkAccount && !hasSeenTutorial && <Joyride
-          steps={steps}
-          continuous
-          showProgress
-          showSkipButton
-          callback={handleJoyrideCallback}
+        {isReady  && <Joyride
+            steps={steps}
+            continuous
+            showProgress
+            showSkipButton
+            callback={handleJoyrideCallback}
+            run={!hasSeenTutorial}
         />}
             {showMessage  && <Message severity="error" text={errorMessage} />}
             <Toast ref={toast} />
