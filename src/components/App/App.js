@@ -15,6 +15,7 @@ import Tuto from '../Settings/Tuto/Tuto';
 import ForgotPassword from '../Login/ForgotPassword/ForgotPassword';
 import UpdatePasword from '../Login/UpdatePassword/UpdatePassword';
 import React from 'react';
+import InstallPWA from '../InstallPWA/InstallPWA';
 
 function PrivateRoute({ children, ...rest }) {
   const logged = useSelector((state) => state.userReducer.logged);
@@ -97,6 +98,7 @@ function Root() {
   
   return (
     <div className="App">
+      <InstallPWA />
       <Header/>
       <Outlet context={{ checkAccount }} />
       <hr className='separate'/>
