@@ -98,9 +98,9 @@ function Root() {
   
   return (
     <div className="App">
-      <InstallPWA />
       <Header/>
       <Outlet context={{ checkAccount }} />
+      <InstallPWA />
       <hr className='separate'/>
       {logged && <Footer checkAccount={checkAccount}/>}
     </div>
