@@ -131,7 +131,7 @@ const Boardgame = () => {
                     <button type="button" className="boardgame_button-addgame mt-2 add-game-tuto" onClick={() => setVisible(true)}>Ajouter un jeu</button>
                     <IconField iconPosition="right" className="mt-2 ml-2 mr-2 text-right">
                         <InputIcon className="pi pi-search"> </InputIcon>
-                        <InputText placeholder="Je recherche mon jeu" className="p-inputtext-sm  search-game-tuto" value={name} onChange={(e) => handleChange(e.target.value)} />
+                        <InputText placeholder="Je recherche mon jeu" className="p-inputtext-sm  search-game-tuto w-12rem" value={name} onChange={(e) => handleChange(e.target.value)} />
                     </IconField>
                 </div>
             </div>
