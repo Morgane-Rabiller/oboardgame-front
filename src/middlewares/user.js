@@ -10,25 +10,28 @@ const userMiddleware = (store) => (next) => (action) => {
                 const { pseudo } = res.data.user;
                 console.log("Je suis dans mon fetch user");
                 
-                axiosInstance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
+                // axiosInstance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
                 store.dispatch(savePseudo(pseudo));
             }).catch((err) => {
                 console.error(err);
                 const error = err.response.data.message;
-                store.dispatch(loginFailure(error));
+                if(error === "Pas d'autorisation token") {
+                    store.dispatch(logout());
+                }
+                store.dispatch(loginFailure(err));
                 });
             }
             next(action);
             break;
         case LOGIN: {
             const { email, password } = store.getState().userReducer;
-
-            axiosInstance.post("/login", {email, password}).then((res) => {
+            
+            axiosInstance.post("/login", {email, password}, {
+                withCredentials: true, // Nécessaire pour envoyer les cookies
+              }).then((res) => {
                 const { pseudo } = res.data.user;
                 const { check } = res.data.user;
                 console.log(res.data);
-                
-                
                 
                 axiosInstance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
                 store.dispatch(savePseudo(pseudo));
@@ -67,10 +70,14 @@ const userMiddleware = (store) => (next) => (action) => {
             }
             next(action);
             break;
-        case LOGOUT:
-            axiosInstance.defaults.headers.common.Authorization = null;
+        case LOGOUT:axiosInstance.post("/logout",{
+            withCredentials: true, // Nécessaire pour envoyer les cookies
+          }).then((res) => {
+            // axiosInstance.defaults.headers.common.Authorization = null;
             localStorage.removeItem('user');
             localStorage.removeItem('logged');
+        })
+            
             next(action);
             break;
         case REGISTER:
@@ -89,7 +96,11 @@ const userMiddleware = (store) => (next) => (action) => {
                     store.dispatch(updateSuccess(res.data.message));
                 }).catch((err) => {
                     console.log("Erreur lors de la mise à jour du mot de passe :",err.response.data.message);
-                    store.dispatch(updateFailure(err.response.data.message));
+                    const error = err.response.data.message;
+                    if(error === "Pas d'autorisation token") {
+                        store.dispatch(logout());
+                    }
+                    store.dispatch(updateFailure(error));
                 });
             next(action);
             break;
@@ -97,7 +108,11 @@ const userMiddleware = (store) => (next) => (action) => {
             axiosInstance.delete("/deleteAccount").then((res) => {
                 store.dispatch(logout());
             }).catch((err) => {
-                console.log("Erreur lors de la suppression du compte :",err.response.data.message);
+                const error = err.response.data.message;
+                if(error === "Pas d'autorisation token") {
+                    store.dispatch(logout());
+                }
+                console.log("Erreur lors de la suppression du compte :",error);
             });;
             next(action);
             break;

@@ -1,4 +1,5 @@
 import { ADD_BOARDGAME, addBoardgameSuccess, addErrorMessage, DELETE_BOARDGAME, eraseBoardgameLine, FETCH_LIBRARY, saveBoardgameName, saveData, saveDataAfterUpdate, saveMessage, SELECT_RANDOM_BOARDGAME, UPDATE_LIBRARY_LINE } from "../actions/library";
+import { logout } from "../actions/user";
 import axiosInstance from "./axiosInstance";
 
 
@@ -8,7 +9,11 @@ const libraryMiddleware = (store) => (next) => (action) => {
             axiosInstance.get("/library").then((res) => {
                 store.dispatch(saveData(res.data.data));
             }).catch((err) => {
-                console.log(err);    
+                console.log(err);
+                const error = err.response.data.message;
+                if(error === "Pas d'autorisation token") {
+                    store.dispatch(logout());
+                }
             });
             next(action);
             break;
@@ -17,6 +22,10 @@ const libraryMiddleware = (store) => (next) => (action) => {
                 store.dispatch(saveBoardgameName(res.data.boardgameName));
             }).catch((err) => {
                 console.log(err);
+                const error = err.response.data.message;
+                if(error === "Pas d'autorisation token") {
+                    store.dispatch(logout());
+                }
                 store.dispatch(saveMessage(err.response.data.message));
             });
             next(action);
@@ -26,8 +35,12 @@ const libraryMiddleware = (store) => (next) => (action) => {
             .then((response) => {
                 store.dispatch(addBoardgameSuccess(response.data.message));
             })
-            .catch((error) => {
-                store.dispatch(addErrorMessage(error.response.data.message));
+            .catch((err) => {
+                const error = err.response.data.message;
+                if(error === "Pas d'autorisation token") {
+                    store.dispatch(logout());
+                }
+                store.dispatch(addErrorMessage(err.response.data.message));
             });
             next(action);
             break;
@@ -36,9 +49,13 @@ const libraryMiddleware = (store) => (next) => (action) => {
             .then((response) => {
                 store.dispatch(saveDataAfterUpdate(action.data));
             })
-            .catch((error) => {
-                console.error('Erreur lors de l\'ajout du jeu de société:', error);
-                store.dispatch(addErrorMessage(error.response.data.message));
+            .catch((err) => {
+                console.error('Erreur lors de l\'ajout du jeu de société:', err);
+                const error = err.response.data.message;
+                if(error === "Pas d'autorisation token") {
+                    store.dispatch(logout());
+                }
+                store.dispatch(addErrorMessage(err.response.data.message));
             });
             next(action);
             break;
@@ -47,8 +64,12 @@ const libraryMiddleware = (store) => (next) => (action) => {
             .then((response) => {
                 store.dispatch(eraseBoardgameLine(action.id));
             })
-            .catch((error) => {
-                console.log(error);
+            .catch((err) => {
+                const error = err.response.data.message;
+                if(error === "Pas d'autorisation token") {
+                    store.dispatch(logout());
+                }
+                console.log(err);
             })
             next(action);
             break;
