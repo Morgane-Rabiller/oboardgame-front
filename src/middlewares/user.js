@@ -1,18 +1,40 @@
-import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess, UPDATE_PASSWORD, updateSuccess, updateFailure, DELETE_ACCOUNT, logout, FORGOT_PASSWORD, sendEmailSuccess, sendEmailFailure, NEW_PASSWORD_AFTER_FORGOT, sendPasswordSuccess, sendPasswordFailure, VALIDATE_ACCOUNT, accountValidated } from "../actions/user";
+import { LOGIN, savePseudo, loginSuccess, loginFailure, LOGOUT, REGISTER, registerSuccess, UPDATE_PASSWORD, updateSuccess, updateFailure, DELETE_ACCOUNT, logout, FORGOT_PASSWORD, sendEmailSuccess, sendEmailFailure, NEW_PASSWORD_AFTER_FORGOT, sendPasswordSuccess, sendPasswordFailure, VALIDATE_ACCOUNT, accountValidated, FETCH_USER } from "../actions/user";
 import axiosInstance from "./axiosInstance";
 
 const userMiddleware = (store) => (next) => (action) => {
     switch (action.type) {
+        // eslint-disable-next-line
+        case FETCH_USER: {
+
+            axiosInstance.get("/user").then((res) => {
+                const { pseudo } = res.data.user;
+                console.log("Je suis dans mon fetch user");
+                
+                axiosInstance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
+                store.dispatch(savePseudo(pseudo));
+            }).catch((err) => {
+                console.error(err);
+                const error = err.response.data.message;
+                store.dispatch(loginFailure(error));
+                });
+            }
+            next(action);
+            break;
         case LOGIN: {
             const { email, password } = store.getState().userReducer;
 
             axiosInstance.post("/login", {email, password}).then((res) => {
                 const { pseudo } = res.data.user;
                 const { check } = res.data.user;
+                console.log(res.data);
+                
+                
                 
                 axiosInstance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
                 store.dispatch(savePseudo(pseudo));
                 store.dispatch(loginSuccess(check));
+                localStorage.setItem('user', JSON.stringify(pseudo));
+                localStorage.setItem('logged', JSON.stringify(true));
             }).catch((err) => {
                 console.error(err);
                 const error = err.response.data.message;
@@ -47,6 +69,8 @@ const userMiddleware = (store) => (next) => (action) => {
             break;
         case LOGOUT:
             axiosInstance.defaults.headers.common.Authorization = null;
+            localStorage.removeItem('user');
+            localStorage.removeItem('logged');
             next(action);
             break;
         case REGISTER:

@@ -6,7 +6,7 @@ import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import RandomGame from '../RandomGame/Randomgame';
-import { useSelector } from 'react-redux';
+import { /* useDispatch, */ useSelector } from 'react-redux';
 import Footer from '../Footer/Footer';
 import Library from '../Library/Library';
 import Boardgame from '../Boardgame/Boardgame';
@@ -16,12 +16,28 @@ import ForgotPassword from '../Login/ForgotPassword/ForgotPassword';
 import UpdatePasword from '../Login/UpdatePassword/UpdatePassword';
 import React from 'react';
 import InstallPWA from '../InstallPWA/InstallPWA';
+// import { fetchUser } from '../../actions/user';
 
 function PrivateRoute({ children, ...rest }) {
   const logged = useSelector((state) => state.userReducer.logged);
+  // const logged = localStorage.getItem('logged');
   
   return logged ? React.cloneElement(children, { ...rest }) : <Navigate to="/connexion" />;
 }
+
+// function usePreventRefresh() {
+//   const logged = localStorage.getItem('logged');
+//   const dispatch = useDispatch();
+  
+//     window.onbeforeunload = function() {
+//       console.log("je passe ici");
+      
+//           if(logged) {
+//             dispatch(fetchUser());
+//           }
+//       window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser 
+//   }
+// }
 
 const router = createBrowserRouter([
   {
@@ -95,6 +111,8 @@ const router = createBrowserRouter([
 function Root() {
   const logged = useSelector((state) => state.userReducer.logged);
   const checkAccount = useSelector((state) => state.userReducer.check);
+
+  // usePreventRefresh();
   
   return (
     <div className="App">

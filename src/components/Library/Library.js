@@ -181,17 +181,17 @@ const Library = () => {
                                             </select> : data.type_game}
                                             age={isEditing ? <input type="number" className="w-12" min="2" value={editedData.age} onChange={(e) => handleChange('age', e.target.value)} /> : data.age}
                                             time={isEditing ? <select className="w-13"  value={editedData.time} onChange={(e) => handleChange('time', e.target.value)} >
-                                                <option value="15" key="1">5</option>
-                                                <option value="15" key="1">10</option>
+                                                <option value="5" key="1">5</option>
+                                                <option value="10" key="1">10</option>
                                                 <option value="15" key="1">15</option>
-                                                <option value="15" key="1">20</option>
-                                                <option value="15" key="1">25</option>
-                                                <option value="20" key="2">30</option>
-                                                <option value="30" key="3">35</option>
-                                                <option value="45" key="4">40</option>
+                                                <option value="20" key="1">20</option>
+                                                <option value="25" key="1">25</option>
+                                                <option value="30" key="2">30</option>
+                                                <option value="35" key="3">35</option>
+                                                <option value="40" key="4">40</option>
                                                 <option value="45" key="4">45</option>
-                                                <option value="45" key="4">50</option>
-                                                <option value="45" key="4">55</option>
+                                                <option value="50" key="4">50</option>
+                                                <option value="55" key="4">55</option>
                                                 <option value="60" key="5">60</option>
                                             </select> : data.time}
                                         />

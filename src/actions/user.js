@@ -140,3 +140,10 @@ export const ACCOUNT_VALIDATED = 'ACCOUNT_VALIDATED';
 export const accountValidated = () => ({
   type: ACCOUNT_VALIDATED,
 });
+
+export const FETCH_USER = 'FETCH_USER';
+
+export const fetchUser = () => ({
+  type: FETCH_USER,
+});
+
