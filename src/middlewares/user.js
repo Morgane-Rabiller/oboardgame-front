@@ -5,7 +5,6 @@ const userMiddleware = (store) => (next) => (action) => {
     switch (action.type) {
         // eslint-disable-next-line
         case FETCH_USER: {
-
             axiosInstance.get("/user").then((res) => {
                 const { pseudo } = res.data.user;
                 

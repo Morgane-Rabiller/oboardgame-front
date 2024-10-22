@@ -28,14 +28,21 @@ function PrivateRoute({ children, ...rest }) {
 function usePreventRefresh() {
   const logged = localStorage.getItem('logged');
   const dispatch = useDispatch();
-  
-    window.onload = function() {
-      
+
+  if (document.readyState === "complete") {
     if(logged) {
       dispatch(fetchUser());
     }
-    window.onbeforeunload = null;
+    console.log('readySate')
+  } else {
+    window.addEventListener('load', () => {
+      if(logged) {
+        dispatch(fetchUser());
+      }
+    });
+    console.log('event here')
   }
+  
 }
 
 const router = createBrowserRouter([
