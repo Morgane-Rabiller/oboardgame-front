@@ -1,5 +1,4 @@
-
-import { Navigate, Outlet, RouterProvider, createBrowserRouter} from 'react-router-dom';
+import { Navigate, Outlet, RouterProvider, createBrowserRouter, useNavigate} from 'react-router-dom';
 import Header from '../Header/Header';
 import './App.scss';
 import Home from '../Home/Home';
@@ -14,9 +13,10 @@ import Settings from '../Settings/Settings';
 import Tuto from '../Settings/Tuto/Tuto';
 import ForgotPassword from '../Login/ForgotPassword/ForgotPassword';
 import UpdatePasword from '../Login/UpdatePassword/UpdatePassword';
-import React from 'react';
+import React, { useEffect } from 'react';
 import InstallPWA from '../InstallPWA/InstallPWA';
 import { fetchUser } from '../../actions/user';
+import Error404 from '../Error404/Error404';
 
 function PrivateRoute({ children, ...rest }) {
   const logged = useSelector((state) => state.userReducer.logged);
@@ -28,18 +28,13 @@ function PrivateRoute({ children, ...rest }) {
 function usePreventRefresh() {
   const logged = localStorage.getItem('logged');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  if (document.readyState === "complete") {
-    if(logged) {
+  useEffect(() => {
+    if (logged) {
       dispatch(fetchUser());
-    }
-  } else {
-    window.addEventListener('load', () => {
-      if(logged) {
-        dispatch(fetchUser());
-      }
-    });
-  }
+    } 
+  }, [logged, dispatch, navigate]);
 }
 
 const router = createBrowserRouter([
@@ -106,6 +101,11 @@ const router = createBrowserRouter([
             <Tuto />
           </PrivateRoute>
         ),
+        
+      },
+      {
+        path: "*",
+        element: <Error404 />,
       },
     ],
   }
