@@ -12,7 +12,6 @@ const Randomgame = () => {
     const { checkAccount } = useOutletContext();
     const hasSeenTutorial = localStorage.getItem('hasSeenRandomGameTutorial');
     
-    
     const steps = [
       {
         target: '.logo-tuto',

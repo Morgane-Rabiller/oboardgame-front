@@ -2,8 +2,6 @@ import "./Library.scss";
 import React, { useEffect, useRef, useState } from 'react';
 import { deleteBoardgame, eraseErrorMessage, fetchLibrary, updateLibraryLine } from "../../actions/library";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigation } from "react-router-dom";
-import Loader from '../Loader/Loader';
 import TableDatas from "../TableDatas/TableDatas";
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
@@ -31,7 +29,6 @@ const Library = () => {
         },
     ];
     const toast = useRef(null);
-    const { state } = useNavigation();
     const datas = useSelector((state) => state.libraryReducer.data);
     const [editMode, setEditMode] = useState(null); 
     const [editedData, setEditedData] = useState({});
@@ -145,7 +142,6 @@ const Library = () => {
         />}
             {showMessage  && <Message severity="error" text={errorMessage} />}
             <Toast ref={toast} />
-            {state === 'loading' && <Loader />}
             
             <IconField iconPosition="right" className="mt-3 ml-2 mr-2 text-right">
                 <InputIcon className="pi pi-search"> </InputIcon>
@@ -213,7 +209,8 @@ const Library = () => {
                     </tbody>
                 </table>
             </div> 
-            : 
+            :
+            
             <p className="text-center m-5">Tu n'as pas de jeux dans ta bibliothèque</p>
             }
         </div>

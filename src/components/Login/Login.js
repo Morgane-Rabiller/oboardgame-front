@@ -5,7 +5,8 @@ import { Password } from 'primereact/password';
 import { useDispatch, useSelector } from "react-redux";
 import { login, setUserField, validateAccount } from "../../actions/user";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Loader from '../Loader/Loader';
 
 const Login = () => {
     const email = useSelector((state) => state.userReducer.email);
@@ -15,6 +16,8 @@ const Login = () => {
     const checkAccount = useSelector((state) => state.userReducer.check);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    
     
     const randomgameTuto = localStorage.getItem('hasSeenRandomGameTutorial');
     const footerTuto = localStorage.getItem('hasSeenFooterTutorial');
@@ -27,20 +30,27 @@ const Login = () => {
     const handleForm = (e) => {
         e.preventDefault();
         dispatch(login());
+        setLoading(true);
     }
 
     useEffect(() =>{
+        if(error) {
+            setLoading(false);
+        }
         if(logged) {
+            setLoading(false);
             navigate("/selection-aleatoire");
             if (randomgameTuto && footerTuto && boardgameTuto && libraryTuto && !checkAccount) {
                 // Changer check dans la base de données et dans le store
                 dispatch(validateAccount());
             }
         }
-    }, [logged, navigate, randomgameTuto, footerTuto, boardgameTuto, libraryTuto])
+        // eslint-disable-next-line
+    }, [logged, navigate, randomgameTuto, footerTuto, boardgameTuto, libraryTuto, error])
     
     return (
         <div className="login">
+            {loading && <Loader />}
             <h1 className="login_title">Je me connecte</h1>
             <form className="login_form" onSubmit={e => handleForm(e)}>
                 <InputText type="text" className="login_form-email p-inputtext-sm" placeholder="Adresse mail" name="email" value={email} onChange={changeField} />

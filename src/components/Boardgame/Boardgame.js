@@ -1,8 +1,7 @@
 import "./Boardgame.scss";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigation, useOutletContext } from "react-router-dom";
-import Loader from '../Loader/Loader';
+import { useOutletContext } from "react-router-dom";
 import TableDatas from "../TableDatas/TableDatas";
 import { eraseSuccessMessageBoardgame, fetchBoardgames } from "../../actions/boardgame";
 import { addBoardgame, eraseErrorMessage, eraseSuccessMessage } from "../../actions/library";
@@ -36,7 +35,6 @@ const Boardgame = () => {
         content: 'Ajoute les jeux que tu détiens chez toi à ta bibliothèque personnelle.',
       },
     ];
-    const { state } = useNavigation();
     const datas = useSelector((state) => state.boardgameReducer.data);
     const successMessage = useSelector((state) => state.libraryReducer.successMessage);
     const successMessageBoardgame = useSelector((state) => state.boardgameReducer.successMessage);
@@ -121,7 +119,6 @@ const Boardgame = () => {
           showSkipButton
           callback={handleJoyrideCallback}
         />}
-            {state === 'loading' && <Loader />}
             {showSuccessMessage  && <Message severity="success" className="absolute" text={successMessage} />}
             {showSuccessBoardgameMessage  && <Message severity="success" className="absolute" text={successMessageBoardgame} />}
             {showErrorMessage  && <Message severity="error" className="absolute" text={errorMessage} />}

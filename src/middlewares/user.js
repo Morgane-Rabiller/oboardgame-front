@@ -8,7 +8,6 @@ const userMiddleware = (store) => (next) => (action) => {
 
             axiosInstance.get("/user").then((res) => {
                 const { pseudo } = res.data.user;
-                console.log("Je suis dans mon fetch user");
                 
                 // axiosInstance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
                 store.dispatch(savePseudo(pseudo));
@@ -33,7 +32,6 @@ const userMiddleware = (store) => (next) => (action) => {
                 const { check } = res.data.user;
                 console.log(res.data);
                 
-                axiosInstance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
                 store.dispatch(savePseudo(pseudo));
                 store.dispatch(loginSuccess(check));
                 localStorage.setItem('user', JSON.stringify(pseudo));
@@ -73,7 +71,6 @@ const userMiddleware = (store) => (next) => (action) => {
         case LOGOUT:axiosInstance.post("/logout",{
             withCredentials: true, // Nécessaire pour envoyer les cookies
           }).then((res) => {
-            // axiosInstance.defaults.headers.common.Authorization = null;
             localStorage.removeItem('user');
             localStorage.removeItem('logged');
         })
@@ -113,7 +110,7 @@ const userMiddleware = (store) => (next) => (action) => {
                     store.dispatch(logout());
                 }
                 console.log("Erreur lors de la suppression du compte :",error);
-            });;
+            });
             next(action);
             break;
         case VALIDATE_ACCOUNT:
