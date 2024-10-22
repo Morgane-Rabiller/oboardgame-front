@@ -33,16 +33,13 @@ function usePreventRefresh() {
     if(logged) {
       dispatch(fetchUser());
     }
-    console.log('readySate')
   } else {
     window.addEventListener('load', () => {
       if(logged) {
         dispatch(fetchUser());
       }
     });
-    console.log('event here')
   }
-  
 }
 
 const router = createBrowserRouter([
