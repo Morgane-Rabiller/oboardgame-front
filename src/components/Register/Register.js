@@ -3,11 +3,13 @@ import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useDispatch, useSelector } from "react-redux";
 import { register, setUserField } from "../../actions/user";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Message } from "primereact/message";
+import Loader from '../Loader/Loader';
 
 const Register = () => {
+    const [loading, setLoading] = useState(false);
     const pseudo = useSelector((state) => state.userReducer.pseudo);
     const email = useSelector((state) => state.userReducer.email);
     const password = useSelector((state) => state.userReducer.password);
@@ -23,18 +25,24 @@ const Register = () => {
     const handleForm = (e) => {
         e.preventDefault();
         dispatch(register());
+        setLoading(true);
     }
 
     useEffect(() => {
+        if(error) {
+            setLoading(false);
+        }
         if(message) {
             window.setTimeout(() => {
+                setLoading(false);
                 navigate("/connexion");
             }, 3000);
         }
-    }, [message, navigate]);
+    }, [message, navigate, error]);
 
     return (
         <div className="register">
+            {loading && <Loader />}
             {message && <Message severity="success" text={message} />}
             <h1 className="register_title">Je m'inscris</h1>
             <form className="register_form" onSubmit={e => handleForm(e)}>
