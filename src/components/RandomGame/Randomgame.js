@@ -46,7 +46,9 @@ const Randomgame = () => {
         { name: '15' },
         { name: '30' },
         { name: '45' },
-        { name: '60+' }
+        { name: '60' },
+        { name: '90' },
+        { name: '120+' }
     ];
     const [ selectedType, setSelectedType] = useState(null);
     const types = [

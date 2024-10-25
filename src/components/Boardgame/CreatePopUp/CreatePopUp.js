@@ -17,7 +17,7 @@ const CreatePopUp = ({ onSuccess }) => {
     const [displayMessage, setDisplayMessage] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const types = [ "Cartes", "Dés", "Plateau" ];
-    const times = [ 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
+    const times = [ 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 90, 120];
     const errorMessage = useSelector((state) => state.boardgameReducer.errorMessage);
     const dispatch = useDispatch();
 
