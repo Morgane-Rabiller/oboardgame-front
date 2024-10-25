@@ -4,9 +4,9 @@ export const hasNote = () => ({
   type: HAS_NOTE,
 });
 
-export const SET_NOTE = 'SET_NOTE';
+export const ADD_NOTE = 'ADD_NOTE';
 
-export const setNote = (note) => ({
-  type: SET_NOTE,
+export const addNote = (note) => ({
+  type: ADD_NOTE,
   note
 });

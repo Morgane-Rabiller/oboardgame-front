@@ -170,6 +170,7 @@ const Library = () => {
                                     <tr className="library_table-line" key={data.boardgame_id}>
                                         <TableDatas
                                             name={isEditing ? <input type="text" className="w-12" value={editedData.name} onChange={(e) => handleChange('name', e.target.value)} /> : data.name}
+                                            isEditing={isEditing}
                                             playerMin={isEditing ? <input type="number"className="w-6" min="1" max="10" value={editedData.player_min} onChange={(e) => handleChange('player_min', e.target.value)} /> : data.player_min}
                                             playerMax={isEditing ? <input type="number" className="w-6" min="1" max="50" value={editedData.player_max} onChange={(e) => handleChange('player_max', e.target.value)} /> : data.player_max}
                                             type={isEditing ? <select className="w-12"  value={editedData.type_game} onChange={(e) => handleChange('type_game', e.target.value)} >
