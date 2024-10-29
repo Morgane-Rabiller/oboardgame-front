@@ -16,7 +16,6 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
     const dispatch = useDispatch();
 
     const handleClick = (e) => {
-        // setHasNote(true);
         if (!isEditing) {
             op.current.toggle(e);
         }
@@ -43,7 +42,6 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
     };
     const handleDeleteNote = (e) => {
         dispatch(deleteNote(noteId));
-        // dispatch(removeNote());
         setValue("");
         op.current.hide(e);
     };
