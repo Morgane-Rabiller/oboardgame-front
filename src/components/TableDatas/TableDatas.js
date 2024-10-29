@@ -3,13 +3,18 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 import { InputTextarea } from 'primereact/inputtextarea';
 import "../Library/Library.scss";
 import { Button } from "primereact/button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addNote, hasNote } from "../../actions/note";
 
 const TableDatas = ({ name, playerMin, playerMax, type, age, time, isEditing }) => {
-    const hasNote = useSelector((state) => state.noteReducer.hasNote);
+    const getHasNote = useSelector((state) => state.noteReducer.hasNote);
+    const note = useSelector((state) => state.noteReducer.note);
     const [value, setValue] = useState('');
     const [classButton, setClassButton] = useState("text-sm mr-2 bg-purple-200 border-purple-200");
+    const [showError, setShowError] = useState(false);
     const op = useRef(null);
+    const op2 = useRef(null);
+    const dispatch = useDispatch();
 
     const handleClick = (e) => {
         // setHasNote(true);
@@ -21,23 +26,50 @@ const TableDatas = ({ name, playerMin, playerMax, type, age, time, isEditing }) 
     const handleChange = (e) => {
         setValue(e.target.value);
         setClassButton(e.target.value === "" ? "text-sm mr-2 bg-purple-200 border-purple-200" : "text-sm mr-2");
+    };
+
+    const handleAddNote = () => {
+        if (value !== "" ) {
+            dispatch(hasNote());
+            dispatch(addNote(value));
+        } else {
+            setShowError(true);
+            window.setTimeout(() => {
+                setShowError(false);
+            }, 2000);
+        }
+    };
+    const handleUpdateNote = (e) => {
+
+    };
+    const handleDeleteNote = (e) => {
 
     };
 
     return (
         <>
-            <td className={hasNote ? "text-green-500" : ""} onClick={(e) => handleClick(e)}>{name}</td>
+            <td className={getHasNote ? "text-green-500" : ""} onClick={(e) => handleClick(e)}>{name}</td>
             <OverlayPanel ref={op} className="p-2 w-20rem">
                 <div className="flex">
                     <i className="pi pi-pen-to-square mr-2"></i>
                     <p className="font-bold text-sm mb-3">Veux-tu ajouter une note pour {name} ?</p>
                 </div>
-                {!hasNote && <InputTextarea value={value} className="ml-4 mb-2 h-4rem" onChange={(e) => handleChange(e)} rows={5} cols={30} />}
-                <div className="flex justify-content-end">
-                    <Button className={classButton}>Ajouter</Button>
-                    <Button className="text-sm">Annuler</Button>
-                </div>
-                
+                {!getHasNote ? 
+                    <>
+                        <InputTextarea value={value} className="ml-4 mb-2 h-4rem" onChange={(e) => handleChange(e)} rows={5} cols={30} /> 
+                        {showError && <p className="text-red-500">Pas de note.</p>}
+                        <div className="flex justify-content-end">
+                            <Button className={classButton} type="button" onClick={() => handleAddNote()}>Ajouter</Button>
+                        </div>
+                    </>
+                : 
+                    <>
+                        <p>{note}</p>
+                        <div className="flex justify-content-end mt-2">
+                            <Button className={classButton} type="button" onClick={() => handleUpdateNote()}>modifier</Button>
+                            <Button className="text-sm" onClick={() => handleDeleteNote()}>Supprimer</Button>
+                        </div>
+                    </>}
             </OverlayPanel>
             <td>{playerMin} - {playerMax}</td>
             <td>{type}</td>
