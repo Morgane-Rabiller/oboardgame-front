@@ -4,7 +4,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import "../Library/Library.scss";
 import { Button } from "primereact/button";
 import { useDispatch, useSelector } from "react-redux";
-import { addNote, hasNote } from "../../actions/note";
+import { addNote, deleteNote, hasNote, removeNote } from "../../actions/note";
 
 const TableDatas = ({ name, playerMin, playerMax, type, age, time, isEditing }) => {
     const getHasNote = useSelector((state) => state.noteReducer.hasNote);
@@ -13,7 +13,6 @@ const TableDatas = ({ name, playerMin, playerMax, type, age, time, isEditing }) 
     const [classButton, setClassButton] = useState("text-sm mr-2 bg-purple-200 border-purple-200");
     const [showError, setShowError] = useState(false);
     const op = useRef(null);
-    const op2 = useRef(null);
     const dispatch = useDispatch();
 
     const handleClick = (e) => {
@@ -43,7 +42,10 @@ const TableDatas = ({ name, playerMin, playerMax, type, age, time, isEditing }) 
 
     };
     const handleDeleteNote = (e) => {
-
+        dispatch(deleteNote());
+        dispatch(removeNote());
+        setValue("");
+        op.current.hide(e);
     };
 
     return (
