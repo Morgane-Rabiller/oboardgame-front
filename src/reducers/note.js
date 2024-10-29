@@ -1,33 +1,43 @@
 import { ADD_NOTE, DELETE_NOTE, HAS_NOTE, REMOVE_NOTE } from "../actions/note";
 
 const initialState = {
-    note: "",
-    hasNote: false,
+    notes: {},
 };
 
 export default function noteReducer(state = initialState, action) {
     switch (action.type) {
         case HAS_NOTE:
-          return {
-            ...state,
-            hasNote: true
-          };
+            return {
+                ...state,
+                notes: {
+                    ...state.notes,
+                    [action.noteId]: { ...state.notes[action.noteId], hasNote: true }
+                }
+            };
         case REMOVE_NOTE:
-          return {
-            ...state,
-            hasNote: false
-          };
+            return {
+                ...state,
+                notes: {
+                    ...state.notes,
+                    [action.noteId]: { ...state.notes[action.noteId], hasNote: false }
+                }
+            };
         case ADD_NOTE:
-          return {
-            ...state,
-            note: action.note
-          };
+            return {
+                ...state,
+                notes: {
+                    ...state.notes,
+                    [action.noteId]: { ...state.notes[action.noteId], note: action.note }
+                }
+            };
         case DELETE_NOTE:
-          return {
-            ...state,
-            note: ""
-          };
-      default:
-        return state;
+            const updatedNotes = { ...state.notes };
+            delete updatedNotes[action.noteId];
+            return {
+                ...state,
+                notes: updatedNotes
+            };
+        default:
+            return state;
     }
 }

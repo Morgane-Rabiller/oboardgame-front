@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import { OverlayPanel } from 'primereact/overlaypanel';
 import { InputTextarea } from 'primereact/inputtextarea';
 import "../Library/Library.scss";
@@ -6,9 +6,9 @@ import { Button } from "primereact/button";
 import { useDispatch, useSelector } from "react-redux";
 import { addNote, deleteNote, hasNote, removeNote } from "../../actions/note";
 
-const TableDatas = ({ name, playerMin, playerMax, type, age, time, isEditing }) => {
-    const getHasNote = useSelector((state) => state.noteReducer.hasNote);
-    const note = useSelector((state) => state.noteReducer.note);
+const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEditing }) => {
+    const notes = useSelector((state) => state.noteReducer.notes);
+    const noteData = useMemo(() => notes[noteId] || {}, [notes, noteId]);
     const [value, setValue] = useState('');
     const [classButton, setClassButton] = useState("text-sm mr-2 bg-purple-200 border-purple-200");
     const [showError, setShowError] = useState(false);
@@ -29,8 +29,8 @@ const TableDatas = ({ name, playerMin, playerMax, type, age, time, isEditing }) 
 
     const handleAddNote = () => {
         if (value !== "" ) {
-            dispatch(hasNote());
-            dispatch(addNote(value));
+            dispatch(hasNote(noteId));
+            dispatch(addNote(value, noteId));
         } else {
             setShowError(true);
             window.setTimeout(() => {
@@ -39,24 +39,24 @@ const TableDatas = ({ name, playerMin, playerMax, type, age, time, isEditing }) 
         }
     };
     const handleUpdateNote = (e) => {
-        dispatch(removeNote());
+        dispatch(removeNote(noteId));
     };
     const handleDeleteNote = (e) => {
-        dispatch(deleteNote());
-        dispatch(removeNote());
+        dispatch(deleteNote(noteId));
+        // dispatch(removeNote());
         setValue("");
         op.current.hide(e);
     };
 
     return (
         <>
-            <td className={getHasNote ? "text-green-500" : ""} onClick={(e) => handleClick(e)}>{name}</td>
+            <td className={noteData.hasNote ? "text-green-500" : ""} onClick={(e) => handleClick(e)}>{name}</td>
             <OverlayPanel ref={op} className="p-2 w-20rem">
                 <div className="flex">
                     <i className="pi pi-pen-to-square mr-2"></i>
                     <p className="font-bold text-sm mb-3">Veux-tu ajouter une note pour {name} ?</p>
                 </div>
-                {!getHasNote ? 
+                {!noteData.hasNote ? 
                     <>
                         <InputTextarea value={value} className="ml-4 mb-2 h-4rem" onChange={(e) => handleChange(e)} rows={5} cols={30} /> 
                         {showError && <p className="text-red-500">Pas de note.</p>}
@@ -66,7 +66,7 @@ const TableDatas = ({ name, playerMin, playerMax, type, age, time, isEditing }) 
                     </>
                 : 
                     <>
-                        <p>{note}</p>
+                        <p>{noteData.note}</p>
                         <div className="flex justify-content-end mt-2">
                             <Button className="text-sm mr-2" type="button" onClick={() => handleUpdateNote()}>Modifier</Button>
                             <Button className="text-sm" onClick={() => handleDeleteNote()}>Supprimer</Button>

@@ -1,20 +1,23 @@
 export const HAS_NOTE = 'HAS_NOTE';
 
-export const hasNote = () => ({
+export const hasNote = (noteId) => ({
   type: HAS_NOTE,
+  noteId
 });
 
 export const REMOVE_NOTE = 'REMOVE_NOTE';
 
-export const removeNote = () => ({
+export const removeNote = (noteId) => ({
   type: REMOVE_NOTE,
+  noteId
 });
 
 export const ADD_NOTE = 'ADD_NOTE';
 
-export const addNote = (note) => ({
+export const addNote = (note, noteId) => ({
   type: ADD_NOTE,
-  note
+  note,
+  noteId
 });
 
 export const UPDATE_NOTE = 'UPDATE_NOTE';
@@ -26,6 +29,7 @@ export const updateNote = (note) => ({
 
 export const DELETE_NOTE = 'DELETE_NOTE';
 
-export const deleteNote = () => ({
-  type: DELETE_NOTE
+export const deleteNote = (noteId) => ({
+  type: DELETE_NOTE,
+  noteId
 });
