@@ -39,7 +39,7 @@ const TableDatas = ({ name, playerMin, playerMax, type, age, time, isEditing }) 
         }
     };
     const handleUpdateNote = (e) => {
-
+        dispatch(removeNote());
     };
     const handleDeleteNote = (e) => {
         dispatch(deleteNote());
@@ -68,7 +68,7 @@ const TableDatas = ({ name, playerMin, playerMax, type, age, time, isEditing }) 
                     <>
                         <p>{note}</p>
                         <div className="flex justify-content-end mt-2">
-                            <Button className={classButton} type="button" onClick={() => handleUpdateNote()}>modifier</Button>
+                            <Button className="text-sm mr-2" type="button" onClick={() => handleUpdateNote()}>Modifier</Button>
                             <Button className="text-sm" onClick={() => handleDeleteNote()}>Supprimer</Button>
                         </div>
                     </>}
