@@ -12,11 +12,14 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
     const [value, setValue] = useState('');
     const [classButton, setClassButton] = useState("text-sm mr-2 bg-purple-200 border-purple-200");
     const [showError, setShowError] = useState(false);
+    const [isEditingNote, setIsEditingNote] = useState(false);
     const op = useRef(null);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getNote());
-    })
+        if (!noteData.hasNote) {
+            dispatch(getNote(noteId));
+        }
+    }, [dispatch, noteId, noteData.hasNote]);
 
     const handleClick = (e) => {
         if (!isEditing) {
@@ -30,6 +33,7 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
     };
 
     const handleAddNote = () => {
+        setIsEditingNote(false);
         if (value !== "" ) {
             console.log("je rentre une note");
             
@@ -42,7 +46,9 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
         }
     };
     const handleUpdateNote = (e) => {
-        dispatch(removeNote(noteId));
+        // dispatch(removeNote(noteId));
+        setIsEditingNote(true);
+        setValue(noteData.note || '');
     };
     const handleDeleteNote = (e) => {
         dispatch(deleteNote(noteId));
@@ -58,12 +64,12 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
                     <i className="pi pi-pen-to-square mr-2"></i>
                     <p className="font-bold text-sm mb-3">Veux-tu ajouter une note pour {name} ?</p>
                 </div>
-                {!noteData.hasNote ? 
+                {!noteData.hasNote || isEditingNote ? 
                     <>
                         <InputTextarea value={value} className="ml-4 mb-2 h-4rem" onChange={(e) => handleChange(e)} rows={5} cols={30} /> 
                         {showError && <p className="text-red-500">Pas de note.</p>}
                         <div className="flex justify-content-end">
-                            <Button className={classButton} type="button" onClick={() => handleAddNote()}>Ajouter</Button>
+                            <Button className={classButton} type="button" onClick={() => handleAddNote() }>{isEditingNote ? "Mettre à jour" : "Ajouter"}</Button>
                         </div>
                     </>
                 : 

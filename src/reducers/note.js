@@ -19,7 +19,7 @@ export default function noteReducer(state = initialState, action) {
                 ...state,
                 notes: {
                     ...state.notes,
-                    [action.noteId]: { ...state.notes[action.noteId], hasNote: false }
+                    [action.noteId]: { ...state.notes[action.noteId], hasNote: false, note: null }
                 }
             };
         case ADD_NOTE:

@@ -1,4 +1,4 @@
-import { addNote, hasNote, JOIN_NOTE } from "../actions/note";
+import { addNote, GET_NOTE, hasNote, JOIN_NOTE } from "../actions/note";
 import axiosInstance from "./axiosInstance";
 
 
@@ -8,15 +8,21 @@ const noteMiddleware = (store) => (next) => (action) => {
             console.log("action.note", action.note);
             
             axiosInstance.put(`/note/add/${action.noteId}`, {note :action.note}).then((res) => {
-                console.log(res);
                 store.dispatch(hasNote(action.noteId));
                 store.dispatch(addNote(action.note, action.noteId));
             }).catch((err) => {
                 console.log(err);
-                // const error = err.response.data.message;
-                // if(error === "Pas d'autorisation token") {
-                //     store.dispatch(logout());
-                // }
+            });
+            next(action);
+            break;
+        case GET_NOTE:
+            axiosInstance.get(`/note/${action.noteId}`).then((res) => {
+                if(res.data.note) {
+                    store.dispatch(hasNote(action.noteId));
+                    store.dispatch(addNote(res.data.note, action.noteId));
+                }
+            }).catch((err) => {
+                console.log(err);
             });
             next(action);
             break;
