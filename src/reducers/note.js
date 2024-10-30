@@ -14,14 +14,6 @@ export default function noteReducer(state = initialState, action) {
                     [action.noteId]: { ...state.notes[action.noteId], hasNote: true }
                 }
             };
-        case REMOVE_NOTE:
-            return {
-                ...state,
-                notes: {
-                    ...state.notes,
-                    [action.noteId]: { ...state.notes[action.noteId], hasNote: false, note: null }
-                }
-            };
         case ADD_NOTE:
             return {
                 ...state,

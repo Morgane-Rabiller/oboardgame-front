@@ -4,7 +4,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import "../Library/Library.scss";
 import { Button } from "primereact/button";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteNote, getNote, joinNote, removeNote } from "../../actions/note";
+import { getNote, joinNote, removeNote } from "../../actions/note";
 
 const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEditing }) => {
     const notes = useSelector((state) => state.noteReducer.notes);
@@ -51,7 +51,7 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
         setValue(noteData.note || '');
     };
     const handleDeleteNote = (e) => {
-        dispatch(deleteNote(noteId));
+        dispatch(removeNote(noteId));
         setValue("");
         op.current.hide(e);
     };

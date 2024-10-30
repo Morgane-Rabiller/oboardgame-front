@@ -1,4 +1,4 @@
-import { addNote, GET_NOTE, hasNote, JOIN_NOTE } from "../actions/note";
+import { addNote, deleteNote, GET_NOTE, hasNote, JOIN_NOTE, REMOVE_NOTE } from "../actions/note";
 import axiosInstance from "./axiosInstance";
 
 
@@ -21,6 +21,14 @@ const noteMiddleware = (store) => (next) => (action) => {
                     store.dispatch(hasNote(action.noteId));
                     store.dispatch(addNote(res.data.note, action.noteId));
                 }
+            }).catch((err) => {
+                console.log(err);
+            });
+            next(action);
+            break;
+        case REMOVE_NOTE:
+            axiosInstance.put(`/note/delete/${action.noteId}`).then((res) => {
+                store.dispatch(deleteNote(action.noteId));
             }).catch((err) => {
                 console.log(err);
             });
