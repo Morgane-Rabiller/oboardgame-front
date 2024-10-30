@@ -1,10 +1,10 @@
-import { useRef, useState, useMemo } from "react";
+import { useRef, useState, useMemo, useEffect } from "react";
 import { OverlayPanel } from 'primereact/overlaypanel';
 import { InputTextarea } from 'primereact/inputtextarea';
 import "../Library/Library.scss";
 import { Button } from "primereact/button";
 import { useDispatch, useSelector } from "react-redux";
-import { addNote, deleteNote, hasNote, removeNote } from "../../actions/note";
+import { deleteNote, getNote, joinNote, removeNote } from "../../actions/note";
 
 const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEditing }) => {
     const notes = useSelector((state) => state.noteReducer.notes);
@@ -14,6 +14,9 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
     const [showError, setShowError] = useState(false);
     const op = useRef(null);
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getNote());
+    })
 
     const handleClick = (e) => {
         if (!isEditing) {
@@ -28,8 +31,9 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
 
     const handleAddNote = () => {
         if (value !== "" ) {
-            dispatch(hasNote(noteId));
-            dispatch(addNote(value, noteId));
+            console.log("je rentre une note");
+            
+            dispatch(joinNote(value, noteId));
         } else {
             setShowError(true);
             window.setTimeout(() => {
