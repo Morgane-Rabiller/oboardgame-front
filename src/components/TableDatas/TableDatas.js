@@ -32,12 +32,11 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
         setClassButton(e.target.value === "" ? "text-sm mr-2 bg-purple-200 border-purple-200" : "text-sm mr-2");
     };
 
-    const handleAddNote = () => {
+    const handleAddNote = (e) => {
         setIsEditingNote(false);
         if (value !== "" ) {
-            console.log("je rentre une note");
-            
             dispatch(joinNote(value, noteId));
+            op.current.hide(e);
         } else {
             setShowError(true);
             window.setTimeout(() => {
@@ -46,7 +45,6 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
         }
     };
     const handleUpdateNote = (e) => {
-        // dispatch(removeNote(noteId));
         setIsEditingNote(true);
         setValue(noteData.note || '');
     };
@@ -66,10 +64,10 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
                 </div>
                 {!noteData.hasNote || isEditingNote ? 
                     <>
-                        <InputTextarea value={value} className="ml-4 mb-2 h-4rem" onChange={(e) => handleChange(e)} rows={5} cols={30} /> 
+                        <InputTextarea value={value} className="ml-4 mb-2 h-4rem" onChange={(e) => handleChange(e)} rows={5} cols={20} /> 
                         {showError && <p className="text-red-500">Pas de note.</p>}
                         <div className="flex justify-content-end">
-                            <Button className={classButton} type="button" onClick={() => handleAddNote() }>{isEditingNote ? "Mettre à jour" : "Ajouter"}</Button>
+                            <Button className={classButton} type="button" onClick={(e) => handleAddNote(e) }>{isEditingNote ? "Mettre à jour" : "Ajouter"}</Button>
                         </div>
                     </>
                 : 
