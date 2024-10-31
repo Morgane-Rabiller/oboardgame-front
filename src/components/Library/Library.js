@@ -27,6 +27,10 @@ const Library = () => {
             target: '.delete-tuto',
             content: 'Tu n\'a plus ce jeu chez toi ? Tu peux le supprimer de ta bibliothèque personnelle.',
         },
+        {
+            target: '.note-tuto',
+            content: 'Tu as besoin de spécifier quelque chose sur un jeu ? (par ex : le jeu est prêté par tel personne). Tu peux ajouter une note en cliquant sur le nom du jeu. Tous les jeux qui contiennent une note seront colorés.',
+        },
     ];
     const toast = useRef(null);
     const datas = useSelector((state) => state.libraryReducer.data);
@@ -154,7 +158,7 @@ const Library = () => {
                 <table className="library_table">
                     <thead className="library_table-thead">
                         <tr className="library_table-line">
-                            <th className="library_table-firstth">Nom</th>
+                            <th className="library_table-firstth note-tuto">Nom</th>
                             <th>Joueurs</th>
                             <th>Type</th>
                             <th>Age</th>
