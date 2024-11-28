@@ -2,7 +2,6 @@ import "./Boardgame.scss";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useOutletContext } from "react-router-dom";
-import TableDatas from "../TableDatas/TableDatas";
 import { eraseSuccessMessageBoardgame, fetchBoardgames } from "../../actions/boardgame";
 import { addBoardgame, eraseErrorMessage, eraseSuccessMessage } from "../../actions/library";
 import { Message } from 'primereact/message';
@@ -12,6 +11,7 @@ import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
 import CreatePopUp from "./CreatePopUp/CreatePopUp";
 import Joyride from 'react-joyride';
+import TableDataBoardgame from "../TableDataBoardgame/TableDataBoardgame";
 
 const Boardgame = () => {
     const { checkAccount } = useOutletContext();
@@ -149,7 +149,7 @@ const Boardgame = () => {
                             {filteredDatas.map((data) => {
                                 return (
                                         <tr className="boardgame_table-line" key={data.id}>
-                                            <TableDatas name={data.name} playerMin={data.player_min} playerMax={data.player_max} type={data.type} age={data.age} time={data.time} />
+                                            <TableDataBoardgame name={data.name} playerMin={data.player_min} playerMax={data.player_max} type={data.type} age={data.age} time={data.time} />
                                             <td><i className="pi pi-plus" onClick={() => dispatch(addBoardgame(data.name))}></i></td>
                                         </tr>
                                     )
