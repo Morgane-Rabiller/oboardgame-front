@@ -60,7 +60,7 @@ const TableDatas = ({ noteId, name, playerMin, playerMax, type, age, time, isEdi
             <OverlayPanel ref={op} className="p-2 w-20rem">
                 <div className="flex">
                     <i className="pi pi-pen-to-square mr-2"></i>
-                    <p className="font-bold text-sm mb-3">Veux-tu ajouter une note pour {name} ?</p>
+                    <p className="font-bold text-sm mb-3">{!noteData.hasNote ? `Veux-tu ajouter une note pour ${name} ?` : `Note sur le jeu ${name} :`}</p>
                 </div>
                 {!noteData.hasNote || isEditingNote ? 
                     <>
