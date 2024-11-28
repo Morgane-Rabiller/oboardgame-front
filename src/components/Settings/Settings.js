@@ -64,6 +64,7 @@ const Settings = () => {
                 <ChangePassword onSuccess={handleSuccess} />
             </Dialog>
             <Link to="/tuto"><Button className="mb-2 w-full">Tuto</Button></Link>
+            <Link to="/contact-admin"> <Button className='mb-2 w-full'>Contacter l'administrateur</Button></Link>
             <Button className="mb-2 bg-red-700 border-red-700 focus:shadow-5" onClick={() => setShowDelete(true)}>Supprimer mon compte</Button>
             <Dialog header="Suppression du compte" className="settings_delete" visible={showDelete} onHide={() => { if (!showDelete) return; setShowDelete(false); }}>
                 <p className='mb-4'>Es-tu sûr de vouloir supprimer ton compte ?</p>

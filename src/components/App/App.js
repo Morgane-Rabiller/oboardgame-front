@@ -1,4 +1,4 @@
-import { Navigate, Outlet, RouterProvider, createBrowserRouter, useNavigate} from 'react-router-dom';
+import { Link, Navigate, Outlet, RouterProvider, createBrowserRouter, useNavigate} from 'react-router-dom';
 import Header from '../Header/Header';
 import './App.scss';
 import Home from '../Home/Home';
@@ -17,6 +17,7 @@ import React, { useEffect } from 'react';
 import InstallPWA from '../InstallPWA/InstallPWA';
 import { fetchUser } from '../../actions/user';
 import Error404 from '../Error404/Error404';
+import ContactAdmin from '../ContactAdmin/ContactAdmin.js';
 
 function PrivateRoute({ children, ...rest }) {
   const logged = useSelector((state) => state.userReducer.logged);
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "inscription",
         element: <Register />,
+      },
+      {
+        path: "contact-admin",
+        element: <ContactAdmin />,
       },
       {
         path: "selection-aleatoire",
@@ -123,7 +128,7 @@ function Root() {
       <Outlet context={{ checkAccount }} />
       <InstallPWA />
       <hr className='separate'/>
-      {logged && <Footer checkAccount={checkAccount}/>}
+      {logged ? <Footer checkAccount={checkAccount}/> : <Link to="/contact-admin" className='footer flex justify-content-center mb-3'>Contacter l'administrateur</Link>}
     </div>
   )
 }
