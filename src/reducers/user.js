@@ -22,6 +22,7 @@ export default function userReducer(state = initialState, action) {
         return {
           ...state,
           pseudo: action.pseudo,
+          email: action.email,
           logged: true
         };
       case REGISTER_SUCCESS:

@@ -6,10 +6,10 @@ const userMiddleware = (store) => (next) => (action) => {
         // eslint-disable-next-line
         case FETCH_USER: {
             axiosInstance.get("/user").then((res) => {
-                const { pseudo } = res.data.user;
+                const { pseudo, email } = res.data.user;
                 
                 // axiosInstance.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
-                store.dispatch(savePseudo(pseudo));
+                store.dispatch(savePseudo(pseudo,email));
             }).catch((err) => {
                 console.error(err);
                 const error = err.response.data.message;
@@ -27,11 +27,9 @@ const userMiddleware = (store) => (next) => (action) => {
             axiosInstance.post("/login", {email, password}, {
                 withCredentials: true, // Nécessaire pour envoyer les cookies
               }).then((res) => {
-                const { pseudo } = res.data.user;
-                const { check } = res.data.user;
-                console.log(res.data);
+                const { pseudo, check, email : currentEmail } = res.data.user;
                 
-                store.dispatch(savePseudo(pseudo));
+                store.dispatch(savePseudo(pseudo, currentEmail));
                 store.dispatch(loginSuccess(check));
                 localStorage.setItem('user', JSON.stringify(pseudo));
                 localStorage.setItem('logged', JSON.stringify(true));

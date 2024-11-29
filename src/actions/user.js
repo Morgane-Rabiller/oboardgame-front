@@ -26,9 +26,10 @@ export const logout = () => ({
 
 export const SAVE_PSEUDO = 'SAVE_PSEUDO';
 
-export const savePseudo = (pseudo) => ({
+export const savePseudo = (pseudo, email) => ({
   type: SAVE_PSEUDO,
-  pseudo
+  pseudo,
+  email
 });
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
