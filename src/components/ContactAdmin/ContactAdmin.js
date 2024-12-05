@@ -3,6 +3,7 @@ import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { sendMail } from "../../actions/contact";
 
 
 const ContactAdmin = () => {
@@ -42,8 +43,8 @@ const ContactAdmin = () => {
                     <InputTextarea className="text-sm" rows={5} cols={30} value={message} onChange={(e) => setMessage(e.target.value)}></InputTextarea>
                 </div>
                 <div className="flex justify-content-around mx-5 mt-3">
-                    <Button className="mb-5 w-4 flex justify-content-center text-sm">Envoyer</Button>
-                    <Button className="mb-5 w-4 flex justify-content-center text-sm">Retour</Button>
+                    <Button  type="submit" className="mb-5 w-4 flex justify-content-center text-sm">Envoyer</Button>
+                    <Button type="button" className="mb-5 w-4 flex justify-content-center text-sm">Retour</Button>
                 </div>
             </form>
         </div>
