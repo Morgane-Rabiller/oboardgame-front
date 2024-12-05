@@ -128,7 +128,7 @@ function Root() {
       <Outlet context={{ checkAccount }} />
       <InstallPWA />
       <hr className='separate'/>
-      {logged ? <Footer checkAccount={checkAccount}/> : <Link to="/contact-admin" className='footer flex justify-content-center mb-3'>Contacter l'administrateur</Link>}
+      {logged ? <Footer checkAccount={checkAccount}/> : <Link to="/contact-admin" className='footer flex justify-content-center mb-3 text-sm'>Contacter l'administrateur</Link>}
     </div>
   )
 }

@@ -2,13 +2,14 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const ContactAdmin = () => {
     const [email, setEmail] = useState("");
     const logged = localStorage.getItem("logged");
     const currentEmail = useSelector((state) => state.userReducer.email);
+    const dispatch = useDispatch();
     useEffect(() => {
         if (logged) {
             setEmail(currentEmail);
@@ -18,10 +19,16 @@ const ContactAdmin = () => {
     const [object, setObject] = useState("");
     const [message, setMessage] = useState("");
 
+        
+    const handleForm = (e) => {
+        e.preventDefault();
+        dispatch(sendMail(email, object, message));
+    }
+
     return (
         <div>
             <h1 className="text-center mt-5">Contacter l'administrateur</h1>
-            <form>
+            <form onSubmit={e => handleForm(e)}>
                 <div className="flex flex-column w-8 m-auto mt-5">
                     <label className="mb-2 text-sm">Adresse mail</label>
                     <InputText className="text-sm" value={email} onChange={(e) => setEmail(e.target.value)}></InputText>
