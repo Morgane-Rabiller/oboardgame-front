@@ -6,3 +6,10 @@ export const sendMail = (email, object, message) => ({
     object,
     message
 });
+
+export const SEND_MAIL_MESSAGE = "SEND_MAIL_MESSAGE";
+
+export const sendMailMessage = (message) => ({
+type: SEND_MAIL_MESSAGE,
+message
+});
