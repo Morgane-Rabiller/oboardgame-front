@@ -36,8 +36,6 @@ const ContactAdmin = () => {
         }
         
         if (errorMessage) {
-            console.log("errorMessage", errorMessage);
-            
             setDisplayError(true);
             setLoading(false);
             setTimeout(() => {
@@ -78,7 +76,7 @@ const ContactAdmin = () => {
                 {displayError && <p className="text-red-400 mt-3 text-center">{errorMessage}</p>}
                 <div className="flex justify-content-around mx-5 mt-3">
                     <Button  type="submit" className="mb-5 w-4 flex justify-content-center text-sm">Envoyer</Button>
-                    <Button type="button" className="mb-5 w-4 flex justify-content-center text-sm">Retour</Button>
+                    <Button type="button" className="mb-5 w-4 flex justify-content-center text-sm" onClick={() => navigate("/connexion")}>Retour</Button>
                 </div>
             </form>
         </div>
