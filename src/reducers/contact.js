@@ -1,8 +1,8 @@
-import { SEND_MAIL_ERROR, SEND_MAIL_SUCCESS } from "../actions/contact";
+import { ERASE_MESSAGES, SEND_MAIL_ERROR, SEND_MAIL_SUCCESS } from "../actions/contact";
 
 const initialState = {
-    success: {},
-    error: {},
+    success: null,
+    error: null,
 };
 
 export default function contactReducer(state = initialState, action) {
@@ -16,6 +16,12 @@ export default function contactReducer(state = initialState, action) {
             return {
                 ...state,
                 error : action.error
+            };
+        case ERASE_MESSAGES:
+            return {
+                ...state,
+                success: null,
+                error: null,
             };
         default:
             return state;

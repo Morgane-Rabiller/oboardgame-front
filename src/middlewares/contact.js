@@ -1,4 +1,4 @@
-import { SEND_MAIL, sendMailSuccess } from "../actions/contact";
+import { SEND_MAIL, sendMailError, sendMailSuccess } from "../actions/contact";
 import axiosInstance from "./axiosInstance";
 
 
@@ -10,7 +10,7 @@ const contactMiddleware = (store) => (next) => (action) => {
                 console.log(res);
                 
             }).catch((err) => {
-                store.dispatch(sendMailSuccess(err.response.data.message));
+                store.dispatch(sendMailError(err.response.data.message));
                 console.log(err);
             })
             next(action);

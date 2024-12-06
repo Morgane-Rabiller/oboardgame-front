@@ -20,3 +20,9 @@ export const sendMailError = (error) => ({
 type: SEND_MAIL_ERROR,
 error
 });
+
+export const ERASE_MESSAGES = "ERASE_MESSAGES";
+
+export const eraseMessages = () => ({
+type: ERASE_MESSAGES
+});
